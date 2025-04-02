@@ -1,6 +1,5 @@
 extends Panel
 class_name TileSelectorTile
-const Shared = preload("res://levels/shared.gd")
 
 @onready var btn: TextureButton = $TextureButton
 var idx: int

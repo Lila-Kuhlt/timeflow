@@ -1,9 +1,9 @@
 extends CanvasLayer
 class_name TileSelectorMenu
-const Shared = preload("res://levels/shared.gd")
 
 signal tile_select_changed(idx: int)
 
+const TileSelectorTileScene := preload("res://ui/components/TileSelectorTile.tscn")
 @onready var tile_container = $MarginContainer/Panel/HBoxContainer
 var tiles: Array[TileSelectorTile] = []
 var selected_tile: Shared.Tile = -1
@@ -11,13 +11,14 @@ var selected_tile_idx := -1
 
 func init_tiles(t: Dictionary[Shared.Tile, int]):
 	var i := 0
-	for tile_ty in t:
+	for tile_ty: Shared.Tile in t:
 		var tilename := "TileSelectorTile%d" % (i+1)
-		var tile: TileSelectorTile = tile_container.get_node(tilename)
+		var tile: TileSelectorTile = TileSelectorTileScene.instantiate()
 		tile.idx = i
-		tile.tile_ty = tile_ty
+		tile.tile_type = tile_ty
 		tile.connect("on_clicked", on_select_tile)
 		tiles.append(tile)
+		tile_container.add_child(tile)
 		i += 1
 	on_select_tile(tiles[0])
 

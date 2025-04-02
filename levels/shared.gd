@@ -1,3 +1,5 @@
+class_name Shared
+
 enum Tile {
 	STRAIGHT,
 	CROSS,

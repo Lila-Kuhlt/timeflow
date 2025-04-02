@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnerb5wu8ihny"]
+[gd_scene load_steps=2 format=3 uid="uid://bnerb5wu8ihny"]
 
-[ext_resource type="PackedScene" uid="uid://tq0q4dmrfgv5" path="res://ui/components/TileSelectorTile.tscn" id="1_kfcty"]
 [ext_resource type="Script" uid="uid://b2682wl3ns832" path="res://ui/screens/tile-selector/tile_selector_menu.gd" id="1_lai4r"]
 
 [node name="TileSelectorMenu" type="CanvasLayer"]
@@ -27,12 +26,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="TileSelectorTile1" parent="MarginContainer/Panel/HBoxContainer" instance=ExtResource("1_kfcty")]
-layout_mode = 2
-
-[node name="TileSelectorTile2" parent="MarginContainer/Panel/HBoxContainer" instance=ExtResource("1_kfcty")]
-layout_mode = 2
-
-[node name="TileSelectorTile3" parent="MarginContainer/Panel/HBoxContainer" instance=ExtResource("1_kfcty")]
-layout_mode = 2

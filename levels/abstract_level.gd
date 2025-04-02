@@ -1,7 +1,6 @@
 extends Node2D
 class_name Level
 
-const Shared = preload("shared.gd")
 const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
