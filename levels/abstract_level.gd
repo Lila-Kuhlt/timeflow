@@ -4,8 +4,14 @@ extends Node2D
 @onready var ghost_map : TileMapLayer = $GhostTileMap
 @onready var tile_selector : TileSelectorMenu = $TileSelectorMenu
 var hovered_tile_before
-var chosen_atlas_sourceid #represents the ID of the atlas in your tileset (you can have many atlases in any given set, so it needs to know which one to grab). If you only have one atlas set up, this will be 0
 var chosen_atlas_coord #specific tile to assign from within that tileset source
+# maps tile ids to its available count
+@export var available_tiles := {
+	Tile.STRAIGHT: 5,
+	Tile.CROSS: 5,
+	Tile.CURVE: 5,
+	Tile.T: 5,
+}
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:

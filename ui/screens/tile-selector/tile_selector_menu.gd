@@ -6,6 +6,7 @@ signal tile_select_changed(idx: int)
 var tile_count := 3
 var tiles: Array[TileSelectorTile] = []
 var selected_tile := -1
+var selected_tile_idx := -1
 
 func _ready():
 	var tile_container = $MarginContainer/Panel/HBoxContainer
@@ -18,9 +19,9 @@ func _ready():
 	on_select_tile(tiles[0])
 
 func on_select_tile(tile: TileSelectorTile):
-	if selected_tile == tile.idx:
+	if selected_tile_idx == tile.idx:
 		return
-	tiles[selected_tile].on_deselect()
+	tiles[selected_tile_idx].on_deselect()
 	tile.on_select()
-	selected_tile = tile.idx
-	tile_select_changed.emit(selected_tile)
+	selected_tile_idx = tile.idx
+	tile_select_changed.emit(selected_tile_idx)
