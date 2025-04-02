@@ -40,36 +40,37 @@ func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) 
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
 	
+# Return type: {"tile": <Tile type>, "rotation": <Rotation type>}
 func get_enum_from_atlas_coords(coords: Vector2i):
 	match coords.x:
 		0:
 			match coords.y:
 				0:
-					return [Tile.CURVE, Rotation.LEFT]
+					return {"tile": Tile.CURVE, "rotation": Rotation.LEFT}
 				1:
-					return [Tile.CURVE, Rotation.RIGHT]
+					return {"tile": Tile.CURVE, "rotation": Rotation.RIGHT}
 				2:
-					return [Tile.STRAIGHT, Rotation.UP]
+					return {"tile": Tile.STRAIGHT, "rotation": Rotation.UP}
 				3:
-					return [Tile.T, Rotation.RIGHT]
+					return {"tile": Tile.T, "rotation": Rotation.RIGHT}
 		1:
 			match coords.y:
 				0:
-					return [Tile.CURVE, Rotation.DOWN]
+					return {"tile": Tile.CURVE, "rotation": Rotation.DOWN}
 				1:
-					return [Tile.CROSS, Rotation.UP]
+					return {"tile": Tile.CROSS, "rotation": Rotation.UP}
 				2:
-					return [Tile.T, Rotation.DOWN]
+					return {"tile": Tile.T, "rotation": Rotation.DOWN}
 				3:
-					return [Tile.T, Rotation.UP]
+					return {"tile": Tile.T, "rotation": Rotation.UP}
 		2:
 			match coords.y:
 				0:
-					return [Tile.CURVE, Rotation.UP]
+					return {"tile": Tile.CURVE, "rotation": Rotation.UP}
 				1:
-					return [Tile.STRAIGHT, Rotation.LEFT]
+					return {"tile": Tile.STRAIGHT, "rotation": Rotation.LEFT}
 				2:
-					return [Tile.T, Rotation.LEFT]
+					return {"tile": Tile.T, "rotation": Rotation.LEFT}
 					
 	return null
 		
@@ -106,5 +107,5 @@ func get_tile_atlas_coords_from_enums(type: Tile, rotation: Rotation):
 					return Vector2i(1, 2)
 				Rotation.RIGHT:
 					return Vector2i(0, 3)
-					
+
 	return null

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyfvcuxi210mg"]
 
-[ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
+[ext_resource type="Script" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
 [ext_resource type="PackedScene" uid="uid://bnerb5wu8ihny" path="res://ui/screens/tile-selector/tile_selector_menu.tscn" id="2_8tasw"]
 
