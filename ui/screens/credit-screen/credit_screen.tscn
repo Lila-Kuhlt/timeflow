@@ -51,13 +51,13 @@ layout_mode = 2
 
 [node name="LabelCreatedBy" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-text = "Created by You"
+text = "Created by Lila Pause"
 label_settings = SubResource("LabelSettings_cutkl")
 horizontal_alignment = 1
 
 [node name="LabelSpecialThanks" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-text = "Special thanks to Also You"
+text = "Special thanks to KIT GameJam"
 horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
