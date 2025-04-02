@@ -34,43 +34,77 @@ func _process(_delta: float):
 			ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
 		# ghost_map.set_cell(hovered_tile, tile_selector.selected_tile, chosen_atlas_coord)
 		# hovered_tile_before = hovered_tile
-		# place_tile_on_coordinate(Vector2i(0, 0), Shared.Tile.STRAIGHT, Shared.Rotation.UP, Shared.State.EMPTY)
+		place_tile_on_coordinate(Vector2i(0, 0), Tile.STRAIGHT, Rotation.UP)
 
-func place_tile_on_coordinate(coords: Vector2i, type: Shared.Tile, rotation: Shared.Rotation, state: Shared.State):
+func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
-	tile_map.set_cell(coords, state, tile_coordinates)
+	tile_map.set_cell(coords, 0, tile_coordinates)
 	
-func get_tile_atlas_coords_from_enums(type: Shared.Tile, rotation: Shared.Rotation) -> Vector2i:
+func get_enum_from_atlas_coords(coords: Vector2i):
+	match coords.x:
+		0:
+			match coords.y:
+				0:
+					return [Tile.CURVE, Rotation.LEFT]
+				1:
+					return [Tile.CURVE, Rotation.RIGHT]
+				2:
+					return [Tile.STRAIGHT, Rotation.UP]
+				3:
+					return [Tile.T, Rotation.RIGHT]
+		1:
+			match coords.y:
+				0:
+					return [Tile.CURVE, Rotation.DOWN]
+				1:
+					return [Tile.CROSS, Rotation.UP]
+				2:
+					return [Tile.T, Rotation.DOWN]
+				3:
+					return [Tile.T, Rotation.UP]
+		2:
+			match coords.y:
+				0:
+					return [Tile.CURVE, Rotation.UP]
+				1:
+					return [Tile.STRAIGHT, Rotation.LEFT]
+				2:
+					return [Tile.T, Rotation.LEFT]
+					
+	return null
+		
+	
+func get_tile_atlas_coords_from_enums(type: Tile, rotation: Rotation):
 	match type:
-		Shared.Tile.STRAIGHT:
+		Tile.STRAIGHT:
 			match rotation:
-				Shared.Rotation.UP, Shared.Rotation.DOWN:
+				Rotation.UP, Rotation.DOWN:
 					return Vector2i(0, 2)
-				Shared.Rotation.LEFT, Shared.Rotation.RIGHT:
+				Rotation.LEFT, Rotation.RIGHT:
 					return Vector2i(2, 1)
-		Shared.Tile.CROSS:
+		Tile.CROSS:
 			match rotation:
 				_:
 					return Vector2i(1, 1)
-		Shared.Tile.CURVE:
+		Tile.CURVE:
 			match rotation:
-				Shared.Rotation.UP:
+				Rotation.UP:
 					return Vector2i(2, 0)
-				Shared.Rotation.LEFT:
-					return Vector2i(0, 1)
-				Shared.Rotation.DOWN:
-					return Vector2i(1, 0)
-				Shared.Rotation.RIGHT:
+				Rotation.LEFT:
 					return Vector2i(0, 0)
-		Shared.Tile.T:
+				Rotation.DOWN:
+					return Vector2i(1, 0)
+				Rotation.RIGHT:
+					return Vector2i(0, 1)
+		Tile.T:
 			match rotation:
-				Shared.Rotation.UP:
+				Rotation.UP:
 					return Vector2i(1, 3)
-				Shared.Rotation.LEFT:
-					return Vector2i(0, 3)
-				Shared.Rotation.DOWN:
-					return Vector2i(1, 2)
-				Shared.Rotation.RIGHT:
+				Rotation.LEFT:
 					return Vector2i(2, 2)
+				Rotation.DOWN:
+					return Vector2i(1, 2)
+				Rotation.RIGHT:
+					return Vector2i(0, 3)
 					
-	return Vector2i(0, 0)
+	return null
