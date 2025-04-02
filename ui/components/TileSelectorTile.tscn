@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://tq0q4dmrfgv5"]
+
+[ext_resource type="Script" uid="uid://cmj3vocf7awk0" path="res://ui/components/tile_selector_tile.gd" id="1_3dy13"]
+[ext_resource type="Texture2D" uid="uid://ds7gsig2ixn55" path="res://textures/tile_t_filled.png" id="1_ch0cq"]
+
+[node name="TileSelectorTile" type="Panel"]
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3dy13")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_right = 32.0
+offset_bottom = 32.0
+texture_normal = ExtResource("1_ch0cq")
+
+[connection signal="pressed" from="TextureButton" to="." method="on_click_handler"]
