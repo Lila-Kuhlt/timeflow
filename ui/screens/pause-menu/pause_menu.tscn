@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://bilai15byqef2"]
+
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_0kumn"]
+[ext_resource type="Script" uid="uid://2n7o5t6b5g4w" path="res://ui/screens/pause-menu/pause_menu.gd" id="2_0mnak"]
+[ext_resource type="PackedScene" uid="uid://cv271fh4d2p13" path="res://ui/components/settings-menu/settings_menu.tscn" id="4_e3p6x"]
+
+[node name="PauseMenuScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_0mnak")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0kumn")
+
+[node name="MainPauseMenuPopup" type="PanelContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MainPauseMenuPopup"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="PausedLbl" type="Label" parent="CenterContainer/MainPauseMenuPopup/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ContinueBtn" type="Button" parent="CenterContainer/MainPauseMenuPopup/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/MainPauseMenuPopup/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="ExitToMainMenuBtn" type="Button" parent="CenterContainer/MainPauseMenuPopup/VBoxContainer"]
+layout_mode = 2
+text = "Quit to title screen"
+
+[node name="ExitGameBtn" type="Button" parent="CenterContainer/MainPauseMenuPopup/VBoxContainer"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="SettingsMenuPopup" type="PanelContainer" parent="CenterContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("1_0kumn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/SettingsMenuPopup"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="CenterContainer/SettingsMenuPopup/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="SettingsMenu" parent="CenterContainer/SettingsMenuPopup/VBoxContainer" instance=ExtResource("4_e3p6x")]
+layout_mode = 2
+
+[node name="SaveAndBackBtn" type="Button" parent="CenterContainer/SettingsMenuPopup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Save and back"
+
+[connection signal="pressed" from="CenterContainer/MainPauseMenuPopup/VBoxContainer/ContinueBtn" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="CenterContainer/MainPauseMenuPopup/VBoxContainer/SettingsButton" to="." method="_on_btn_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/MainPauseMenuPopup/VBoxContainer/ExitToMainMenuBtn" to="." method="_on_btn_exit_to_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/MainPauseMenuPopup/VBoxContainer/ExitGameBtn" to="." method="_on_btn_exit_game_pressed"]
+[connection signal="pressed" from="CenterContainer/SettingsMenuPopup/VBoxContainer/SaveAndBackBtn" to="." method="_on_save_and_back_btn_pressed"]

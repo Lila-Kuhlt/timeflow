@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddc3qfst7mbgc"]
+
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_qt2rq"]
+[ext_resource type="Script" uid="uid://1mjt83fygiua" path="res://ui/screens/title-screen/title_screen.gd" id="1_rm86k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0ue6"]
+font_size = 150
+
+[sub_resource type="LabelSettings" id="LabelSettings_73xnf"]
+font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_wly7t"]
+font_size = 12
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_qt2rq")
+script = ExtResource("1_rm86k")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 20.0
+offset_right = 2.0
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(731.345, 0)
+layout_mode = 2
+text = "My Game"
+label_settings = SubResource("LabelSettings_s0ue6")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(731.345, 0)
+layout_mode = 2
+text = "~My Game Subtitle~"
+label_settings = SubResource("LabelSettings_73xnf")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 309.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Start"
+
+[node name="LevelSelect" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Level Select"
+
+[node name="Options" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Settings"
+
+[node name="Credit" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Credits"
+
+[node name="Quit" type="Button" parent="CenterContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.5
+offset_top = -25.0
+offset_right = 76.5
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "My Version"
+label_settings = SubResource("LabelSettings_wly7t")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/LevelSelect" to="." method="_on_level_select_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Credit" to="." method="_on_credit_pressed"]
+[connection signal="pressed" from="CenterContainer2/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv82k2twxie3n"]
+
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_cpj7q"]
+[ext_resource type="Script" uid="uid://d2i8k7votngvg" path="res://ui/screens/level-select-screen/level_select.gd" id="2_lcog6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mfdjd"]
+font_size = 60
+
+[node name="LevelSelect" type="MarginContainer" node_paths=PackedStringArray("buttonContainer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cpj7q")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("2_lcog6")
+buttonContainer = NodePath("VBoxContainer/HFlowContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LevelSelectTitle" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(731.345, 0)
+layout_mode = 2
+text = "Level Select"
+label_settings = SubResource("LabelSettings_mfdjd")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "This Level Select Screen is provided by the template.
+
+Numbered buttons related to a given level will be displayed here, if multiple_levels is enabled and the max number of levels is larger than zero.
+
+The default location for levels ist the 'levels/' Folder with levels using the \"level_x.tscn\" naming scheme."
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="UnlockLevels" type="CheckButton" parent="VBoxContainer/Control"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Unlock all Levels"
+
+[node name="Return" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return to Main Menu"
+
+[connection signal="toggled" from="VBoxContainer/Control/UnlockLevels" to="." method="_on_unlock_levels_toggled"]
+[connection signal="pressed" from="VBoxContainer/Return" to="." method="_return_to_title"]
