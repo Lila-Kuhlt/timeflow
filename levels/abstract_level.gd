@@ -1,6 +1,9 @@
 extends Node2D
 
 const Shared = preload("shared.gd")
+const Tile = Shared.Tile
+const Rotation = Shared.Rotation
+const State = Shared.State
 
 @onready var tile_map : TileMapLayer = $PlaceableTileMap
 @onready var ghost_map : TileMapLayer = $GhostTileMap
