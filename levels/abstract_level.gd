@@ -12,7 +12,7 @@ const State = Shared.State
 var hovered_tile_before
 var chosen_atlas_coord #specific tile to assign from within that tileset source
 # maps tile ids to its available count
-@export var available_tiles := {
+@export var available_tiles: Dictionary[Shared.Tile, int] = {
 	Shared.Tile.STRAIGHT: 5,
 	Shared.Tile.CROSS: 5,
 	Shared.Tile.CURVE: 5,
@@ -20,7 +20,7 @@ var chosen_atlas_coord #specific tile to assign from within that tileset source
 }
 
 func _ready() -> void:
-	tile_selector.level = self
+	tile_selector.init_tiles(available_tiles)
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
@@ -33,9 +33,9 @@ func _process(_delta: float):
 	if hovered_tile != hovered_tile_before:
 		if hovered_tile_before != null:
 			ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
-		ghost_map.set_cell(hovered_tile, tile_selector.selected_tile, chosen_atlas_coord)
-		hovered_tile_before = hovered_tile
-		place_tile_on_coordinate(Vector2i(0, 0), Shared.Tile.STRAIGHT, Shared.Rotation.UP, Shared.State.EMPTY)
+		# ghost_map.set_cell(hovered_tile, tile_selector.selected_tile, chosen_atlas_coord)
+		# hovered_tile_before = hovered_tile
+		# place_tile_on_coordinate(Vector2i(0, 0), Shared.Tile.STRAIGHT, Shared.Rotation.UP, Shared.State.EMPTY)
 
 func place_tile_on_coordinate(coords: Vector2i, type: Shared.Tile, rotation: Shared.Rotation, state: Shared.State):
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
