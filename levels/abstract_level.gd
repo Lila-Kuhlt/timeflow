@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var tile_map : TileMapLayer = $PlaceableTileMap
 @onready var ghost_map : TileMapLayer = $GhostTileMap
+@onready var tile_selector : TileSelectorMenu = $TileSelectorMenu
 var hovered_tile_before
 var chosen_atlas_sourceid #represents the ID of the atlas in your tileset (you can have many atlases in any given set, so it needs to know which one to grab). If you only have one atlas set up, this will be 0
 var chosen_atlas_coord #specific tile to assign from within that tileset source
@@ -15,8 +16,9 @@ func get_selected_tile() -> Vector2i:
 func _process(delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
-		ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
-		ghost_map.set_cell(hovered_tile, chosen_atlas_sourceid, chosen_atlas_coord)
+		if hovered_tile_before != null:
+			ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
+		ghost_map.set_cell(hovered_tile, tile_selector.selected_tile, chosen_atlas_coord)
 		hovered_tile_before = hovered_tile
 		place_tile_on_coordinate(Vector2i(0, 0), Tile.STRAIGHT, Rotation.UP)
 

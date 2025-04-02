@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name TileSelectorMenu
 
 signal tile_select_changed(idx: int)
 
