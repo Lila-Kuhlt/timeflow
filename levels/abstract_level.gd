@@ -8,8 +8,9 @@ const State = Shared.State
 @onready var tile_map : TileMapLayer = $PlaceableTileMap
 @onready var ghost_map : TileMapLayer = $GhostTileMap
 @onready var tile_selector : TileSelectorMenu = $TileSelectorMenu
-var hovered_tile_before
-var chosen_atlas_coord #specific tile to assign from within that tileset source
+var hovered_tile_before: Vector2i
+var chosen_atlas_coord: Vector2i #specific tile to assign from within that tileset source
+var chosen_rot: Rotation = Rotation.UP
 # maps tile ids to its available count
 @export var available_tiles: Dictionary[Shared.Tile, int] = {
 	Shared.Tile.STRAIGHT: 5,
@@ -30,11 +31,10 @@ func get_selected_tile() -> Vector2i:
 func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
-		if hovered_tile_before != null:
-			ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
-		# ghost_map.set_cell(hovered_tile, tile_selector.selected_tile, chosen_atlas_coord)
-		# hovered_tile_before = hovered_tile
-		place_tile_on_coordinate(Vector2i(0, 0), Tile.STRAIGHT, Rotation.UP)
+		ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
+		chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
+		ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
+		hovered_tile_before = hovered_tile
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
