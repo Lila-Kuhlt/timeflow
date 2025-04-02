@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://tq0q4dmrfgv5"]
 
 [ext_resource type="Script" uid="uid://cmj3vocf7awk0" path="res://ui/components/tile_selector_tile.gd" id="1_3dy13"]
-[ext_resource type="Texture2D" uid="uid://cugecpa4ks0gs" path="res://textures/tilemap.png" id="2_3dy13"]
+[ext_resource type="Texture2D" uid="uid://bluctoolvbcwj" path="res://textures/tilemaps/channels/channels_atlas.png" id="2_3dy13"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8xse5"]
 atlas = ExtResource("2_3dy13")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [node name="TileSelectorTile" type="Panel"]
 offset_right = 32.0
