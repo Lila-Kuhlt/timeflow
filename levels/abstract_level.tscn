@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=3 format=3 uid="uid://cyfvcuxi210mg"]
 
-[ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
+[ext_resource type="TileSet" uid="uid://h77pvi83wujl" path="res://textures/tile_set.tres" id="1_nghai"]
+[ext_resource type="PackedScene" uid="uid://bnerb5wu8ihny" path="res://ui/screens/tile-selector/tile_selector_menu.tscn" id="2_8tasw"]
 
 [node name="Level1" type="Node2D"]
 
@@ -9,3 +10,5 @@ tile_set = ExtResource("1_nghai")
 
 [node name="PlaceableTileMap" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_nghai")
+
+[node name="TileSelectorMenu" parent="." instance=ExtResource("2_8tasw")]

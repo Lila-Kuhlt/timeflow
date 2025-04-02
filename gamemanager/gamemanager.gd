@@ -47,7 +47,7 @@ func _start_game() -> void:
 
 func pause():
 	InputManager.set_is_paused(true)
-	menu_layer.move_to_front()
+	# menu_layer.move_to_front()
 	pause_menu.move_to_front()
 	pause_menu.show()
 	get_tree().paused = true
