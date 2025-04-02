@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://cluu0cgltsenj" path="res://gamemanager/gamemanager.gd" id="1_htktm"]
 [ext_resource type="PackedScene" uid="uid://bilai15byqef2" path="res://ui/screens/pause-menu/pause_menu.tscn" id="2_b2lg8"]
 [ext_resource type="Environment" uid="uid://bhb4ckqipjvu3" path="res://other/main_environment.tres" id="2_v1n10"]
-[ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/main_level.tscn" id="2_xueuq"]
+[ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="2_xueuq"]
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="3_8qpx4"]
 
 [node name="Gamemanager" type="Node"]
 process_mode = 3
 script = ExtResource("1_htktm")
 main_level = ExtResource("2_xueuq")
+max_level = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_v1n10")
