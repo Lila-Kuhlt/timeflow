@@ -9,10 +9,10 @@ var hovered_tile_before
 var chosen_atlas_coord #specific tile to assign from within that tileset source
 # maps tile ids to its available count
 @export var available_tiles := {
-	Tile.STRAIGHT: 5,
-	Tile.CROSS: 5,
-	Tile.CURVE: 5,
-	Tile.T: 5,
+	Shared.Tile.STRAIGHT: 5,
+	Shared.Tile.CROSS: 5,
+	Shared.Tile.CURVE: 5,
+	Shared.Tile.T: 5,
 }
 
 # selected == mouse hover
