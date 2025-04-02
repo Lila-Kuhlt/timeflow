@@ -18,4 +18,23 @@ func _process(delta: float):
 		ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
 		ghost_map.set_cell(hovered_tile, chosen_atlas_sourceid, chosen_atlas_coord)
 		hovered_tile_before = hovered_tile
-		
+		place_tile_on_coordinate(Vector2i(0, 0), Tile.STRAIGHT, Rotation.UP)
+
+func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation):
+	
+	var test := Vector2i(1, 1)
+	tile_map.set_cell(coords, 0, test)
+	
+enum Tile {
+	STRAIGHT,
+	CROSS,
+	CURVE,
+	T
+}
+
+enum Rotation {
+	UP,
+	LEFT,
+	DOWN,
+	RIGHT
+}
