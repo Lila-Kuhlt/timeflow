@@ -1,4 +1,5 @@
 extends Node2D
+class_name Level
 
 const Shared = preload("shared.gd")
 const Tile = Shared.Tile
@@ -17,6 +18,9 @@ var chosen_atlas_coord #specific tile to assign from within that tileset source
 	Shared.Tile.CURVE: 5,
 	Shared.Tile.T: 5,
 }
+
+func _ready() -> void:
+	tile_selector.level = self
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
