@@ -11,11 +11,11 @@ func _populate_menu() -> void:
 		var margin_container = MarginContainer.new()
 		tc.add_child(margin_container)
 		tc.set_tab_title(category, Settings.category_string(category))
-		
+
 		var scroll_container = ScrollContainer.new()
 		scroll_container.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 		margin_container.add_child(scroll_container)
-		
+
 		var margin_container2 = MarginContainer.new()
 		margin_container2.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		margin_container2.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -30,7 +30,7 @@ func _populate_menu() -> void:
 		for setting_key in Settings.settings:
 			if Settings.settings[setting_key].category != category:
 				continue
-			
+
 			var setting: Settings.Setting = Settings.settings[setting_key]
 
 			# Check if its a section label
@@ -47,18 +47,18 @@ func _populate_menu() -> void:
 			var hbox = HBoxContainer.new()
 			hbox.custom_minimum_size = Vector2(0, 40)
 			cat_vbox.add_child(hbox)
-			
+
 			# Another HBoxContainer for the label and revert button
 			var hbox_lbl = HBoxContainer.new()
 			hbox_lbl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			hbox.add_child(hbox_lbl)
-			
+
 			# Label for the name of the setting
 			var lbl_name = Label.new()
 			lbl_name.text = setting.label_text
 			lbl_name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			hbox_lbl.add_child(lbl_name)
-			
+
 			# Revert button for changing the setting back to its default value
 			# For input bindings we need to create a new button for each remapping later
 			if setting.type != Settings.SettingType.INPUT_BINDING and setting.type != Settings.SettingType.SECTION:
@@ -72,7 +72,7 @@ func _populate_menu() -> void:
 				_update_revert_button(null, setting_key, revert_btn)
 
 			# TODO: Tooltip
-			
+
 			# Setting-specific editor
 			var setting_value = setting.value
 			if setting.type == Settings.SettingType.FLOAT or setting.type == Settings.SettingType.INT:
@@ -101,7 +101,7 @@ func _populate_menu() -> void:
 				setting.value_changed.connect(option_button.select)
 				hbox.add_child(option_button)
 			elif setting.type == Settings.SettingType.INPUT_BINDING:
-				
+
 				# First reset button
 				var input_revert_btn_1 = Button.new()
 				input_revert_btn_1.icon = get_theme_icon("icon", "RevertButton")
@@ -111,7 +111,7 @@ func _populate_menu() -> void:
 				hbox.add_child(input_revert_btn_1)
 				setting.value_changed.connect(_update_input_mapping_revert_button_1.bind(setting_key, input_revert_btn_1))
 				_update_input_mapping_revert_button_1(null, setting_key, input_revert_btn_1)
-				
+
 				# First remapping button
 				var remapping_btn1 = action_remapping_button_scene.instantiate()
 				remapping_btn1.set_event(setting_value[0] if setting_value.size() > 0 else null)

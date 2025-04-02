@@ -15,7 +15,7 @@ func _show_label() -> void:
 		InputManager.is_debug_label_visible = true
 		if debug_label == null:
 			push_warning("debug label not set")
-	
+
 func _hide_label() -> void:
 	if debug_label:
 		debug_label.visible = false
@@ -38,6 +38,5 @@ func _process(_delta):
 		for key in debug_dict.keys():
 			debug_text += key + ": " + str(debug_dict[key]) + "\n"
 		debug_label.text = debug_text
-		
+
 		update_queued = false
-		

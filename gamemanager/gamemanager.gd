@@ -26,19 +26,19 @@ var current_level_node: Node
 func _ready() -> void:
 	Global.set_game_manager(self)
 	DebugGlobal.debug_label = %DebugLabel
-	for i in range(max_level): 
+	for i in range(max_level):
 		completed_levels.append(false)
 	# Load settings
 	Settings.load_config()
-	
+
 	# Connect to InputManager
 	InputManager.game_pause.connect(pause)
 	InputManager.game_unpause.connect(resume)
 	InputManager.set_is_in_game(false)
 	InputManager.set_is_paused(false)
-	
+
 	_show_title_screen()
-	
+
 func _start_game() -> void:
 	level = 0
 	_show_controls()
@@ -51,7 +51,7 @@ func pause():
 	pause_menu.move_to_front()
 	pause_menu.show()
 	get_tree().paused = true
-	
+
 func resume():
 	InputManager.set_is_paused(false)
 	print("resume")
@@ -72,7 +72,7 @@ func _show_main_level() -> void:
 		next_level.reset.connect(_reload_current_level)
 	add_child(next_level)
 	current_level_node = next_level
-	
+
 
 func _next_level() -> void:
 	if level < max_level and max_level > 0:
@@ -80,7 +80,7 @@ func _next_level() -> void:
 		level += 1
 		_show_level(level)
 		completed_levels[level - 1] = true
-	else: 
+	else:
 		_show_win_screen()
 
 func _show_level(level_nr: int) -> void:
@@ -93,7 +93,7 @@ func _show_level(level_nr: int) -> void:
 		next_level.reset.connect(_reload_current_level)
 	add_child(next_level)
 	current_level_node = next_level
-	
+
 func _reload_current_level() -> void:
 	# Destroy level
 	if current_level_node != null:
@@ -102,7 +102,7 @@ func _reload_current_level() -> void:
 	_show_level(level)
 #endregion
 
-#region Showing Different GUI views 
+#region Showing Different GUI views
 
 
 func _show_win_screen() -> void:
@@ -110,12 +110,12 @@ func _show_win_screen() -> void:
 	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
 	win_screen.tree_exited.connect(_show_title_screen)
 	add_child(win_screen)
-	
+
 func _show_credits() -> void:
 	var credits: Node = load("res://ui/screens/credit-screen/credit_screen.tscn").instantiate()
 	credits.tree_exited.connect(_show_title_screen)
 	menu_layer.add_child(credits)
-	
+
 func _show_title_screen() -> void:
 	InputManager.set_is_in_game(false)
 	var title_screen: Node = load("res://ui/screens/title-screen/title_screen.tscn").instantiate()
@@ -133,12 +133,12 @@ func _show_level_select() -> void:
 	level_select.exit.connect(_show_title_screen)
 	level_select.init_buttons(max_level, completed_levels)
 	menu_layer.add_child(level_select)
-	
+
 func _show_settings_screen() -> void:
 	var settings_screen: Node = load("res://ui/screens/settings-screen/settings_screen.tscn").instantiate()
 	settings_screen.exit.connect(_show_title_screen)
 	menu_layer.add_child(settings_screen)
-	
+
 func _show_controls() -> void:
 	var controls: Node = load("res://ui/screens/control-screen/control_screen.tscn").instantiate()
 	if not main_level:
@@ -161,6 +161,6 @@ func _return_to_title_screen() -> void:
 func _quit_game() -> void:
 	get_tree().paused = false
 	get_tree().quit()
-	
+
 func set_world_environment(env: Environment):
 	$WorldEnvironment.environment = env

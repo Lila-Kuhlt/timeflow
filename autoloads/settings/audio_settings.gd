@@ -3,11 +3,11 @@ class_name AudioSettings
 enum AudioBus {MASTER, MUSIC, SFX, VOICE}
 
 static func _register_settings() -> void:
-	Settings.add_setting("volume_master", Settings.Setting.new("Volume", 
-																Settings.SettingCategory.AUDIO, 
-																Settings.SettingType.FLOAT, 
-																100.0, 
-																{"min": 0, "max": 150, "step": 1}, 
+	Settings.add_setting("volume_master", Settings.Setting.new("Volume",
+																Settings.SettingCategory.AUDIO,
+																Settings.SettingType.FLOAT,
+																100.0,
+																{"min": 0, "max": 150, "step": 1},
 																_set_audio_bus_volume.bind(AudioBus.MASTER)))
 	Settings.add_section("section_audio_bus", "Fine Control", Settings.SettingCategory.AUDIO)
 	Settings.add_setting("volume_music", Settings.Setting.new("Volume (Music)",

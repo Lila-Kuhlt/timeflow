@@ -31,7 +31,7 @@ func _input(event: InputEvent) -> void:
 			game_debug_hide.emit()
 		else:
 			game_debug_show.emit()
-	elif not _is_in_game: 
+	elif not _is_in_game:
 		pass
 
 func set_is_in_game(b: bool) -> void:

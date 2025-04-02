@@ -17,7 +17,7 @@ func _on_credit_pressed() -> void:
 func _on_level_select_pressed() -> void:
 	show_level_select.emit()
 	queue_free()
-	
+
 func _on_options_pressed() -> void:
 	show_settings_screen.emit()
 	queue_free()
