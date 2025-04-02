@@ -11,7 +11,7 @@ signal game_debug_hide
 var _is_in_game: bool = false
 var _is_paused: bool = false
 var is_debug_label_visible: bool = false
-var capture_mouse_ingame: bool = true
+var capture_mouse_ingame: bool = false
 #endregion
 
 enum InputType {MOUSE, JOYPAD}
