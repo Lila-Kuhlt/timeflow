@@ -33,3 +33,63 @@ func _process(_delta: float):
 func place_tile_on_coordinate(coords: Vector2i, type: Shared.Tile, rotation: Shared.Rotation):
 	var test := Vector2i(1, 1)
 	tile_map.set_cell(coords, 0, test)
+		place_tile_on_coordinate(Vector2i(0, 0), Tile.STRAIGHT, Rotation.UP, State.EMPTY)
+
+func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation, state: State):
+	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
+	tile_map.set_cell(coords, state, tile_coordinates)
+	
+func get_tile_atlas_coords_from_enums(type: Tile, rotation: Rotation) -> Vector2i:
+	match type:
+		Tile.STRAIGHT:
+			match rotation:
+				Rotation.UP, Rotation.DOWN:
+					return Vector2i(0, 2)
+				Rotation.LEFT, Rotation.RIGHT:
+					return Vector2i(2, 1)
+		Tile.CROSS:
+			match rotation:
+				_:
+					return Vector2i(1, 1)
+		Tile.CURVE:
+			match rotation:
+				Rotation.UP:
+					return Vector2i(2, 0)
+				Rotation.LEFT:
+					return Vector2i(0, 1)
+				Rotation.DOWN:
+					return Vector2i(1, 0)
+				Rotation.RIGHT:
+					return Vector2i(0, 0)
+		Tile.T:
+			match rotation:
+				Rotation.UP:
+					return Vector2i(1, 3)
+				Rotation.LEFT:
+					return Vector2i(0, 3)
+				Rotation.DOWN:
+					return Vector2i(1, 2)
+				Rotation.RIGHT:
+					return Vector2i(2, 2)
+					
+	return Vector2i(0, 0)
+					
+					
+enum Tile {
+	STRAIGHT,
+	CROSS,
+	CURVE,
+	T
+}
+
+enum Rotation {
+	UP,
+	LEFT,
+	DOWN,
+	RIGHT
+}
+
+enum State {
+	EMPTY,
+	FULL
+}

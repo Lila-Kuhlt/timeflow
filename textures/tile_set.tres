@@ -1,6 +1,34 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dj5auvsbjxvwu"]
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://dj5auvsbjxvwu"]
 
+[ext_resource type="Texture2D" uid="uid://bluctoolvbcwj" path="res://textures/tilemaps/channels/channels_atlas.png" id="1_e8b4j"]
 [ext_resource type="Texture2D" uid="uid://cugecpa4ks0gs" path="res://textures/tilemap.png" id="1_r5uoo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0pla1"]
+texture = ExtResource("1_e8b4j")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "down_left"
+1:0/next_alternative_id = 4
+1:0/0 = 0
+1:0/0/custom_data_0 = "down_right"
+2:0/0 = 0
+2:0/0/custom_data_0 = "up_left"
+0:1/0 = 0
+0:1/0/custom_data_0 = "up_right"
+1:1/0 = 0
+1:1/0/custom_data_0 = "cross"
+2:1/0 = 0
+2:1/0/custom_data_0 = "straight_horizontanl"
+0:2/0 = 0
+0:2/0/custom_data_0 = "straight_vertical"
+1:2/0 = 0
+1:2/0/custom_data_0 = "t_down"
+2:2/0 = 0
+2:2/0/custom_data_0 = "t_left"
+0:3/0 = 0
+0:3/0/custom_data_0 = "t_right"
+1:3/0 = 0
+1:3/0/custom_data_0 = "t_up"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8b4j"]
 texture = ExtResource("1_r5uoo")
@@ -18,4 +46,7 @@ texture_region_size = Vector2i(32, 32)
 
 [resource]
 tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "tile"
+custom_data_layer_0/type = 4
 sources/9 = SubResource("TileSetAtlasSource_e8b4j")
+sources/0 = SubResource("TileSetAtlasSource_0pla1")
