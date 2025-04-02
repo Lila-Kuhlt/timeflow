@@ -11,3 +11,8 @@ enum Rotation {
 	DOWN,
 	RIGHT
 }
+
+enum State {
+	EMPTY,
+	FULL
+}
