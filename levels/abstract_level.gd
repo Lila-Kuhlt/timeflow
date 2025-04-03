@@ -48,10 +48,15 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
+	if Input.is_action_just_pressed('remove_tile'):
+		remove_tile_on_coordinate(hovered_tile)
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
+
+func remove_tile_on_coordinate(coords: Vector2i):
+	tile_map.set_cell(coords, -1, Vector2i(-1, -1), -1)
 
 # Return type: {"tile": <Tile type>, "rotation": <Rotation type>}
 static func get_enum_from_atlas_coords(coords: Vector2i):
