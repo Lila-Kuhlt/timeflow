@@ -15,10 +15,10 @@ func init_tiles(t: Dictionary[Shared.Tile, int]):
 		var tilename := "TileSelectorTile%d" % (i+1)
 		var tile: TileSelectorTile = TileSelectorTileScene.instantiate()
 		tile.idx = i
-		tile.tile_type = tile_ty
 		tile.connect("on_clicked", on_select_tile)
 		tiles.append(tile)
 		tile_container.add_child(tile)
+		tile.set_tile_type(tile_ty)
 		i += 1
 	on_select_tile(tiles[0])
 

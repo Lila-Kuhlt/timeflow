@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bluctoolvbcwj" path="res://textures/tilemaps/channels/channels_atlas.png" id="2_3dy13"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8xse5"]
+resource_local_to_scene = true
 atlas = ExtResource("2_3dy13")
 region = Rect2(0, 0, 32, 32)
 

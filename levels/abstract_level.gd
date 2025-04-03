@@ -42,7 +42,7 @@ func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) 
 	tile_map.set_cell(coords, 0, tile_coordinates)
 	
 # Return type: {"tile": <Tile type>, "rotation": <Rotation type>}
-func get_enum_from_atlas_coords(coords: Vector2i):
+static func get_enum_from_atlas_coords(coords: Vector2i):
 	match coords.x:
 		0:
 			match coords.y:
@@ -76,7 +76,7 @@ func get_enum_from_atlas_coords(coords: Vector2i):
 	return null
 		
 	
-func get_tile_atlas_coords_from_enums(type: Tile, rotation: Rotation):
+static func get_tile_atlas_coords_from_enums(type: Tile, rotation: Rotation):
 	match type:
 		Tile.STRAIGHT:
 			match rotation:
