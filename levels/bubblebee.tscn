@@ -1,31 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://baphhn1yaervo"]
+[gd_scene load_steps=7 format=3 uid="uid://baphhn1yaervo"]
 
-[ext_resource type="Script" path="res://levels/bubblebee.gd" id="1_0uemu"]
-[ext_resource type="Texture2D" uid="uid://dkgp7tccxyyxc" path="res://icon.svg" id="2_g61yg"]
+[ext_resource type="Script" uid="uid://cd0m4txwwdj51" path="res://levels/bubblebee.gd" id="1_0uemu"]
+[ext_resource type="Texture2D" uid="uid://bcl1nc3ojcsh2" path="res://textures/tilemaps/enviroment/bumblebee_animated.png" id="2_g61yg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqyts"]
+atlas = ExtResource("2_g61yg")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dnfg"]
+atlas = ExtResource("2_g61yg")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sd5b6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_g61yg")
+"texture": SubResource("AtlasTexture_fqyts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dnfg")
 }],
 "loop": true,
-"name": &"default",
+"name": &"fly",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g61yg"]
-radius = 6.08276
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g61yg"]
+size = Vector2(15, 10)
 
 [node name="Bubblebee" type="Node2D"]
 script = ExtResource("1_0uemu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_sd5b6")
-frame_progress = 0.976921
+animation = &"fly"
+autoplay = "fly"
+frame_progress = 0.46078
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_g61yg")
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_g61yg")
