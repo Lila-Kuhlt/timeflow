@@ -33,6 +33,7 @@ var water_heads: Array[Vector2i] = []
 var delay_map: Dictionary[Vector2i, int] = {}
 
 signal loss()
+signal win()
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
@@ -282,8 +283,6 @@ func flow_tick():
 	var any_on_checkpoint: bool = false
 	var all_on_checkpoint: bool = true
 
-	if current_checkpoint_index >= checkpoint_groups.size():
-		return
 	var checkpoints = checkpoint_groups[current_checkpoint_index]
 	for head in water_heads:
 		if head in checkpoints:
@@ -294,6 +293,8 @@ func flow_tick():
 	if all_on_checkpoint:
 		print("checkpoint ", current_checkpoint_index, " complete")
 		current_checkpoint_index += 1
+		if current_checkpoint_index >= checkpoint_groups.size():
+			win.emit()
 	else:
 		if any_on_checkpoint:
 			# TODO add reason
