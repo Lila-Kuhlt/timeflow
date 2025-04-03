@@ -5,10 +5,13 @@ const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
 
+@onready var rotateSFXAudio : AudioStreamPlayer = $AudioRotationSound
+@onready var placeSFXAudio : AudioStreamPlayer = $AudioPlacementSound
 @onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
+@onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
@@ -27,22 +30,28 @@ var chosen_rot: Rotation = Rotation.UP
 }
 
 # Array of arrays of Vector2i
-@export var checkpoint_groups: Array[Array] = [[Vector2i(2, 2)]]
+@export var checkpoint_groups: Array[Array] = [[]]
 
 var water_heads: Array[Vector2i] = []
 var delay_map: Dictionary[Vector2i, int] = {}
 
 signal loss()
+signal win()
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
+
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
 
+	for i in range(checkpoint_groups.size()):
+		for checkpoint in checkpoint_groups[i]:
+			checkpoint_map.set_cell(checkpoint, 4, Vector2i(0, 0), 1)
+
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
-	var mouse_pos = get_viewport().get_mouse_position()
-	var map_coord = tile_map.local_to_map(to_local(mouse_pos))
+	var mouse_pos = $Camera2D.get_local_mouse_position()
+	var map_coord = tile_map.local_to_map(mouse_pos)
 	return map_coord
 
 func update_hovered_tile(hovered_tile):
@@ -63,9 +72,11 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
+		rotateSFXAudio.play(0.1)
 	if Input.is_action_just_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
+		rotateSFXAudio.play(0.1)
 	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
@@ -87,6 +98,7 @@ func update_tile_count(tile: Tile):
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
+	placeSFXAudio.play(0)
 	if available_tiles[type] > 0:
 		available_tiles[type] -= 1
 		update_tile_count(type)
@@ -273,17 +285,17 @@ func flow_tick():
 			# TODO add reason
 			print("no way to flow")
 			loss.emit()
+			return
 
 	if water_heads.is_empty():
 		# TODO add reason
 		print("no water heads")
 		loss.emit()
+		return
 
 	var any_on_checkpoint: bool = false
 	var all_on_checkpoint: bool = true
 
-	if current_checkpoint_index >= checkpoint_groups.size():
-		return
 	var checkpoints = checkpoint_groups[current_checkpoint_index]
 	for head in water_heads:
 		if head in checkpoints:
@@ -294,6 +306,8 @@ func flow_tick():
 	if all_on_checkpoint:
 		print("checkpoint ", current_checkpoint_index, " complete")
 		current_checkpoint_index += 1
+		if current_checkpoint_index >= checkpoint_groups.size():
+			win.emit()
 	else:
 		if any_on_checkpoint:
 			# TODO add reason

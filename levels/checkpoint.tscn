@@ -1,11 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcp430ao51hn6"]
+[gd_scene load_steps=6 format=3 uid="uid://dcp430ao51hn6"]
 
-[ext_resource type="Texture2D" uid="uid://cm5ag0m7s2sdd" path="res://textures/programmer_checkpoint.png" id="1_dw2mh"]
+[ext_resource type="Script" uid="uid://b7owndihruw6u" path="res://levels/checkpoint.gd" id="1_o8aye"]
+[ext_resource type="Texture2D" uid="uid://byxiw5e401pyp" path="res://textures/tilemaps/enviroment/watermill.png" id="1_yt13s"]
+[ext_resource type="Texture2D" uid="uid://bq8j2bn420jno" path="res://textures/tilemaps/enviroment/checkpoint_flag.png" id="2_o8aye"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_yt13s"]
-diffuse_texture = ExtResource("1_dw2mh")
+[sub_resource type="CanvasTexture" id="CanvasTexture_5v0h6"]
+diffuse_texture = ExtResource("1_yt13s")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2gv07"]
+diffuse_texture = ExtResource("2_o8aye")
 
 [node name="Checkpoint" type="Node2D"]
+script = ExtResource("1_o8aye")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CanvasTexture_yt13s")
+[node name="Mill" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_5v0h6")
+
+[node name="Flag" type="Sprite2D" parent="."]
+position = Vector2(-27, -25)
+texture = SubResource("CanvasTexture_2gv07")

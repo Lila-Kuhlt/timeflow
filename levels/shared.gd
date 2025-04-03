@@ -1,6 +1,6 @@
 class_name Shared
 
-const SKIP_TITLE_SCREEN := true
+const SKIP_TITLE_SCREEN := false
 
 enum Tile {
 	STRAIGHT,
