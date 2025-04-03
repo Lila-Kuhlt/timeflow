@@ -1,12 +1,30 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://hheneshfv1b2"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://hheneshfv1b2"]
 
 [ext_resource type="Texture2D" uid="uid://ftlf5ywhqv63" path="res://textures/gui/ui_rect_base.png" id="1_ge066"]
 [ext_resource type="Texture2D" uid="uid://dttgwmuw317v8" path="res://textures/gui/ui_rect_dark.png" id="1_prsbj"]
 [ext_resource type="Texture2D" uid="uid://b23e4kqj4o6dv" path="res://textures/Revert.svg" id="1_r1020"]
+[ext_resource type="Texture2D" uid="uid://dqrfwsj382kdg" path="res://textures/gui/ui_rect_darker.png" id="2_1soqu"]
 [ext_resource type="FontFile" uid="uid://pvjhfeag1gvd" path="res://ui/themes/minimal5x7.ttf" id="3_c2y3n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_prsbj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w51bx"]
+texture = ExtResource("1_prsbj")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+modulate_color = Color(0.838897, 0.838897, 0.838897, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1soqu"]
 texture = ExtResource("1_prsbj")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_353en"]
+texture = ExtResource("2_1soqu")
 texture_margin_left = 12.0
 texture_margin_top = 12.0
 texture_margin_right = 12.0
@@ -40,7 +58,10 @@ corner_radius_bottom_left = 2
 [resource]
 default_font = ExtResource("3_c2y3n")
 default_font_size = 48
+Button/styles/focus = SubResource("StyleBoxEmpty_prsbj")
+Button/styles/hover = SubResource("StyleBoxTexture_w51bx")
 Button/styles/normal = SubResource("StyleBoxTexture_1soqu")
+Button/styles/pressed = SubResource("StyleBoxTexture_353en")
 DarkPanel/base_type = &"Panel"
 DarkPanel/styles/panel = SubResource("StyleBoxTexture_prsbj")
 HeaderLarge/font_sizes/font_size = 56
