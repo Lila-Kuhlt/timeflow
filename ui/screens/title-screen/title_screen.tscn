@@ -66,8 +66,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(561, 640)
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control"]
+scale = Vector2(2.145, 2.145)
 amount = 308
 texture = SubResource("GradientTexture2D_587ml")
 process_material = SubResource("ParticleProcessMaterial_8jtjs")
