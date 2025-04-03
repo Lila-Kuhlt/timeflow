@@ -21,4 +21,12 @@ offset_right = 32.0
 offset_bottom = 32.0
 texture_normal = SubResource("AtlasTexture_8xse5")
 
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 35.0
+offset_bottom = 36.0
+text = "0"
+
 [connection signal="pressed" from="TextureButton" to="." method="on_click_handler"]

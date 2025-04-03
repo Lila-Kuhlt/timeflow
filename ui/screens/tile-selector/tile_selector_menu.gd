@@ -6,6 +6,7 @@ signal tile_select_changed(idx: int)
 const TileSelectorTileScene := preload("res://ui/components/TileSelectorTile.tscn")
 @onready var tile_container = $MarginContainer/Panel/HBoxContainer
 var tiles: Array[TileSelectorTile] = []
+var type_to_index: Dictionary[Shared.Tile, int] = {}
 var selected_tile: Shared.Tile = -1
 var selected_tile_idx := -1
 
@@ -22,11 +23,16 @@ func init_tiles(t: Dictionary[Shared.Tile, int]):
 		tile.idx = i
 		tile.connect("on_clicked", on_select_tile)
 		tiles.append(tile)
+		type_to_index[tile_ty] = i
 		tile_container.add_child(tile)
 		tile.set_tile_type(tile_ty)
+		tile.set_tile_count(t[tile_ty])
 		i += 1
 	on_select_tile(tiles[0])
 
+func update_tile_count(ty: Shared.Tile, count: int):
+	var tile: TileSelectorTile = tiles[type_to_index[ty]]
+	tile.set_tile_count(count)
 
 func on_select_tile(tile: TileSelectorTile):
 	if selected_tile_idx == tile.idx:

@@ -13,11 +13,12 @@ const State = Shared.State
 var hovered_tile_before: Vector2i
 var chosen_atlas_coord: Vector2i #specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
-# maps tile ids to its available count
+# Maps tile ids to its available count.
+# -1 means infinity
 @export var available_tiles: Dictionary[Shared.Tile, int] = {
 	Shared.Tile.STRAIGHT: 5,
 	Shared.Tile.CROSS: 5,
-	Shared.Tile.CURVE: 5,
+	Shared.Tile.CURVE: -1,
 	Shared.Tile.T: 5,
 }
 var water_heads: Array[Vector2i] = []
@@ -43,7 +44,8 @@ func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile'):
+	if Input.is_action_just_pressed('place_tile') and is_tile_available():
+		remove_tile_on_coordinate(hovered_tile)
 		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 	if Input.is_action_just_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
@@ -54,11 +56,28 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 
+func is_tile_available() -> bool:
+	return available_tiles[tile_selector.selected_tile] != 0
+
+func update_tile_count(tile: Tile):
+	tile_selector.update_tile_count(tile, available_tiles[tile])
+
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
+	if available_tiles[type] > 0:
+		available_tiles[type] -= 1
+		update_tile_count(type)
 
 func remove_tile_on_coordinate(coords: Vector2i):
+	var atlas_coords := tile_map.get_cell_atlas_coords(coords)
+	if atlas_coords == Vector2i(-1, -1):
+		return
+	var tile_info: Dictionary = get_enum_from_atlas_coords(atlas_coords)
+	var tile: Tile = tile_info['tile']
+	if available_tiles[tile] >= 0:
+		available_tiles[tile] += 1
+		update_tile_count(tile)
 	tile_map.set_cell(coords)
 
 func set_tile_water_state(coords: Vector2i, state: State):
