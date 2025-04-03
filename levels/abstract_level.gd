@@ -7,6 +7,7 @@ const State = Shared.State
 
 @onready var rotateSFXAudio : AudioStreamPlayer = $AudioRotationSound
 @onready var placeSFXAudio : AudioStreamPlayer = $AudioPlacementSound
+@onready var removeSFXAudio : AudioStreamPlayer = $AudioRemoveSound
 @onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
@@ -134,6 +135,7 @@ func remove_tile_on_coordinate(coords: Vector2i):
 		available_tiles[tile] += 1
 		update_tile_count(tile)
 	tile_map.set_cell(coords)
+	removeSFXAudio.play(0)
 
 func set_tile_water_state(coords: Vector2i, state: State):
 	if state == State.EMPTY:

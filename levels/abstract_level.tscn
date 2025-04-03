@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=4 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=15 format=4 uid="uid://cyfvcuxi210mg"]
 
 [ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
 [ext_resource type="PackedScene" uid="uid://bnerb5wu8ihny" path="res://ui/screens/tile-selector/tile_selector_menu.tscn" id="2_8tasw"]
 [ext_resource type="Texture2D" uid="uid://5u86ksoilp5c" path="res://textures/tilemaps/channels/water_atlas.png" id="5_c78cs"]
+[ext_resource type="AudioStream" uid="uid://dgui7vgxlffit" path="res://music/SoundEffects/Rotate1.wav" id="5_gcjs8"]
 [ext_resource type="PackedScene" uid="uid://baphhn1yaervo" path="res://levels/bubblebee.tscn" id="6_5vxm8"]
+[ext_resource type="AudioStream" uid="uid://vbrsap5vqadx" path="res://music/SoundEffects/Placement3.wav" id="6_sv1o5"]
+[ext_resource type="AudioStream" uid="uid://nkgroqp7xy0f" path="res://music/SoundEffects/Placement2.wav" id="7_arcml"]
+[ext_resource type="AudioStream" uid="uid://2igri7wesil0" path="res://music/SoundEffects/RemoveBlock.wav" id="9_sv1o5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vxm8"]
 texture = ExtResource("5_c78cs")
@@ -29,11 +33,18 @@ sources/0 = SubResource("TileSetAtlasSource_5vxm8")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y43h3"]
 streams_count = 4
+stream_0/stream = ExtResource("5_gcjs8")
 stream_0/weight = 5.0
+stream_1/stream = ExtResource("5_gcjs8")
+stream_2/stream = ExtResource("5_gcjs8")
+stream_3/stream = ExtResource("5_gcjs8")
 stream_3/weight = 5.0
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qu85l"]
 streams_count = 3
+stream_0/stream = ExtResource("6_sv1o5")
+stream_1/stream = ExtResource("7_arcml")
+stream_2/stream = ExtResource("6_sv1o5")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vxm8"]
 size = Vector2(562.5, 306)
@@ -80,6 +91,7 @@ zoom = Vector2(2, 2)
 
 [node name="AudioPlacementSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_qu85l")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="Bubblebee" parent="." instance=ExtResource("6_5vxm8")]
@@ -90,6 +102,10 @@ position = Vector2(273.5, 106)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BeeArea"]
 position = Vector2(286.75, 158.5)
 shape = SubResource("RectangleShape2D_5vxm8")
+
+[node name="AudioRemoveSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_sv1o5")
+volume_db = 5.0
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
 [connection signal="area_exited" from="BeeArea" to="Bubblebee" method="_change_speed_leaving_area"]

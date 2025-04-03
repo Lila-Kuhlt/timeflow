@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://2igri7wesil0"
-path="res://.godot/imported/PlaceBlock.wav-c78d27ffa905a44bb6c23e713dc0db98.sample"
+path="res://.godot/imported/RemoveBlock.wav-f4d5e683b3fb97d6c7034eed97472308.sample"
 
 [deps]
 
-source_file="res://music/SoundEffects/PlaceBlock.wav"
-dest_files=["res://.godot/imported/PlaceBlock.wav-c78d27ffa905a44bb6c23e713dc0db98.sample"]
+source_file="res://music/SoundEffects/RemoveBlock.wav"
+dest_files=["res://.godot/imported/RemoveBlock.wav-f4d5e683b3fb97d6c7034eed97472308.sample"]
 
 [params]
 
