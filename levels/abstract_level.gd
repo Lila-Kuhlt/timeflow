@@ -264,22 +264,31 @@ func flow_tick():
 					water_heads.append(neighbor)
 					continue
 			# TODO add reason
+			print("no way to flow")
 			loss.emit()
 
 	if water_heads.is_empty():
 		# TODO add reason
+		print("no water heads")
 		loss.emit()
 
 	var any_on_checkpoint: bool = false
 	var all_on_checkpoint: bool = true
-	
+
+	if current_checkpoint_index >= checkpoint_groups.size():
+		return
+	var checkpoints = checkpoint_groups[current_checkpoint_index]
 	for head in water_heads:
-		for checkpoints in checkpoint_groups[current_checkpoint_index]:
-			if (head in checkpoints):
-				any_on_checkpoint = true
-			else:
-				all_on_checkpoint = false
-	
-	if (any_on_checkpoint && !all_on_checkpoint):
-		# TODO add reason
-		loss.emit()
+		if head in checkpoints:
+			any_on_checkpoint = true
+		else:
+			all_on_checkpoint = false
+
+	if all_on_checkpoint:
+		print("checkpoint ", current_checkpoint_index, " complete")
+		current_checkpoint_index += 1
+	else:
+		if any_on_checkpoint:
+			# TODO add reason
+			print("not all checkpoints reached at the same time: ", current_checkpoint_index)
+			loss.emit()

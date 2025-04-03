@@ -110,14 +110,14 @@ func _reload_current_level() -> void:
 func _show_win_screen() -> void:
 	InputManager.set_is_in_game(false)
 	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
-	win_screen.tree_exited.connect(_show_title_screen)
+	win_screen.tree_exited.connect(_return_to_title_screen)
 	add_child(win_screen)
 
 func _show_loss_screen() -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	var loss_screen: Control = load("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
-	loss_screen.tree_exited.connect(_show_title_screen)
+	loss_screen.tree_exited.connect(_return_to_title_screen)
 	add_child(loss_screen)
 
 func _show_credits() -> void:
