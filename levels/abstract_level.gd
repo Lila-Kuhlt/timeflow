@@ -98,7 +98,7 @@ func update_tile_count(tile: Tile):
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
-	#placeSFXAudio.play(0)
+	placeSFXAudio.play(0)
 	if available_tiles[type] > 0:
 		available_tiles[type] -= 1
 		update_tile_count(type)
