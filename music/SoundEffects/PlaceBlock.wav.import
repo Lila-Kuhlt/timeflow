@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://2igri7wesil0"
-path="res://.godot/imported/GameJamPlaceBlock.wav-9d638addd66820c8c2580ae1bff689da.sample"
+path="res://.godot/imported/PlaceBlock.wav-c78d27ffa905a44bb6c23e713dc0db98.sample"
 
 [deps]
 
-source_file="res://music/SoundEffects/GameJamPlaceBlock.wav"
-dest_files=["res://.godot/imported/GameJamPlaceBlock.wav-9d638addd66820c8c2580ae1bff689da.sample"]
+source_file="res://music/SoundEffects/PlaceBlock.wav"
+dest_files=["res://.godot/imported/PlaceBlock.wav-c78d27ffa905a44bb6c23e713dc0db98.sample"]
 
 [params]
 

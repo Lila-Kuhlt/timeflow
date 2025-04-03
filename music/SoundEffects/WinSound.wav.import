@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://e3mt2buyi7jq"
-path="res://.godot/imported/GameJamWinSound.wav-3f35235fa038f81f76206dfc7d23479a.sample"
+path="res://.godot/imported/WinSound.wav-926c5b95bd864046bf611ee4940f6966.sample"
 
 [deps]
 
-source_file="res://music/SoundEffects/GameJamWinSound.wav"
-dest_files=["res://.godot/imported/GameJamWinSound.wav-3f35235fa038f81f76206dfc7d23479a.sample"]
+source_file="res://music/SoundEffects/WinSound.wav"
+dest_files=["res://.godot/imported/WinSound.wav-926c5b95bd864046bf611ee4940f6966.sample"]
 
 [params]
 
