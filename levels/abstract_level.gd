@@ -67,7 +67,7 @@ func _process(_delta: float):
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
 	if Input.is_action_just_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile):
-		var is_ok := (available_tiles[tile_selector.selected_tile] > 0)
+		var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
 		if not is_ok:
 			var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
 			if atlas_coord != Vector2i(-1, -1):

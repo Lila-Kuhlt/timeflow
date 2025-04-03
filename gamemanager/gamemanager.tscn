@@ -9,7 +9,7 @@
 [node name="Gamemanager" type="Node"]
 process_mode = 3
 script = ExtResource("1_htktm")
-max_level = 4
+max_level = 5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_v1n10")
