@@ -5,7 +5,7 @@ signal tile_select_changed(idx: int)
 
 const TileSelectorTileScene := preload("res://ui/components/TileSelectorTile.tscn")
 @onready var tile_container = $MarginContainer/Panel/MarginContainer/HBoxContainer
-@onready var fast_forward_button: TextureButton = $MarginContainer/Panel/MarginContainer/HBoxContainer/FastForwardButton
+@onready var fast_forward_button: TextureButton = $MarginContainer/Panel/Panel/FastForwardButton
 var tiles: Array[TileSelectorTile] = []
 var type_to_index: Dictionary[Shared.Tile, int] = {}
 var selected_tile: Shared.Tile = -1
