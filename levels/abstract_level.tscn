@@ -38,6 +38,7 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_5vxm8")
 
 [node name="Level1" type="Node2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_8tasw")
 
 [node name="BackgroundTileMap" type="TileMapLayer" parent="."]
