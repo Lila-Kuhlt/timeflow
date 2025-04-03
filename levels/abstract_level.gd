@@ -26,7 +26,7 @@ var chosen_rot: Rotation = Rotation.UP
 }
 
 # Array of arrays of Vector2i
-@export var checkpoint_groups: Array[Array] = [[]]
+@export var checkpoint_groups: Array[Array] = [[Vector2i(2, 2)]]
 
 var water_heads: Array[Vector2i] = []
 

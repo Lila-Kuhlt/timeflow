@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=8 format=4 uid="uid://cyfvcuxi210mg"]
 
 [ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
 [ext_resource type="PackedScene" uid="uid://bnerb5wu8ihny" path="res://ui/screens/tile-selector/tile_selector_menu.tscn" id="2_8tasw"]
+[ext_resource type="PackedScene" uid="uid://dcp430ao51hn6" path="res://levels/checkpoint.tscn" id="5_5vxm8"]
 [ext_resource type="Texture2D" uid="uid://5u86ksoilp5c" path="res://textures/tilemaps/channels/water_atlas.png" id="5_c78cs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vxm8"]
@@ -50,5 +51,8 @@ tile_set = SubResource("TileSet_aw458")
 
 [node name="FluidTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="Checkpoint" parent="." instance=ExtResource("5_5vxm8")]
+position = Vector2(16, 15)
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
