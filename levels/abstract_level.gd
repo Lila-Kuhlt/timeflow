@@ -66,9 +66,16 @@ func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile') and is_tile_available() and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile):
-		remove_tile_on_coordinate(hovered_tile)
-		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
+	if Input.is_action_just_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile):
+		var is_ok := (available_tiles[tile_selector.selected_tile] > 0)
+		if not is_ok:
+			var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
+			if atlas_coord != Vector2i(-1, -1):
+				var tile_info = get_enum_from_atlas_coords(atlas_coord)
+				is_ok = tile_info['tile'] == tile_selector.selected_tile
+		if is_ok:
+			remove_tile_on_coordinate(hovered_tile)
+			place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 	if Input.is_action_just_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
