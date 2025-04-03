@@ -29,6 +29,7 @@ var chosen_rot: Rotation = Rotation.UP
 @export var checkpoint_groups: Array[Array] = [[Vector2i(2, 2)]]
 
 var water_heads: Array[Vector2i] = []
+var delay_map: Dictionary[Vector2i, int] = {}
 
 signal loss()
 
@@ -225,13 +226,29 @@ func move_in_direction(direction: Rotation, coords: Vector2i) -> Vector2i:
 		Rotation.RIGHT: return coords + Vector2i(1, 0)
 		_: return coords
 
+func tick_delay(tile: Tile, coords: Vector2i) -> bool:
+	if tile != Tile.DELAY:
+		return true
+	if coords not in delay_map:
+		delay_map[coords] = 1
+		return false
+	delay_map[coords] -= 1
+	if delay_map[coords] <= 0:
+		delay_map.erase(coords)
+		return true
+	return false
+
 func flow_tick():
 	var old_water_heads = water_heads.duplicate()
 	water_heads.clear()
 	for head in old_water_heads:
 		var head_coords := tile_map.get_cell_atlas_coords(head)
 		var head_data: Dictionary = get_enum_from_atlas_coords(head_coords)
-		for direction in get_directions(head_data["tile"], head_data["rotation"]):
+		var head_type: Tile = head_data["tile"]
+		if not tick_delay(head_type, head):
+			water_heads.append(head)
+			continue
+		for direction in get_directions(head_type, head_data["rotation"]):
 			var neighbor = move_in_direction(direction, head)
 			if neighbor == Vector2i(0, -1):
 				# TODO: real water soure/sink detection
