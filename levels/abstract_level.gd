@@ -5,6 +5,7 @@ const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
 
+@onready var rotateSFXAudio := $AudioRotationSound
 @onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
@@ -64,9 +65,11 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
+		rotateSFXAudio.play(0)
 	if Input.is_action_just_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
+		rotateSFXAudio.play(0)
 	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
