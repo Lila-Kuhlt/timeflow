@@ -18,10 +18,12 @@ func _ready():
 
 func rand_position() -> Vector2:
 	var viewport := get_viewport_rect()
+	var vw_start: Vector2 = get_parent().to_local(viewport.position)
+	var vw_end: Vector2 = get_parent().to_local(viewport.end)
 	print(viewport)
 	return Vector2(
-		randf_range(viewport.position.x, viewport.end.x),
-		randf_range(viewport.position.y, viewport.end.y),
+		randf_range(vw_start.x, vw_end.x),
+		randf_range(vw_start.y, vw_end.y),
 	)
 
 func update_next_path():
