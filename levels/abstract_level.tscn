@@ -80,6 +80,7 @@ zoom = Vector2(2, 2)
 
 [node name="AudioPlacementSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_qu85l")
+bus = &"SFX"
 
 [node name="Bubblebee" parent="." instance=ExtResource("6_5vxm8")]
 position = Vector2(273.5, 106)
