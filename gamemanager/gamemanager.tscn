@@ -34,6 +34,7 @@ theme = ExtResource("3_8qpx4")
 
 [node name="AudioMainThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_i7ped")
+volume_db = -19.882
 autoplay = true
 bus = &"Music"
 
