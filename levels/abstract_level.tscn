@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=13 format=4 uid="uid://cyfvcuxi210mg"]
 
 [ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
@@ -9,9 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://ca65au5hbgen7" path="res://music/SoundEffects/Rotate2.wav" id="7_arcml"]
 [ext_resource type="AudioStream" uid="uid://bkrvnei8xrwtw" path="res://music/SoundEffects/Rotate3.wav" id="8_5wbbs"]
 [ext_resource type="AudioStream" uid="uid://bv8d4dbbkmdes" path="res://music/SoundEffects/Rotate4.wav" id="9_07s2t"]
-[ext_resource type="AudioStream" uid="uid://c3f5a183ogs2l" path="res://music/SoundEffects/Placement1.wav" id="10_07s2t"]
-[ext_resource type="AudioStream" uid="uid://nkgroqp7xy0f" path="res://music/SoundEffects/Placement2.wav" id="11_y43h3"]
-[ext_resource type="AudioStream" uid="uid://vbrsap5vqadx" path="res://music/SoundEffects/Placement3.wav" id="12_qu85l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vxm8"]
 texture = ExtResource("5_c78cs")
@@ -52,7 +49,7 @@ stream_1/weight = 50.0
 stream_2/stream = ExtResource("12_qu85l")
 stream_2/weight = 10.0
 
-[node name="Level1" type="Node2D"]
+[node name="AbstractLevel" type="Node2D"]
 process_mode = 1
 scale = Vector2(2, 2)
 script = ExtResource("1_8tasw")
@@ -83,10 +80,6 @@ position = Vector2(16, 15)
 
 [node name="AudioRotationSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_y43h3")
-bus = &"SFX"
-
-[node name="AudioPlacementSound" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_aapoo")
 bus = &"SFX"
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
