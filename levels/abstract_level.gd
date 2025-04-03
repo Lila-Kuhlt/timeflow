@@ -59,6 +59,9 @@ func on_fast_forward_toggle(enable: bool) -> void:
 	else:
 		fluid_timer.wait_time = 1.25
 
+func update_fast_forward_button(enable: bool) -> void:
+	tile_selector.fast_forward_button.button_pressed = enable
+
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
 	var mouse_pos = $Camera2D.get_local_mouse_position()
@@ -104,8 +107,10 @@ func _process(_delta: float):
 			break
 	if Input.is_action_just_pressed("fast_forward"):
 		on_fast_forward_toggle(true)
+		update_fast_forward_button(true)
 	elif Input.is_action_just_released("fast_forward"):
 		on_fast_forward_toggle(false)
+		update_fast_forward_button(false)
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
