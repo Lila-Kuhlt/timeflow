@@ -26,3 +26,6 @@ static func rotate_right(rotation: Rotation) -> Rotation:
 
 static func rotate_left(rotation: Rotation) -> Rotation:
 	return (rotation + 1) % 4 as Rotation
+
+static func reflect(rotation: Rotation) -> Rotation:
+	return (rotation + 2) % 4 as Rotation
