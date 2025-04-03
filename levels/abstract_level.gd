@@ -10,8 +10,11 @@ const State = Shared.State
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
+
+var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
+
 var hovered_tile_before: Vector2i
-var chosen_atlas_coord: Vector2i #specific tile to assign from within that tileset source
+var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
 # Maps tile ids to its available count.
 # -1 means infinity
@@ -21,6 +24,10 @@ var chosen_rot: Rotation = Rotation.UP
 	Shared.Tile.CURVE: -1,
 	Shared.Tile.T: 5,
 }
+
+# Array of arrays of Vector2i
+@export var checkpoint_groups: Array[Array] = []
+
 var water_heads: Array[Vector2i] = []
 
 signal loss()
@@ -131,7 +138,6 @@ static func get_enum_from_atlas_coords(coords: Vector2i):
 
 	return null
 
-
 static func get_tile_atlas_coords_from_enums(type: Tile, orientation: Rotation):
 	match type:
 		Tile.STRAIGHT:
@@ -230,4 +236,23 @@ func flow_tick():
 					set_tile_water_state(neighbor, State.FULL)
 					water_heads.append(neighbor)
 					continue
+			# TODO add reason
 			loss.emit()
+
+	if water_heads.is_empty():
+		# TODO add reason
+		loss.emit()
+
+	var any_on_checkpoint: bool = false
+	var all_on_checkpoint: bool = true
+	
+	for head in water_heads:
+		for checkpoints in checkpoint_groups[current_checkpoint_index]:
+			if (head in checkpoints):
+				any_on_checkpoint = true
+			else:
+				all_on_checkpoint = false
+	
+	if (any_on_checkpoint && !all_on_checkpoint):
+		# TODO add reason
+		loss.emit()
