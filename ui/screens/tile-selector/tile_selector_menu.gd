@@ -9,6 +9,11 @@ var tiles: Array[TileSelectorTile] = []
 var selected_tile: Shared.Tile = -1
 var selected_tile_idx := -1
 
+func _process(delta: float) -> void:
+	for i in range(len(tiles)):
+		if Input.is_physical_key_pressed(KEY_1 + i):
+			on_select_tile(tiles[i])
+
 func init_tiles(t: Dictionary[Shared.Tile, int]):
 	var i := 0
 	for tile_ty: Shared.Tile in t:
