@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dcp430ao51hn6"]
 
-[ext_resource type="Script" uid="uid://b7owndihruw6u" path="res://levels/checkpoint.gd" id="1_o8aye"]
+[ext_resource type="Script" path="res://levels/checkpoint.gd" id="1_o8aye"]
 [ext_resource type="Texture2D" uid="uid://byxiw5e401pyp" path="res://textures/tilemaps/enviroment/watermill.png" id="1_yt13s"]
 [ext_resource type="Texture2D" uid="uid://bq8j2bn420jno" path="res://textures/tilemaps/enviroment/checkpoint_flag.png" id="2_o8aye"]
 
