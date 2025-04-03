@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
 [ext_resource type="PackedScene" uid="uid://bnerb5wu8ihny" path="res://ui/screens/tile-selector/tile_selector_menu.tscn" id="2_8tasw"]
 [ext_resource type="Texture2D" uid="uid://5u86ksoilp5c" path="res://textures/tilemaps/channels/water_atlas.png" id="5_c78cs"]
-[ext_resource type="PackedScene" uid="uid://dka77ygk7vm0q" path="res://levels/bubblebee.tscn" id="6_5vxm8"]
+[ext_resource type="PackedScene" uid="uid://baphhn1yaervo" path="res://levels/bubblebee.tscn" id="6_5vxm8"]
 [ext_resource type="AudioStream" uid="uid://dgui7vgxlffit" path="res://music/SoundEffects/Rotate1.wav" id="6_sv1o5"]
 [ext_resource type="AudioStream" uid="uid://ca65au5hbgen7" path="res://music/SoundEffects/Rotate2.wav" id="7_arcml"]
 [ext_resource type="AudioStream" uid="uid://bkrvnei8xrwtw" path="res://music/SoundEffects/Rotate3.wav" id="8_5wbbs"]
@@ -33,15 +33,6 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_aw458"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_5vxm8")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vxm8"]
-size = Vector2(562.5, 306)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vxm8"]
-size = Vector2(562.5, 306)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vxm8"]
-size = Vector2(562.5, 306)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y43h3"]
 streams_count = 4
