@@ -36,6 +36,12 @@ func _process(_delta: float):
 		chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
 		ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
 		hovered_tile_before = hovered_tile
+	if Input.is_action_just_pressed('place_tile'):
+		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
+	if Input.is_action_just_pressed('rotate_left'):
+		pass # rotate left
+	if Input.is_action_just_pressed('rotate_right'):
+		pass # rotate left
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
