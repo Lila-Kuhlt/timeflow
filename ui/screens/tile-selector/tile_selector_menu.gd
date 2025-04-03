@@ -4,7 +4,7 @@ class_name TileSelectorMenu
 signal tile_select_changed(idx: int)
 
 const TileSelectorTileScene := preload("res://ui/components/TileSelectorTile.tscn")
-@onready var tile_container = $MarginContainer/Panel/HBoxContainer
+@onready var tile_container = $MarginContainer/Panel/MarginContainer/HBoxContainer
 var tiles: Array[TileSelectorTile] = []
 var type_to_index: Dictionary[Shared.Tile, int] = {}
 var selected_tile: Shared.Tile = -1

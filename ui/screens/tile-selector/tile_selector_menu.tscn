@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnerb5wu8ihny"]
+[gd_scene load_steps=3 format=3 uid="uid://bnerb5wu8ihny"]
 
 [ext_resource type="Script" uid="uid://b2682wl3ns832" path="res://ui/screens/tile-selector/tile_selector_menu.gd" id="1_lai4r"]
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="2_lai4r"]
 
 [node name="TileSelectorMenu" type="CanvasLayer"]
 layer = 0
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_lai4r")
 theme_override_constants/margin_bottom = 20
 
 [node name="Panel" type="Panel" parent="MarginContainer"]
@@ -19,12 +21,20 @@ custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+theme_type_variation = &"DarkPanel"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
 alignment = 1
