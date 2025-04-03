@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b2682wl3ns832" path="res://ui/screens/tile-selector/tile_selector_menu.gd" id="1_lai4r"]
 
 [node name="TileSelectorMenu" type="CanvasLayer"]
-layer = -1
+layer = 0
 script = ExtResource("1_lai4r")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

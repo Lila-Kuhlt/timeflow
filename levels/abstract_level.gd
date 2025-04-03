@@ -57,6 +57,11 @@ func _process(_delta: float):
 		update_hovered_tile(hovered_tile)
 	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
+	for i in range(len(tile_selector.tiles)):
+		if Input.is_physical_key_pressed(KEY_1 + i):
+			tile_selector.on_select_tile(tile_selector.tiles[i])
+			update_hovered_tile(hovered_tile)
+			break
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
