@@ -23,6 +23,7 @@ var chosen_rot: Rotation = Rotation.UP
 	Shared.Tile.CROSS: 5,
 	Shared.Tile.CURVE: -1,
 	Shared.Tile.T: 5,
+	Shared.Tile.DELAY: 5,
 }
 
 # Array of arrays of Vector2i
@@ -117,6 +118,8 @@ static func get_enum_from_atlas_coords(coords: Vector2i):
 					return {"tile": Tile.STRAIGHT, "rotation": Rotation.UP}
 				3:
 					return {"tile": Tile.T, "rotation": Rotation.RIGHT}
+				4:
+					return {"tile": Tile.DELAY, "rotation": Rotation.UP}
 		1:
 			match coords.y:
 				0:
@@ -135,6 +138,8 @@ static func get_enum_from_atlas_coords(coords: Vector2i):
 					return {"tile": Tile.STRAIGHT, "rotation": Rotation.LEFT}
 				2:
 					return {"tile": Tile.T, "rotation": Rotation.LEFT}
+				3:
+					return {"tile": Tile.DELAY, "rotation": Rotation.LEFT}
 
 	return null
 
@@ -170,12 +175,18 @@ static func get_tile_atlas_coords_from_enums(type: Tile, orientation: Rotation):
 					return Vector2i(1, 2)
 				Rotation.RIGHT:
 					return Vector2i(0, 3)
+		Tile.DELAY:
+			match orientation:
+				Rotation.UP, Rotation.DOWN:
+					return Vector2i(0, 4)
+				Rotation.LEFT, Rotation.RIGHT:
+					return Vector2i(2, 3)
 
 	return null
 
 func get_directions(type: Tile, orientation: Rotation) -> Array[Rotation]:
 	match type:
-		Tile.STRAIGHT:
+		Tile.STRAIGHT, Tile.DELAY:
 			match orientation:
 				Rotation.UP, Rotation.DOWN:
 					return [Rotation.UP, Rotation.DOWN]

@@ -6,7 +6,8 @@ enum Tile {
 	STRAIGHT,
 	CROSS,
 	CURVE,
-	T
+	T,
+	DELAY
 }
 
 enum Rotation {
