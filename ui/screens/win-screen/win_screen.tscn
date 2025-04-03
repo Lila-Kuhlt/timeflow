@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://g2g8hydsgxid"]
+[gd_scene load_steps=5 format=3 uid="uid://g2g8hydsgxid"]
 
 [ext_resource type="Script" uid="uid://dgtme0a6lym5c" path="res://ui/screens/win-screen/win_screen.gd" id="1_lgw0b"]
+[ext_resource type="AudioStream" uid="uid://dgntn8rvmts2a" path="res://music/SoundEffects/WinSound2.wav" id="2_yicpd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbmgw"]
 font_size = 100
@@ -47,5 +48,9 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Return to title screen"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_yicpd")
+pitch_scale = 1.2
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

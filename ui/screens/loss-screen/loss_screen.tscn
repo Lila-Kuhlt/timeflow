@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://3kjrad005fqh"]
+[gd_scene load_steps=6 format=3 uid="uid://3kjrad005fqh"]
 
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_3srwp"]
 [ext_resource type="Script" uid="uid://dkptnuvrtubry" path="res://ui/screens/loss-screen/loss_screen.gd" id="1_7c73l"]
+[ext_resource type="AudioStream" uid="uid://ct3kgn3jfubyv" path="res://music/SoundEffects/LooseSound.wav" id="3_7p1xu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbmgw"]
 font_size = 100
@@ -74,5 +75,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Return to title screen"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7p1xu")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="pressed" from="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
