@@ -1,7 +1,42 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddc3qfst7mbgc"]
+[gd_scene load_steps=12 format=3 uid="uid://ddc3qfst7mbgc"]
 
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_qt2rq"]
 [ext_resource type="Script" uid="uid://1mjt83fygiua" path="res://ui/screens/title-screen/title_screen.gd" id="1_rm86k"]
+[ext_resource type="Texture2D" uid="uid://b46pycwxsvtwk" path="res://textures/waterfall.png" id="3_xh72y"]
+
+[sub_resource type="Shader" id="Shader_gggwx"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.1.stable's CanvasItemMaterial.
+
+shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D tex : filter_nearest, repeat_enable;
+
+void fragment(){
+	COLOR= texture(tex,SCREEN_UV*TEXTURE_PIXEL_SIZE*10.0+vec2(0.0, -2.0*TIME));
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xh72y"]
+shader = SubResource("Shader_gggwx")
+shader_parameter/tex = ExtResource("3_xh72y")
+
+[sub_resource type="Gradient" id="Gradient_xh72y"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.00378788, 1)
+colors = PackedColorArray(1, 1, 1, 0.0941176, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_587ml"]
+gradient = SubResource("Gradient_xh72y")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8jtjs"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(611.765, 1, 1)
+gravity = Vector3(0, 0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_s0ue6"]
 font_size = 150
@@ -21,6 +56,21 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_qt2rq")
 script = ExtResource("1_rm86k")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_xh72y")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(561, 640)
+amount = 308
+texture = SubResource("GradientTexture2D_587ml")
+process_material = SubResource("ParticleProcessMaterial_8jtjs")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
