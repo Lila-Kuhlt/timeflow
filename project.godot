@@ -25,7 +25,7 @@ Settings="*res://autoloads/settings/settings.gd"
 [display]
 
 window/size/mode=4
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [input]
 
