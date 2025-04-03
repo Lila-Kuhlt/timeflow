@@ -17,6 +17,7 @@ tile_set = ExtResource("1_nghai")
 [node name="TileSelectorMenu" parent="." instance=ExtResource("2_8tasw")]
 
 [node name="GhostTileMap" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0.564706)
 tile_set = ExtResource("1_nghai")
 
 [node name="CheckpointTileMap" type="TileMapLayer" parent="."]
