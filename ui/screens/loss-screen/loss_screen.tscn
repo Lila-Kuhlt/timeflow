@@ -78,6 +78,7 @@ text = "Return to title screen"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_7p1xu")
+volume_db = -10.0
 autoplay = true
 bus = &"SFX"
 
