@@ -54,7 +54,6 @@ texture_region_size = Vector2i(32, 48)
 0:0/0/texture_origin = Vector2i(0, 7)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ovwei"]
-texture = ExtResource("7_rp4y7")
 texture_region_size = Vector2i(32, 32)
 0:0/next_alternative_id = 2
 0:0/0 = 0
