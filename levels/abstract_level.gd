@@ -5,7 +5,8 @@ const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
 
-@onready var rotateSFXAudio := $AudioRotationSound
+@onready var rotateSFXAudio : AudioStreamPlayer = $AudioRotationSound
+@onready var placeSFXAudio : AudioStreamPlayer = $AudioPlacementSound
 @onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
@@ -65,11 +66,11 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
-		rotateSFXAudio.play(0)
+		rotateSFXAudio.play(0.1)
 	if Input.is_action_just_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
-		rotateSFXAudio.play(0)
+		rotateSFXAudio.play(0.1)
 	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
@@ -91,6 +92,7 @@ func update_tile_count(tile: Tile):
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
+	placeSFXAudio.play(0)
 	if available_tiles[type] > 0:
 		available_tiles[type] -= 1
 		update_tile_count(type)
