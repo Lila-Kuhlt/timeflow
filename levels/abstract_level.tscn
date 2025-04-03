@@ -41,7 +41,6 @@ stream_3/weight = 5.0
 
 [node name="AbstractLevel" type="Node2D"]
 process_mode = 1
-scale = Vector2(2, 2)
 script = ExtResource("1_8tasw")
 checkpoint_groups = Array[Array]([[Vector2i(0, 3)], [Vector2i(3, 6), Vector2i(3, 8)], [Vector2i(2, 2)]])
 
@@ -71,5 +70,9 @@ autostart = true
 [node name="AudioRotationSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_y43h3")
 bus = &"SFX"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(2, 2)
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]

@@ -79,6 +79,8 @@ func _show_main_level() -> void:
 func _next_level() -> void:
 	if level < max_level and max_level > 0:
 		InputManager.set_is_in_game(true)
+		if current_level_node:
+			current_level_node.queue_free()
 		level += 1
 		_show_level(level)
 		completed_levels[level - 1] = true
@@ -91,6 +93,8 @@ func _show_level(level_nr: int) -> void:
 	var next_level = load(level_location % str(level)).instantiate()
 	if next_level.has_signal("win"):
 		next_level.win.connect(_next_level)
+	if next_level.has_signal("loss"):
+		next_level.loss.connect(_show_loss_screen)
 	if next_level.has_signal("reset"):
 		next_level.reset.connect(_reload_current_level)
 	add_child(next_level)

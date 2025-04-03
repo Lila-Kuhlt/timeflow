@@ -43,7 +43,7 @@ func _ready() -> void:
 
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
-	
+
 	for i in range(checkpoint_groups.size()):
 		for checkpoint in checkpoint_groups[i]:
 			checkpoint_map.set_cell(checkpoint, 4, Vector2i(0, 0), 1)
@@ -285,11 +285,13 @@ func flow_tick():
 			# TODO add reason
 			print("no way to flow")
 			loss.emit()
+			return
 
 	if water_heads.is_empty():
 		# TODO add reason
 		print("no water heads")
 		loss.emit()
+		return
 
 	var any_on_checkpoint: bool = false
 	var all_on_checkpoint: bool = true
