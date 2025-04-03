@@ -51,12 +51,15 @@ texture = ExtResource("4_qxrm0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3qxt"]
 texture = ExtResource("5_dbv2v")
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gmfk"]
 texture = ExtResource("6_d4pg4")
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trgyp"]
 texture = ExtResource("7_1uwti")
+0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oi66c"]
 resource_name = "Tree"
