@@ -6,7 +6,6 @@ const Rotation = Shared.Rotation
 const State = Shared.State
 
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
-@onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
@@ -27,7 +26,7 @@ var chosen_rot: Rotation = Rotation.UP
 }
 
 # Array of arrays of Vector2i
-@export var checkpoint_groups: Array[Array] = []
+@export var checkpoint_groups: Array[Array] = [[]]
 
 var water_heads: Array[Vector2i] = []
 
