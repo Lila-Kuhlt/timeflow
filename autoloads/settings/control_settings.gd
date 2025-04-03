@@ -26,10 +26,10 @@ static func _register_settings() -> void:
 																	{"min": 0.1, "max": 1.9, "step": 0}))
 	Settings.add_section("section_controls_key_bindings", "Key Bindings", Settings.SettingCategory.CONTROLS)
 	# Insert you remappable actions here
-	create_action_setting("move_up", "Move Forward")
-	create_action_setting("move_down", "Move Backward")
-	create_action_setting("move_left", "Move Left")
-	create_action_setting("move_right", "Move Right")
+	create_action_setting("place_tile", "Place Tile")
+	create_action_setting("remove_tile", "Remove Tile")
+	create_action_setting("rotate_left", "Rotate Left")
+	create_action_setting("rotate_right", "Rotate Right")
 
 
 static func set_input_events(events: Array, action: String) -> void:
