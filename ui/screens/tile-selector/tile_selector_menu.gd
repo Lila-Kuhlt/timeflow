@@ -13,6 +13,8 @@ var selected_tile_idx := -1
 func init_tiles(t: Dictionary[Shared.Tile, int]):
 	var i := 0
 	for tile_ty: Shared.Tile in t:
+		if t[tile_ty] == 0:
+			continue
 		var tilename := "TileSelectorTile%d" % (i+1)
 		var tile: TileSelectorTile = TileSelectorTileScene.instantiate()
 		tile.idx = i
