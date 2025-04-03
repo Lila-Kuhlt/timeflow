@@ -5,6 +5,7 @@ const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
 
+@onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
@@ -46,15 +47,17 @@ func get_selected_tile() -> Vector2i:
 
 func update_hovered_tile(hovered_tile):
 	ghost_map.set_cell(hovered_tile_before)  # removes cell
+	hovered_tile_before = hovered_tile
+	if not is_floor_placeable(hovered_tile):
+		return
 	chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
 	ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
-	hovered_tile_before = hovered_tile
 
 func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile') and is_tile_available() and get_tile_water_state(hovered_tile) == State.EMPTY:
+	if Input.is_action_just_pressed('place_tile') and is_tile_available() and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile):
 		remove_tile_on_coordinate(hovered_tile)
 		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 	if Input.is_action_just_pressed('rotate_left'):
@@ -73,6 +76,10 @@ func _process(_delta: float):
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
+
+func is_floor_placeable(coords: Vector2i) -> bool:
+	var source_id := bg_map.get_cell_source_id(coords)
+	return source_id == 1  # check for grass tile
 
 func update_tile_count(tile: Tile):
 	tile_selector.update_tile_count(tile, available_tiles[tile])
