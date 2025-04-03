@@ -27,6 +27,8 @@ signal loss()
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
+	water_heads.append(Vector2i(0, 0))
+	set_tile_water_state(Vector2i(0, 0), State.FULL)
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
@@ -44,7 +46,7 @@ func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile') and is_tile_available():
+	if Input.is_action_just_pressed('place_tile') and is_tile_available() and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 	if Input.is_action_just_pressed('rotate_left'):
@@ -210,6 +212,9 @@ func flow_tick():
 		var head_data: Dictionary = get_enum_from_atlas_coords(head_coords)
 		for direction in get_directions(head_data["tile"], head_data["rotation"]):
 			var neighbor = move_in_direction(direction, head)
+			if neighbor == Vector2i(0, -1):
+				# TODO: real water soure/sink detection
+				continue
 			if get_tile_water_state(neighbor) == State.FULL:
 				continue
 			var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
