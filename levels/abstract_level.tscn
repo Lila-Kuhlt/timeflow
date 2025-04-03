@@ -87,6 +87,7 @@ tile_set = SubResource("TileSet_aw458")
 tile_set = ExtResource("1_nghai")
 
 [node name="FluidTimer" type="Timer" parent="."]
+wait_time = 1.25
 autostart = true
 
 [node name="AudioRotationSound" type="AudioStreamPlayer" parent="."]
