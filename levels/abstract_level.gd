@@ -177,23 +177,28 @@ func get_directions(type: Tile, orientation: Rotation) -> Array[Rotation]:
 
 func move_in_direction(direction: Rotation, coords: Vector2i) -> Vector2i:
 	match direction:
-		Rotation.UP: return coords + Vector2i(-1, 0)
-		Rotation.LEFT: return coords + Vector2i(0, -1)
-		Rotation.DOWN: return coords + Vector2i(1, 0)
-		Rotation.RIGHT: return coords + Vector2i(0, 1)
+		Rotation.UP: return coords + Vector2i(0, -1)
+		Rotation.LEFT: return coords + Vector2i(-1, 0)
+		Rotation.DOWN: return coords + Vector2i(0, 1)
+		Rotation.RIGHT: return coords + Vector2i(1, 0)
 		_: return coords
 
 func flow_tick():
 	var old_water_heads = water_heads.duplicate()
+	water_heads.clear()
 	for head in old_water_heads:
 		var head_coords := tile_map.get_cell_atlas_coords(head)
 		var head_data: Dictionary = get_enum_from_atlas_coords(head_coords)
 		for direction in get_directions(head_data["tile"], head_data["rotation"]):
 			var neighbor = move_in_direction(direction, head)
+			if get_tile_water_state(neighbor) == State.FULL:
+				continue
 			var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
-			var neighbor_data: Dictionary = get_enum_from_atlas_coords(neighbor_coords)
-			# TODO: check if neighbor has water
-			if Shared.reflect(direction) in get_directions(neighbor_data["tile"], neighbor_data["rotation"]):
-				pass # TODO: fill with water, add to water_heads
-			else:
-				loss.emit()
+			var neighbor_data = get_enum_from_atlas_coords(neighbor_coords)
+			if neighbor_data is Dictionary:
+				var neighbor_directions = get_directions(neighbor_data["tile"], neighbor_data["rotation"])
+				if Shared.reflect(direction) in neighbor_directions:
+					set_tile_water_state(neighbor, State.FULL)
+					water_heads.append(neighbor)
+					continue
+			loss.emit()

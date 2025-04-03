@@ -34,6 +34,7 @@ texture_region_size = Vector2i(32, 32)
 0:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_aw458"]
+tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_5vxm8")
 
 [node name="Level1" type="Node2D"]
