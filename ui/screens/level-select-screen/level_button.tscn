@@ -6,7 +6,7 @@
 custom_minimum_size = Vector2(90, 90)
 offset_right = 8.0
 offset_bottom = 8.0
-theme_override_font_sizes/font_size = 56
+theme_override_font_sizes/font_size = 72
 script = ExtResource("1_ej8yx")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
