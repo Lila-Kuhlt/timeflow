@@ -8,6 +8,7 @@ const State = Shared.State
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
+@onready var water_map: TileMapLayer = $WaterTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 var hovered_tile_before: Vector2i
 var chosen_atlas_coord: Vector2i #specific tile to assign from within that tileset source
@@ -59,6 +60,16 @@ func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotatio
 
 func remove_tile_on_coordinate(coords: Vector2i):
 	tile_map.set_cell(coords, -1, Vector2i(-1, -1), -1)
+
+func set_tile_water_state(coords: Vector2i, state: State):
+	if state == State.EMPTY:
+		water_map.set_cell(coords, -1, Vector2i(-1, -1), -1)
+		return
+	var atlas_coords := tile_map.get_cell_atlas_coords(coords)
+	water_map.set_cell(coords, 0, atlas_coords)
+
+func get_tile_water_state(coords: Vector2i) -> State:
+	return State.FULL if water_map.get_cell_source_id(coords) == 0 else State.EMPTY
 
 # Return type: {"tile": <Tile type>, "rotation": <Rotation type>}
 static func get_enum_from_atlas_coords(coords: Vector2i):
