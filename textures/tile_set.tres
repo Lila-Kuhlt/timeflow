@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bep8gwb8egt7f" path="res://textures/tilemaps/enviroment/grass.png" id="2_0pla1"]
 [ext_resource type="Texture2D" uid="uid://dhiawqr58h82o" path="res://textures/tilemaps/enviroment/tree.png" id="3_kd2h0"]
 [ext_resource type="Texture2D" uid="uid://bbjmpjdm40iy7" path="res://textures/tilemaps/enviroment/dry_grass.png" id="4_kd2h0"]
-[ext_resource type="PackedScene" path="res://levels/checkpoint.tscn" id="5_s3hej"]
+[ext_resource type="PackedScene" uid="uid://dcp430ao51hn6" path="res://levels/checkpoint.tscn" id="5_s3hej"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0pla1"]
 resource_name = "Channels"
