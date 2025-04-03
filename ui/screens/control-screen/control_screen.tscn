@@ -57,90 +57,151 @@ autowrap_mode = 2
 position = Vector2(306, 378)
 scale = Vector2(0.695, 0.695)
 
-[node name="WASD" type="Node2D" parent="ControlImages"]
+[node name="Numbers" type="Node2D" parent="ControlImages"]
+position = Vector2(-11.5108, -86.3309)
 
-[node name="TextureRect" type="Sprite2D" parent="ControlImages/WASD"]
-position = Vector2(-32.75, -88.75)
+[node name="TextureRect2" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(-88.75, 7.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_hbk1g")
 
-[node name="W" type="Label" parent="ControlImages/WASD/TextureRect"]
+[node name="1" type="Label" parent="ControlImages/Numbers/TextureRect2"]
+offset_left = -80.0
+offset_top = -188.0
+offset_right = -45.0
+offset_bottom = -125.0
+scale = Vector2(4.75306, 4.39234)
+text = "1
+"
+label_settings = SubResource("LabelSettings_27lof")
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(7.25, 7.25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_hbk1g")
+
+[node name="2" type="Label" parent="ControlImages/Numbers/TextureRect3"]
+offset_left = -80.0
+offset_top = -188.0
+offset_right = -45.0
+offset_bottom = -125.0
+scale = Vector2(4.75306, 4.39234)
+text = "2
+
+"
+label_settings = SubResource("LabelSettings_27lof")
+horizontal_alignment = 1
+
+[node name="TextureRect4" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(103.25, 7.25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_hbk1g")
+
+[node name="3" type="Label" parent="ControlImages/Numbers/TextureRect4"]
+offset_left = -80.0
+offset_top = -188.0
+offset_right = -45.0
+offset_bottom = -125.0
+scale = Vector2(4.75306, 4.39234)
+text = "3
+"
+label_settings = SubResource("LabelSettings_27lof")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(199.25, 7.25)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_hbk1g")
+
+[node name="4" type="Label" parent="ControlImages/Numbers/TextureRect"]
 offset_left = -108.0
 offset_top = -180.0
 offset_right = -65.0
 offset_bottom = -117.0
 scale = Vector2(4.75306, 4.39234)
-text = "W
+text = "4
 "
 label_settings = SubResource("LabelSettings_27lof")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect2" type="Sprite2D" parent="ControlImages/WASD"]
-position = Vector2(-88.75, 7.25)
+[node name="TextureRect5" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(-66.25, 103.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_hbk1g")
 
-[node name="A" type="Label" parent="ControlImages/WASD/TextureRect2"]
+[node name="Q" type="Label" parent="ControlImages/Numbers/TextureRect5"]
 offset_left = -80.0
 offset_top = -188.0
 offset_right = -45.0
 offset_bottom = -125.0
 scale = Vector2(4.75306, 4.39234)
-text = "A
+text = "Q
 "
 label_settings = SubResource("LabelSettings_27lof")
 horizontal_alignment = 1
 
-[node name="TextureRect3" type="Sprite2D" parent="ControlImages/WASD"]
-position = Vector2(7.25, 7.25)
+[node name="TextureRect6" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(29.75, 103.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_hbk1g")
 
-[node name="S" type="Label" parent="ControlImages/WASD/TextureRect3"]
+[node name="W" type="Label" parent="ControlImages/Numbers/TextureRect6"]
+visible = false
 offset_left = -80.0
 offset_top = -188.0
 offset_right = -45.0
 offset_bottom = -125.0
 scale = Vector2(4.75306, 4.39234)
-text = "S
-
+text = "W
 "
 label_settings = SubResource("LabelSettings_27lof")
 horizontal_alignment = 1
 
-[node name="TextureRect4" type="Sprite2D" parent="ControlImages/WASD"]
-position = Vector2(103.25, 7.25)
+[node name="TextureRect7" type="Sprite2D" parent="ControlImages/Numbers"]
+position = Vector2(125.75, 103.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_hbk1g")
 
-[node name="D" type="Label" parent="ControlImages/WASD/TextureRect4"]
+[node name="E" type="Label" parent="ControlImages/Numbers/TextureRect7"]
 offset_left = -80.0
 offset_top = -188.0
 offset_right = -45.0
 offset_bottom = -125.0
 scale = Vector2(4.75306, 4.39234)
-text = "D
+text = "E
 "
 label_settings = SubResource("LabelSettings_27lof")
 horizontal_alignment = 1
 
-[node name="Move" type="Label" parent="ControlImages/WASD"]
-offset_left = -61.8705
-offset_top = 56.1151
-offset_right = 150.13
-offset_bottom = 166.115
-text = "Move"
+[node name="Rotate" type="Label" parent="ControlImages/Numbers"]
+offset_left = -56.1151
+offset_top = 129.496
+offset_right = 155.885
+offset_bottom = 239.496
+text = "Rotate"
+label_settings = SubResource("LabelSettings_jpaqh")
+
+[node name="Select Tile" type="Label" parent="ControlImages/Numbers"]
+offset_left = -82.0144
+offset_top = -120.863
+offset_right = 207.986
+offset_bottom = -10.8634
+text = "Select Tile"
 label_settings = SubResource("LabelSettings_jpaqh")
 
 [node name="Space" type="Node2D" parent="ControlImages"]
+visible = false
 position = Vector2(392, 8)
 
 [node name="Space2" type="Sprite2D" parent="ControlImages/Space"]
+visible = false
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_nvllw")
 
-[node name="W" type="Label" parent="ControlImages/Space/Space2"]
+[node name="TextSpace" type="Label" parent="ControlImages/Space/Space2"]
+visible = false
 offset_left = -288.0
 offset_top = -176.0
 offset_right = -161.0
@@ -151,6 +212,7 @@ label_settings = SubResource("LabelSettings_27lof")
 horizontal_alignment = 1
 
 [node name="Jump" type="Label" parent="ControlImages/Space"]
+visible = false
 offset_left = -62.5036
 offset_top = 40.9209
 offset_right = 149.496
@@ -170,7 +232,7 @@ offset_left = -212.719
 offset_top = -228.374
 offset_right = 310.281
 offset_bottom = -118.374
-text = "Action     Action"
+text = "Place     Remove"
 label_settings = SubResource("LabelSettings_7ean5")
 
 [node name="Line2D" type="Line2D" parent="ControlImages/Mouse"]
