@@ -8,7 +8,7 @@ signal exit_game_btn_pressed
 func reset():
 	%SettingsMenuPopup.hide()
 	%MainPauseMenuPopup.show()
-	
+
 func _on_btn_continue_pressed():
 	continue_btn_pressed.emit()
 	hide()
