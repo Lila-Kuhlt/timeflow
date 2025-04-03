@@ -11,6 +11,7 @@ const State = Shared.State
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
+@onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
@@ -29,7 +30,7 @@ var chosen_rot: Rotation = Rotation.UP
 }
 
 # Array of arrays of Vector2i
-@export var checkpoint_groups: Array[Array] = [[Vector2i(2, 2)]]
+@export var checkpoint_groups: Array[Array] = [[]]
 
 var water_heads: Array[Vector2i] = []
 var delay_map: Dictionary[Vector2i, int] = {}
@@ -39,8 +40,13 @@ signal win()
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
+
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
+	
+	for i in range(checkpoint_groups.size()):
+		for checkpoint in checkpoint_groups[i]:
+			checkpoint_map.set_cell(checkpoint, 4, Vector2i(0, 0), 1)
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
