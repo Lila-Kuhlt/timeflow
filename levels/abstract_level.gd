@@ -50,8 +50,8 @@ func _ready() -> void:
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
-	var mouse_pos = get_viewport().get_mouse_position()
-	var map_coord = tile_map.local_to_map(to_local(mouse_pos))
+	var mouse_pos = $Camera2D.get_local_mouse_position()
+	var map_coord = tile_map.local_to_map(mouse_pos)
 	return map_coord
 
 func update_hovered_tile(hovered_tile):
