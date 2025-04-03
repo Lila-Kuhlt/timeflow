@@ -29,24 +29,29 @@ func get_selected_tile() -> Vector2i:
 	var map_coord = tile_map.local_to_map(to_local(mouse_pos))
 	return map_coord
 
+func update_hovered_tile(hovered_tile):
+	ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
+	chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
+	ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
+	hovered_tile_before = hovered_tile
+
 func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
-		ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
-		chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
-		ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
-		hovered_tile_before = hovered_tile
+		update_hovered_tile(hovered_tile)
 	if Input.is_action_just_pressed('place_tile'):
 		place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 	if Input.is_action_just_pressed('rotate_left'):
-		pass # rotate left
+		chosen_rot = Shared.rotate_left(chosen_rot)
+		update_hovered_tile(hovered_tile)
 	if Input.is_action_just_pressed('rotate_right'):
-		pass # rotate left
+		chosen_rot = Shared.rotate_right(chosen_rot)
+		update_hovered_tile(hovered_tile)
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, rotation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, rotation)
 	tile_map.set_cell(coords, 0, tile_coordinates)
-	
+
 # Return type: {"tile": <Tile type>, "rotation": <Rotation type>}
 static func get_enum_from_atlas_coords(coords: Vector2i):
 	match coords.x:

@@ -21,8 +21,8 @@ enum State {
 	FULL
 }
 
-func rotate_right(rotation: Rotation) -> Rotation:
-	return (rotation - 1) % 4 as Rotation
+static func rotate_right(rotation: Rotation) -> Rotation:
+	return (rotation + 3) % 4 as Rotation
 
-func rotate_left(rotation: Rotation) -> Rotation:
+static func rotate_left(rotation: Rotation) -> Rotation:
 	return (rotation + 1) % 4 as Rotation
