@@ -34,7 +34,7 @@ func get_selected_tile() -> Vector2i:
 	return map_coord
 
 func update_hovered_tile(hovered_tile):
-	ghost_map.set_cell(hovered_tile_before, -1, Vector2i(-1, -1), -1)  # removes cell
+	ghost_map.set_cell(hovered_tile_before)  # removes cell
 	chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
 	ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
 	hovered_tile_before = hovered_tile
@@ -59,7 +59,7 @@ func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotatio
 	tile_map.set_cell(coords, 0, tile_coordinates)
 
 func remove_tile_on_coordinate(coords: Vector2i):
-	tile_map.set_cell(coords, -1, Vector2i(-1, -1), -1)
+	tile_map.set_cell(coords)
 
 func set_tile_water_state(coords: Vector2i, state: State):
 	if state == State.EMPTY:

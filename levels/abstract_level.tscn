@@ -40,7 +40,6 @@ sources/0 = SubResource("TileSetAtlasSource_5vxm8")
 script = ExtResource("1_8tasw")
 
 [node name="BackgroundTileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 tile_set = ExtResource("1_nghai")
 
 [node name="PlaceableTileMap" type="TileMapLayer" parent="."]
