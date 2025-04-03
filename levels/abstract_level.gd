@@ -13,6 +13,7 @@ const State = Shared.State
 @onready var water_map: TileMapLayer = $WaterTileMap
 @onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
+@onready var fluid_timer: Timer = $FluidTimer
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
@@ -40,6 +41,7 @@ signal win()
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
+	tile_selector.fast_forward_button.connect("toggled", on_fast_forward_toggle)
 
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
@@ -47,6 +49,12 @@ func _ready() -> void:
 	for i in range(checkpoint_groups.size()):
 		for checkpoint in checkpoint_groups[i]:
 			checkpoint_map.set_cell(checkpoint, 4, Vector2i(0, 0), 1)
+
+func on_fast_forward_toggle(enable: bool) -> void:
+	if enable:
+		fluid_timer.wait_time = 0.3
+	else:
+		fluid_timer.wait_time = 1.25
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
@@ -91,6 +99,10 @@ func _process(_delta: float):
 			tile_selector.on_select_tile(tile_selector.tiles[i])
 			update_hovered_tile(hovered_tile)
 			break
+	if Input.is_action_just_pressed("fast_forward"):
+		on_fast_forward_toggle(true)
+	elif Input.is_action_just_released("fast_forward"):
+		on_fast_forward_toggle(false)
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
