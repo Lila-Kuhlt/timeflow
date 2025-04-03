@@ -21,6 +21,8 @@ var chosen_rot: Rotation = Rotation.UP
 }
 var water_heads: Array[Vector2i] = []
 
+signal loss()
+
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
 
@@ -183,4 +185,4 @@ func flow_tick():
 			if Shared.reflect(direction) in get_directions(neighbor_data["tile"], neighbor_data["rotation"]):
 				pass # TODO: fill with water, add to water_heads
 			else:
-				pass # TODO: loss
+				loss.emit()
