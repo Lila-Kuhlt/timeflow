@@ -6,6 +6,12 @@ signal show_level_select()
 signal show_settings_screen()
 signal quit()
 
+# SKIP TITLE SCREEN
+func _ready() -> void:
+	if Shared.SKIP_TITLE_SCREEN:
+		start_game.emit()
+		queue_free()
+
 func _on_start_pressed() -> void:
 	start_game.emit()
 	queue_free()

@@ -6,6 +6,7 @@ const Rotation = Shared.Rotation
 const State = Shared.State
 
 @onready var tile_map : TileMapLayer = $PlaceableTileMap
+@onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var ghost_map : TileMapLayer = $GhostTileMap
 @onready var tile_selector : TileSelectorMenu = $TileSelectorMenu
 var hovered_tile_before: Vector2i

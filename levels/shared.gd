@@ -1,5 +1,7 @@
 class_name Shared
 
+const SKIP_TITLE_SCREEN := true
+
 enum Tile {
 	STRAIGHT,
 	CROSS,
