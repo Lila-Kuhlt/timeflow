@@ -30,6 +30,7 @@ static func _register_settings() -> void:
 	create_action_setting("remove_tile", "Remove Tile")
 	create_action_setting("rotate_left", "Rotate Left")
 	create_action_setting("rotate_right", "Rotate Right")
+	create_action_setting("fast_forward", "Fast Forward")
 
 
 static func set_input_events(events: Array, action: String) -> void:
