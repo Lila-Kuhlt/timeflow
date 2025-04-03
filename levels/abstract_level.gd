@@ -51,7 +51,7 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('remove_tile'):
+	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
