@@ -3,8 +3,9 @@ extends Node2D
 @export var start_pos : Vector2 
 @export var end_pos : Vector2
 @export var speed : float = 50
-@export var scheiss_lower := 10.0
-@export var scheiss_upper := 15.0
+@export var scheiss_lower := 1.0
+@export var scheiss_upper := 2.0
+@export var vogel_off_screen_warten := 5.0
 
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
@@ -20,4 +21,7 @@ func _physics_process(delta: float) -> void:
 
 
 func on_scheiss_timer_timeout() -> void:
+	print("UWU")
+	var parent : Level = get_parent()
+	parent.drauf_scheissen(position)
 	scheiss_timer.wait_time = randf_range(scheiss_lower, scheiss_upper)

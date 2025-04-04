@@ -24,7 +24,6 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_2tg2t")
 
 [node name="ScheissTimer" type="Timer" parent="."]
-wait_time = 10.0
 autostart = true
 
 [connection signal="timeout" from="ScheissTimer" to="." method="on_scheiss_timer_timeout"]

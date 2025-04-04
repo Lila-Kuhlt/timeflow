@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=4 uid="uid://dh2pnr7dnv7g5"]
+[gd_scene load_steps=3 format=4 uid="uid://dh2pnr7dnv7g5"]
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_vn7o3"]
+[ext_resource type="PackedScene" uid="uid://d00kbwpwkbomu" path="res://levels/vogel.tscn" id="2_jirdo"]
 
 [node name="Level1" instance=ExtResource("1_vn7o3")]
 available_tiles = Dictionary[int, int]({
@@ -23,3 +24,8 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAAAAEAAAAAAAQAAAAAAAIAAAAAAAI
 
 [node name="Bubblebee" parent="." index="12"]
 disabeele = true
+
+[node name="Vogel" parent="." index="13" instance=ExtResource("2_jirdo")]
+position = Vector2(93, -17)
+end_pos = Vector2(300, 400)
+speed = 100.0

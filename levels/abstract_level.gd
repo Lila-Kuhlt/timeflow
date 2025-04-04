@@ -409,3 +409,7 @@ func get_flow_depth() -> int:
 		heads = new_heads
 		depth += 1
 	return depth
+
+
+func drauf_scheissen(coords : Vector2):
+	print("Scheiss ", coords)
