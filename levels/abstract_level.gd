@@ -47,7 +47,7 @@ func _ready() -> void:
 	tile_selector.fast_forward_button.connect("toggled", on_fast_forward_toggle)
 
 	for i in range(ghost_map.tile_set.get_source_count()):
-		var source := ghost_map.tile_set.get_source(i)
+		var source := ghost_map.tile_set.get_source(ghost_map.tile_set.get_source_id(i))
 		if source.resource_name == 'Blocker':
 			blocker_source_id = i
 
