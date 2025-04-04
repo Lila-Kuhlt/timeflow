@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=19 format=4 uid="uid://cyfvcuxi210mg"]
 
 [ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://nkgroqp7xy0f" path="res://music/SoundEffects/Placement2.wav" id="7_arcml"]
 [ext_resource type="AudioStream" uid="uid://n77cb51n0uqo" path="res://music/SoundEffects/HummelFürLaura.wav" id="9_arcml"]
 [ext_resource type="AudioStream" uid="uid://2igri7wesil0" path="res://music/SoundEffects/RemoveBlock.wav" id="9_sv1o5"]
+[ext_resource type="AudioStream" uid="uid://b7euu626m88b1" path="res://music/SoundEffects/FlowerPickup.wav" id="12_07s2t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_07s2t"]
 texture = ExtResource("3_5wbbs")
@@ -118,6 +119,11 @@ bus = &"SFX"
 [node name="AudioRemoveSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_sv1o5")
 volume_db = 5.0
+
+[node name="AudioFlowerPickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_07s2t")
+volume_db = -20.0
+bus = &"SFX"
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
 [connection signal="on_blocking_toggle" from="Bubblebee" to="." method="on_bumblebee_blocker_toggle"]

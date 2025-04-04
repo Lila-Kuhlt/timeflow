@@ -10,6 +10,7 @@ const State = Shared.State
 @onready var rotateSFXAudio : AudioStreamPlayer = $AudioRotationSound
 @onready var placeSFXAudio : AudioStreamPlayer = $AudioPlacementSound
 @onready var removeSFXAudio : AudioStreamPlayer = $AudioRemoveSound
+@onready var flower_sound: AudioStreamPlayer = $AudioFlowerPickup
 @onready var bg_map: TileMapLayer = $BackgroundTileMap
 @onready var tile_map: TileMapLayer = $PlaceableTileMap
 @onready var ghost_map: TileMapLayer = $GhostTileMap
@@ -19,6 +20,7 @@ const State = Shared.State
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 @onready var fluid_timer: Timer = $FluidTimer
 @onready var decorative_map: TileMapLayer = $DecorativeTileMap
+
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 var scheiss_array : Array[Dictionary] = []
@@ -85,6 +87,7 @@ func update_fast_forward_button(enable: bool) -> void:
 
 func update_flower_count() -> void:
 	flower_count += 1
+	flower_sound.play()
 	tile_selector.update_flower_count(flower_count)
 
 # selected == mouse hover
