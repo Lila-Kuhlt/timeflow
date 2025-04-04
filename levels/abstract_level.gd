@@ -45,6 +45,8 @@ var flower_source_ids: Array[int] = []
 
 var water_heads: Array[Vector2i] = []
 var delay_map: Dictionary[Vector2i, int] = {}
+var is_place_tile_pressed := false
+var is_remove_tile_pressed := false
 
 signal loss()
 signal win()
@@ -100,20 +102,14 @@ func update_hovered_tile(new_hovered_tile):
 		ghost_map.set_cell(new_hovered_tile, 0, chosen_atlas_coord)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed('place_tile'):
-		if get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers and not ist_scheisse(hovered_tile):
-			var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
-			if not is_ok:
-				var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
-				if atlas_coord != Vector2i(-1, -1):
-					var tile_info = get_enum_from_atlas_coords(atlas_coord)
-					is_ok = tile_info['tile'] == tile_selector.selected_tile
-			if is_ok:
-				remove_tile_on_coordinate(hovered_tile)
-				place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
-		elif decorative_map.get_cell_source_id(hovered_tile) in flower_source_ids:
-			decorative_map.set_cell(hovered_tile)
-			update_flower_count()
+	if event.is_action_pressed("place_tile"):
+		is_place_tile_pressed = true
+	elif event.is_action_released("place_tile"):
+		is_place_tile_pressed = false
+	if event.is_action_pressed("remove_tile"):
+		is_remove_tile_pressed = true
+	elif event.is_action_released("remove_tile"):
+		is_remove_tile_pressed = false
 	if event.is_action_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
@@ -122,8 +118,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
 		rotateSFXAudio.play(0.1)
-	if event.is_action_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and not ist_scheisse(hovered_tile):
-		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
 		if event is InputEventKey and event.pressed and event.physical_keycode == KEY_1 + i:
 			tile_selector.on_select_tile(tile_selector.tiles[i])
@@ -150,6 +144,22 @@ func _process(delta: float):
 			return false
 		return true
 	)
+	if is_place_tile_pressed:
+		if get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers and not ist_scheisse(hovered_tile):
+			var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
+			if not is_ok:
+				var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
+				if atlas_coord != Vector2i(-1, -1):
+					var tile_info = get_enum_from_atlas_coords(atlas_coord)
+					is_ok = tile_info['tile'] == tile_selector.selected_tile
+			if is_ok:
+				remove_tile_on_coordinate(hovered_tile)
+				place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
+		elif decorative_map.get_cell_source_id(hovered_tile) in flower_source_ids:
+			decorative_map.set_cell(hovered_tile)
+			update_flower_count()
+	if is_remove_tile_pressed and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and not ist_scheisse(hovered_tile):
+		remove_tile_on_coordinate(hovered_tile)
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
