@@ -320,13 +320,13 @@ func flow_tick():
 			if neighbor == Vector2i(0, -1):
 				# TODO: real water soure/sink detection
 				continue
-			if get_tile_water_state(neighbor) == State.FULL:
-				continue
 			var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
 			var neighbor_data = get_enum_from_atlas_coords(neighbor_coords)
 			if neighbor_data is Dictionary:
 				var neighbor_directions = get_directions(neighbor_data["tile"], neighbor_data["rotation"])
 				if Shared.reflect(direction) in neighbor_directions:
+					if get_tile_water_state(neighbor) == State.FULL:
+						continue
 					set_tile_water_state(neighbor, State.FULL)
 					water_heads.append(neighbor)
 					continue
