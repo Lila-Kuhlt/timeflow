@@ -27,6 +27,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_2tg2t")
 
 [node name="ScheissTimer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 
 [node name="ScheisseAudioPlayer" type="AudioStreamPlayer" parent="."]
