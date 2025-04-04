@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnerb5wu8ihny"]
+[gd_scene load_steps=10 format=3 uid="uid://bnerb5wu8ihny"]
 
 [ext_resource type="Script" uid="uid://b2682wl3ns832" path="res://ui/screens/tile-selector/tile_selector_menu.gd" id="1_lai4r"]
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="2_lai4r"]
 [ext_resource type="Texture2D" uid="uid://d0sbhvhce481w" path="res://textures/FastForward.png" id="3_h1yd4"]
 [ext_resource type="Texture2D" uid="uid://bq26g3j1mcoww" path="res://textures/FastForwardPressed.png" id="4_186ei"]
+[ext_resource type="Texture2D" uid="uid://cc1usmcq73lre" path="res://textures/tilemaps/enviroment/flower_orange.png" id="5_58mdv"]
+[ext_resource type="Texture2D" uid="uid://dpdgiup6yswo0" path="res://textures/tilemaps/enviroment/flower_pink.png" id="6_oqvrv"]
+[ext_resource type="Texture2D" uid="uid://5vc2eqqw5acd" path="res://textures/tilemaps/enviroment/flower_red.png" id="7_7do1c"]
 
 [sub_resource type="Theme" id="Theme_186ei"]
 
@@ -79,12 +82,21 @@ theme = ExtResource("2_lai4r")
 [node name="FlowerPanel" type="Panel" parent="MarginContainer2"]
 layout_mode = 2
 
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/FlowerPanel"]
+layout_mode = 2
+offset_left = 13.0
+offset_top = 29.0
+offset_right = 29.0
+offset_bottom = 45.0
+texture = ExtResource("5_58mdv")
+stretch_mode = 2
+
 [node name="FlowerCount" type="Label" parent="MarginContainer2/FlowerPanel"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 14.0
-offset_right = 19.0
-offset_bottom = 29.0
+layout_mode = 2
+offset_left = 15.0
+offset_top = 9.0
+offset_right = 21.0
+offset_bottom = 19.0
 scale = Vector2(2.5, 2.5)
 tooltip_text = "Where are the flowers?"
 theme = SubResource("Theme_186ei")
@@ -92,3 +104,19 @@ text = "0"
 label_settings = SubResource("LabelSettings_58mdv")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer2/FlowerPanel"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 29.0
+offset_right = 39.0
+offset_bottom = 45.0
+texture = ExtResource("6_oqvrv")
+
+[node name="TextureRect3" type="TextureRect" parent="MarginContainer2/FlowerPanel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 29.0
+offset_right = 19.0
+offset_bottom = 45.0
+texture = ExtResource("7_7do1c")
