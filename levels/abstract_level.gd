@@ -156,7 +156,6 @@ func _process(delta: float):
 					var tile_info = get_enum_from_atlas_coords(atlas_coord)
 					is_ok = tile_info['tile'] == tile_selector.selected_tile
 			if is_ok:
-				remove_tile_on_coordinate(hovered_tile)
 				place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 		elif decorative_map.get_cell_source_id(hovered_tile) in flower_source_ids:
 			decorative_map.set_cell(hovered_tile)
@@ -181,16 +180,7 @@ func on_bumblebee_blocker_toggle(tile: Tile, block: bool):
 		bumblebee_blockers.erase(tile)
 	update_hovered_tile(get_selected_tile())
 
-func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
-	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
-	tile_map.set_cell(coords, 0, tile_coordinates)
-	placeSFXAudio.play(0)
-	if available_tiles[type] > 0:
-		available_tiles[type] -= 1
-		update_tile_count(type)
-
-func remove_tile_on_coordinate(coords: Vector2i):
-	var atlas_coords := tile_map.get_cell_atlas_coords(coords)
+func collect_tile(atlas_coords: Vector2i) -> void:
 	if atlas_coords == Vector2i(-1, -1):
 		return
 	var tile_info: Dictionary = get_enum_from_atlas_coords(atlas_coords)
@@ -198,6 +188,25 @@ func remove_tile_on_coordinate(coords: Vector2i):
 	if available_tiles[tile] >= 0:
 		available_tiles[tile] += 1
 		update_tile_count(tile)
+
+func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
+	var old_atlas_coords := tile_map.get_cell_atlas_coords(coords)
+	var atlas_coords: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
+	if old_atlas_coords == atlas_coords:
+		# tile is already placed
+		return
+	else:
+		# remove tile
+		collect_tile(old_atlas_coords)
+	tile_map.set_cell(coords, 0, atlas_coords)
+	placeSFXAudio.play(0)
+	if available_tiles[type] > 0:
+		available_tiles[type] -= 1
+		update_tile_count(type)
+
+func remove_tile_on_coordinate(coords: Vector2i):
+	var atlas_coords := tile_map.get_cell_atlas_coords(coords)
+	collect_tile(atlas_coords)
 	tile_map.set_cell(coords)
 	removeSFXAudio.play(0)
 
