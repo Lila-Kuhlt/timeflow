@@ -76,7 +76,6 @@ tile_set = ExtResource("1_nghai")
 
 [node name="FluidTimer" type="Timer" parent="."]
 wait_time = 1.25
-autostart = true
 
 [node name="AudioRotationSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_y43h3")
@@ -98,3 +97,4 @@ stream = ExtResource("9_sv1o5")
 volume_db = 5.0
 
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
+[connection signal="on_blocking_toggle" from="Bubblebee" to="." method="on_bumblebee_blocker_toggle"]

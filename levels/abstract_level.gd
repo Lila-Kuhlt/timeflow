@@ -18,6 +18,7 @@ const State = Shared.State
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
+var bumblebee_blockers: Array[Tile] = []
 var hovered_tile_before: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
@@ -80,7 +81,7 @@ func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
 	if hovered_tile != hovered_tile_before:
 		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile):
+	if Input.is_action_just_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
 		var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
 		if not is_ok:
 			var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
@@ -121,6 +122,12 @@ func is_floor_placeable(coords: Vector2i) -> bool:
 
 func update_tile_count(tile: Tile):
 	tile_selector.update_tile_count(tile, available_tiles[tile])
+
+func on_bumblebee_blocker_toggle(tile: Tile, block: bool):
+	if block:
+		bumblebee_blockers.append(tile)
+	else:
+		bumblebee_blockers.erase(tile)
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
