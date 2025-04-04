@@ -75,6 +75,9 @@ func on_fast_forward_toggle(enable: bool) -> void:
 func update_fast_forward_button(enable: bool) -> void:
 	tile_selector.fast_forward_button.button_pressed = enable
 
+func update_flower_count() -> void:
+	tile_selector.update_flower_count()
+
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
 	var mouse_pos = $Camera2D.get_local_mouse_position()
@@ -106,6 +109,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
 		elif decorative_map.get_cell_source_id(hovered_tile) in flower_source_ids:
 			decorative_map.set_cell(hovered_tile)
+			update_flower_count()
 	if event.is_action_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
