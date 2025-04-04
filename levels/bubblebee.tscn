@@ -64,7 +64,7 @@ shape = SubResource("RectangleShape2D_g61yg")
 wait_time = 8.0
 
 [node name="OccupyTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 4.0
 
 [connection signal="timeout" from="AimlessTimer" to="." method="on_leave_aimless_mode"]
 [connection signal="timeout" from="OccupyTimer" to="." method="on_leave_occupy_mode"]

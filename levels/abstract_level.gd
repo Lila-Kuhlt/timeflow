@@ -19,6 +19,7 @@ const State = Shared.State
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
 var bumblebee_blockers: Array[Tile] = []
+var blocker_source_id: int
 var hovered_tile_before: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
@@ -44,6 +45,11 @@ signal win()
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
 	tile_selector.fast_forward_button.connect("toggled", on_fast_forward_toggle)
+
+	for i in range(ghost_map.tile_set.get_source_count()):
+		var source := ghost_map.tile_set.get_source(i)
+		if source.resource_name == 'Blocker':
+			blocker_source_id = i
 
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
@@ -74,8 +80,11 @@ func update_hovered_tile(hovered_tile):
 	hovered_tile_before = hovered_tile
 	if not is_floor_placeable(hovered_tile):
 		return
-	chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
-	ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
+	if tile_selector.selected_tile in bumblebee_blockers:
+		ghost_map.set_cell(hovered_tile, blocker_source_id, Vector2i(0, 0))
+	else:
+		chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
+		ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
 
 func _process(_delta: float):
 	var hovered_tile = get_selected_tile()
@@ -128,6 +137,7 @@ func on_bumblebee_blocker_toggle(tile: Tile, block: bool):
 		bumblebee_blockers.append(tile)
 	else:
 		bumblebee_blockers.erase(tile)
+	update_hovered_tile(get_selected_tile())
 
 func place_tile_on_coordinate(coords: Vector2i, type: Tile, orientation: Rotation) -> void:
 	var tile_coordinates: Vector2i = get_tile_atlas_coords_from_enums(type, orientation)
