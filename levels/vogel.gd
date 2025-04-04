@@ -23,5 +23,5 @@ func _physics_process(delta: float) -> void:
 func on_scheiss_timer_timeout() -> void:
 	print("UWU")
 	var parent : Level = get_parent()
-	parent.drauf_scheissen(position)
+	parent.drauf_scheissen(path_follow.global_position)
 	scheiss_timer.wait_time = randf_range(scheiss_lower, scheiss_upper)

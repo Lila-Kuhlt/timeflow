@@ -22,10 +22,10 @@ tile_map_data = PackedByteArray("AAALAAcACgAAAAAAAAABAAUACgAAAAAAAAANAAMACQAAAAA
 [node name="PlaceableTileMap" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAAAAEAAAAAAAQAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAACAAEAAAACAAMAAAACAAEAAAAKAAMAAAABAAEAAAA=")
 
-[node name="Bubblebee" parent="." index="12"]
-disabeele = true
-
 [node name="Vogel" parent="." index="13" instance=ExtResource("2_jirdo")]
-position = Vector2(93, -17)
-end_pos = Vector2(300, 400)
+position = Vector2(110, 45)
+end_pos = Vector2(200, 200)
 speed = 100.0
+
+[node name="Bubblebee" parent="." index="14"]
+disabeele = true

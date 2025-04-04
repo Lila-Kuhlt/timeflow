@@ -13,11 +13,15 @@ const State = Shared.State
 @onready var ghost_map: TileMapLayer = $GhostTileMap
 @onready var water_map: TileMapLayer = $WaterTileMap
 @onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
+@onready var scheiss_map : TileMapLayer = $ScheissTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 @onready var fluid_timer: Timer = $FluidTimer
 @onready var decorative_map: TileMapLayer = $DecorativeTileMap
 
+@export var scheiss_fade_time := 2.0
+
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
+var scheiss_array : Array[Dictionary] = []
 
 var bumblebee_blockers: Array[Tile] = []
 var blocker_source_id: int
@@ -132,10 +136,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		on_fast_forward_toggle(false)
 		update_fast_forward_button(false)
 
-func _process(_delta: float):
+func _process(delta: float):
 	var new_hovered_tile = get_selected_tile()
 	if new_hovered_tile != hovered_tile:
 		update_hovered_tile(new_hovered_tile)
+	scheiss_array = scheiss_array.filter(func(scheisse):
+		scheisse["lifetime"] -= delta
+		if scheisse["lifetime"] <= 0:
+			scheiss_map.set_cell(scheisse["coords"])
+			return false
+		return true
+	)
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
@@ -416,4 +427,6 @@ func get_flow_depth() -> int:
 
 
 func drauf_scheissen(coords : Vector2):
-	print("Scheiss ", coords)
+	var map_coords := scheiss_map.local_to_map(coords)
+	scheiss_array.append({"lifetime" : scheiss_fade_time, "coords" : map_coords})
+	scheiss_map.set_cell(map_coords, 0, Vector2i(0, 0))

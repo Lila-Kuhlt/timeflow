@@ -17,9 +17,9 @@ curve = SubResource("Curve2D_efgev")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 
-[node name="Node2D" type="Node2D" parent="Path2D/PathFollow2D"]
+[node name="VogelNodePosition" type="Node2D" parent="Path2D/PathFollow2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/VogelNodePosition"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_2tg2t")
 
