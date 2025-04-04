@@ -5,7 +5,6 @@ extends Node2D
 @export var speed : float = 50
 @export var scheiss_lower := 1.0
 @export var scheiss_upper := 2.0
-@export var vogel_off_screen_warten := 5.0
 
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D

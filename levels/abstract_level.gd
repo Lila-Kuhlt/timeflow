@@ -101,7 +101,7 @@ func update_hovered_tile(new_hovered_tile):
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed('place_tile'):
-		if get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
+		if get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers and not ist_scheisse(hovered_tile):
 			var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
 			if not is_ok:
 				var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
@@ -135,6 +135,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_released("fast_forward"):
 		on_fast_forward_toggle(false)
 		update_fast_forward_button(false)
+
+func ist_scheisse(hovered_tile : Vector2i) -> bool:
+	return scheiss_map.get_cell_source_id(hovered_tile) >= 0
 
 func _process(delta: float):
 	var new_hovered_tile = get_selected_tile()
