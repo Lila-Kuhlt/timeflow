@@ -113,13 +113,40 @@ func _reload_current_level() -> void:
 
 #region Showing Different GUI views
 
-
 func _show_win_screen() -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
 	win_screen.tree_exited.connect(_return_to_title_screen)
 	menu_layer.add_child(win_screen)
+
+	var value = flower_highscores.values().reduce(func(a, b): return a + b, 0)
+	win_screen.count.text = str(value)
+	
+	#update comments
+	if value > 50:
+		win_screen.comment.text = "Where did you get all the flowers? o.O"
+		return
+	elif value == 42:
+		win_screen.comment.text = "You, almighty one, solved the question of life..."
+		return
+	elif value > 40:
+		win_screen.comment.text = "Woooow, you're definitly a crazy flower searcher!"
+		return
+	elif value > 30:
+		win_screen.comment.text = "Respect! You collected a lot of flowers."
+		return
+	elif value > 20:
+		win_screen.comment.text = "Cool. Some flowers for you and your loved ones :)"
+		return
+	elif value > 10:
+		win_screen.comment.text = "Look! I see many flowers there in the fields"
+		return
+	elif value > 5:
+		win_screen.comment.text = "Is this collection of flowers an accident?"
+		return
+	elif value > 30:
+		win_screen.comment.text = "One to rule them all!"
 
 func _show_level_win_screen() -> void:
 	InputManager.set_is_in_game(false)

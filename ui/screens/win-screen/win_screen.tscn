@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://g2g8hydsgxid"]
+[gd_scene load_steps=7 format=3 uid="uid://g2g8hydsgxid"]
 
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_keok1"]
 [ext_resource type="Script" uid="uid://dgtme0a6lym5c" path="res://ui/screens/win-screen/win_screen.gd" id="1_lgw0b"]
 [ext_resource type="AudioStream" uid="uid://dgntn8rvmts2a" path="res://music/SoundEffects/WinSound2.wav" id="2_yicpd"]
+[ext_resource type="Texture2D" uid="uid://5vc2eqqw5acd" path="res://textures/tilemaps/enviroment/flower_red.png" id="4_fc65u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbmgw"]
 font_size = 100
@@ -55,5 +56,42 @@ text = "Return to title screen"
 stream = ExtResource("2_yicpd")
 pitch_scale = 1.2
 autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 411.0
+offset_top = 406.0
+offset_right = 451.0
+offset_bottom = 446.0
+texture = ExtResource("4_fc65u")
+
+[node name="HighscoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 454.0
+offset_top = 416.0
+offset_right = 700.0
+offset_bottom = 446.0
+text = "Total-Highscore:"
+
+[node name="Totalcount" type="Label" parent="."]
+layout_mode = 0
+offset_left = 703.0
+offset_top = 416.0
+offset_right = 743.0
+offset_bottom = 446.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Comment" type="Label" parent="."]
+layout_mode = 0
+offset_left = 453.0
+offset_top = 449.0
+offset_right = 874.0
+offset_bottom = 479.0
+scale = Vector2(0.7, 0.7)
+text = "Where are the flowers? :("
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

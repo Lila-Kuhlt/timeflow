@@ -57,14 +57,6 @@ stream = ExtResource("2_2xfu2")
 pitch_scale = 1.2
 autoplay = true
 
-[node name="FlowerLabel" type="Label" parent="."]
-layout_mode = 2
-offset_left = 458.0
-offset_top = 419.0
-offset_right = 614.0
-offset_bottom = 449.0
-text = "Highscore:"
-
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 offset_left = 414.0
@@ -72,6 +64,14 @@ offset_top = 407.0
 offset_right = 459.0
 offset_bottom = 453.0
 texture = ExtResource("4_k3i37")
+
+[node name="FlowerLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 458.0
+offset_top = 419.0
+offset_right = 614.0
+offset_bottom = 449.0
+text = "Highscore:"
 
 [node name="CountLabel" type="Label" parent="."]
 layout_mode = 0
