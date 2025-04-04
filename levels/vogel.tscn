@@ -12,6 +12,8 @@ point_count = 3
 
 [node name="Vogel" type="Node2D"]
 script = ExtResource("1_drrly")
+scheiss_lower = 5.0
+scheiss_upper = 10.0
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_efgev")

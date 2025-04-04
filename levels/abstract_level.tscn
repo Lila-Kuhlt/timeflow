@@ -60,6 +60,7 @@ stream_2/stream = ExtResource("6_sv1o5")
 [node name="AbstractLevel" type="Node2D"]
 process_mode = 1
 script = ExtResource("1_8tasw")
+scheiss_fade_time = 3.0
 checkpoint_groups = Array[Array]([[Vector2i(0, 3)], [Vector2i(3, 6), Vector2i(3, 8)], [Vector2i(2, 2)]])
 
 [node name="BackgroundTileMap" type="TileMapLayer" parent="."]
@@ -74,7 +75,6 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAI
 tile_set = ExtResource("1_nghai")
 
 [node name="ScheissTileMap" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAaABMAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_arcml")
 
 [node name="TileSelectorMenu" parent="." instance=ExtResource("2_8tasw")]

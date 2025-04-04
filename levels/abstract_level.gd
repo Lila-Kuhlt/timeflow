@@ -5,6 +5,8 @@ const Tile = Shared.Tile
 const Rotation = Shared.Rotation
 const State = Shared.State
 
+@export var scheiss_fade_time := 2.0
+
 @onready var rotateSFXAudio : AudioStreamPlayer = $AudioRotationSound
 @onready var placeSFXAudio : AudioStreamPlayer = $AudioPlacementSound
 @onready var removeSFXAudio : AudioStreamPlayer = $AudioRemoveSound
@@ -17,8 +19,6 @@ const State = Shared.State
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 @onready var fluid_timer: Timer = $FluidTimer
 @onready var decorative_map: TileMapLayer = $DecorativeTileMap
-
-@export var scheiss_fade_time := 2.0
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 var scheiss_array : Array[Dictionary] = []
