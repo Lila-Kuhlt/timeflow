@@ -41,16 +41,12 @@ script = ExtResource("1_0uemu")
 curve = SubResource("Curve2D_g61yg")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-rotation = 1.5708
-scale = Vector2(1.03448, 0.966667)
 rotates = false
 loop = false
 
 [node name="BeeNode" type="Node2D" parent="."]
-rotation = 1.5708
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BeeNode"]
-rotation = -1.5708
 scale = Vector2(1.03448, 0.966667)
 sprite_frames = SubResource("SpriteFrames_sd5b6")
 animation = &"fly"
@@ -58,8 +54,6 @@ autoplay = "fly"
 frame_progress = 0.46078
 
 [node name="Area2D" type="Area2D" parent="BeeNode"]
-rotation = -1.5708
-scale = Vector2(1.03448, 0.966667)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BeeNode/Area2D"]
 position = Vector2(0.5, 2)
