@@ -75,6 +75,9 @@ tile_set = SubResource("TileSet_aw458")
 [node name="CheckpointTileMap" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_nghai")
 
+[node name="CollectableTileMap" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_nghai")
+
 [node name="FluidTimer" type="Timer" parent="."]
 wait_time = 1.25
 autostart = true

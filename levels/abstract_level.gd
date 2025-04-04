@@ -15,6 +15,7 @@ const State = Shared.State
 @onready var checkpoint_map: TileMapLayer = $CheckpointTileMap
 @onready var tile_selector: TileSelectorMenu = $TileSelectorMenu
 @onready var fluid_timer: Timer = $FluidTimer
+@onready var decorative_map: TileMapLayer = $DecorativeTileMap
 
 var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
@@ -24,6 +25,7 @@ var is_in_panic := false
 var hovered_tile: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
+var flower_source_ids: Array[int] = []
 # Maps tile ids to its available count.
 # -1 means infinity
 @export var available_tiles: Dictionary[Shared.Tile, int] = {
@@ -52,6 +54,8 @@ func _ready() -> void:
 		var source := ghost_map.tile_set.get_source(id)
 		if source.resource_name == 'Blocker':
 			blocker_source_id = id
+		elif source.resource_name.begins_with("flower_"):
+			flower_source_ids.append(id)
 
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
@@ -89,16 +93,19 @@ func update_hovered_tile(new_hovered_tile):
 		ghost_map.set_cell(new_hovered_tile, 0, chosen_atlas_coord)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
-		var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
-		if not is_ok:
-			var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
-			if atlas_coord != Vector2i(-1, -1):
-				var tile_info = get_enum_from_atlas_coords(atlas_coord)
-				is_ok = tile_info['tile'] == tile_selector.selected_tile
-		if is_ok:
-			remove_tile_on_coordinate(hovered_tile)
-			place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
+	if event.is_action_pressed('place_tile'):
+		if get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
+			var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
+			if not is_ok:
+				var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
+				if atlas_coord != Vector2i(-1, -1):
+					var tile_info = get_enum_from_atlas_coords(atlas_coord)
+					is_ok = tile_info['tile'] == tile_selector.selected_tile
+			if is_ok:
+				remove_tile_on_coordinate(hovered_tile)
+				place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
+		elif decorative_map.get_cell_source_id(hovered_tile) in flower_source_ids:
+			decorative_map.set_cell(hovered_tile)
 	if event.is_action_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)

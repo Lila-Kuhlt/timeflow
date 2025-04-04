@@ -47,18 +47,22 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4c8q4"]
+resource_name = "flower_orange"
 texture = ExtResource("4_qxrm0")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3qxt"]
+resource_name = "flower_pink"
 texture = ExtResource("5_dbv2v")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gmfk"]
+resource_name = "flower_red"
 texture = ExtResource("6_d4pg4")
 0:0/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trgyp"]
+resource_name = "flower_rose"
 texture = ExtResource("7_1uwti")
 0:0/0 = 0
 
