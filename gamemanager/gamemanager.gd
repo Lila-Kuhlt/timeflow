@@ -122,7 +122,6 @@ func _show_loss_screen() -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	var loss_screen: Control = load("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
-	loss_screen.tree_exited.connect(_return_to_title_screen)
 	menu_layer.add_child(loss_screen)
 
 func _show_credits() -> void:
