@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4mta14a3lujw"]
+[gd_scene load_steps=7 format=3 uid="uid://dqfaf3dbgttg2"]
 
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_2xfu2"]
 [ext_resource type="Script" uid="uid://bobq4bd6ykbc3" path="res://ui/screens/win-screen/level_win_screen.gd" id="1_u82dg"]
 [ext_resource type="AudioStream" uid="uid://dgntn8rvmts2a" path="res://music/SoundEffects/WinSound2.wav" id="2_2xfu2"]
+[ext_resource type="Texture2D" uid="uid://5vc2eqqw5acd" path="res://textures/tilemaps/enviroment/flower_red.png" id="4_k3i37"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rbmgw"]
 font_size = 80
+
+[sub_resource type="Theme" id="Theme_kuwy8"]
 
 [node name="LevelWinScreen" type="Control"]
 layout_mode = 3
@@ -22,6 +25,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 9.0
+offset_right = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -51,6 +56,33 @@ text = "Return to title screen"
 stream = ExtResource("2_2xfu2")
 pitch_scale = 1.2
 autoplay = true
+
+[node name="FlowerLabel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 458.0
+offset_top = 419.0
+offset_right = 614.0
+offset_bottom = 449.0
+text = "Highscore:"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = 414.0
+offset_top = 407.0
+offset_right = 459.0
+offset_bottom = 453.0
+texture = ExtResource("4_k3i37")
+
+[node name="CountLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 625.0
+offset_top = 421.0
+offset_right = 652.0
+offset_bottom = 451.0
+theme = SubResource("Theme_kuwy8")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

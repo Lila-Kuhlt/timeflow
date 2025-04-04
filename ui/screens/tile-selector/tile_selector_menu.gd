@@ -11,7 +11,6 @@ var type_to_index: Dictionary[Shared.Tile, int] = {}
 var selected_tile: Shared.Tile = -1
 var selected_tile_idx := -1
 @onready var flower_count_label: Label = $MarginContainer2/FlowerPanel/FlowerCount
-var flower_count := 0
 
 func init_tiles(t: Dictionary[Shared.Tile, int]):
 	var i := 0
@@ -34,9 +33,8 @@ func update_tile_count(ty: Shared.Tile, count: int):
 	var tile: TileSelectorTile = tiles[type_to_index[ty]]
 	tile.set_tile_count(count)
 	
-func update_flower_count():
-	flower_count += 1
-	flower_count_label.text = str(flower_count)
+func update_flower_count(flower_count):
+	flower_count_label.text = str(flower_count)#
 
 func on_select_tile(tile: TileSelectorTile):
 	if selected_tile_idx == tile.idx:

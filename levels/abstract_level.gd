@@ -30,6 +30,8 @@ var hovered_tile: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
 var flower_source_ids: Array[int] = []
+var flower_count := 0
+
 # Maps tile ids to its available count.
 # -1 means infinity
 @export var available_tiles: Dictionary[Shared.Tile, int] = {
@@ -82,7 +84,8 @@ func update_fast_forward_button(enable: bool) -> void:
 	tile_selector.fast_forward_button.button_pressed = enable
 
 func update_flower_count() -> void:
-	tile_selector.update_flower_count()
+	flower_count += 1
+	tile_selector.update_flower_count(flower_count)
 
 # selected == mouse hover
 func get_selected_tile() -> Vector2i:
