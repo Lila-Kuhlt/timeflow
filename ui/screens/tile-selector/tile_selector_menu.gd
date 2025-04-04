@@ -40,3 +40,4 @@ func on_select_tile(tile: TileSelectorTile):
 	selected_tile_idx = tile.idx
 	selected_tile = tile.tile_type
 	tile_select_changed.emit(selected_tile_idx)
+	

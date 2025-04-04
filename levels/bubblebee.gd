@@ -14,6 +14,7 @@ var target_type: Shared.Tile
 @onready var bee_node: Node2D = $BeeNode
 @onready var aimless_timer: Timer = $AimlessTimer
 @onready var occupy_timer: Timer = $OccupyTimer
+@onready var bubbleBeeSound : AudioStreamPlayer = $AudioBubbleBee
 
 signal on_blocking_toggle(tile: Shared.Tile, block: bool)
 
@@ -72,4 +73,5 @@ func _process(delta):
 				target_reached = true
 				on_blocking_toggle.emit(target_type, true)
 				occupy_timer.start()
+				bubbleBeeSound.play(0)
 				path_follow.progress_ratio = 1.0
