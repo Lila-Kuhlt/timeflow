@@ -20,7 +20,7 @@ var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
 var bumblebee_blockers: Array[Tile] = []
 var blocker_source_id: int
-var hovered_tile_before: Vector2i
+var hovered_tile: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
 # Maps tile ids to its available count.
@@ -75,22 +75,19 @@ func get_selected_tile() -> Vector2i:
 	var map_coord = tile_map.local_to_map(mouse_pos)
 	return map_coord
 
-func update_hovered_tile(hovered_tile):
-	ghost_map.set_cell(hovered_tile_before)  # removes cell
-	hovered_tile_before = hovered_tile
-	if not is_floor_placeable(hovered_tile):
+func update_hovered_tile(new_hovered_tile):
+	ghost_map.set_cell(hovered_tile)  # removes cell
+	hovered_tile = new_hovered_tile
+	if not is_floor_placeable(new_hovered_tile):
 		return
 	if tile_selector.selected_tile in bumblebee_blockers:
-		ghost_map.set_cell(hovered_tile, blocker_source_id, Vector2i(0, 0))
+		ghost_map.set_cell(new_hovered_tile, blocker_source_id, Vector2i(0, 0))
 	else:
 		chosen_atlas_coord = get_tile_atlas_coords_from_enums(tile_selector.selected_tile, chosen_rot)
-		ghost_map.set_cell(hovered_tile, 0, chosen_atlas_coord)
+		ghost_map.set_cell(new_hovered_tile, 0, chosen_atlas_coord)
 
-func _process(_delta: float):
-	var hovered_tile = get_selected_tile()
-	if hovered_tile != hovered_tile_before:
-		update_hovered_tile(hovered_tile)
-	if Input.is_action_just_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed('place_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and tile_selector.selected_tile not in bumblebee_blockers:
 		var is_ok := (available_tiles[tile_selector.selected_tile] != 0)
 		if not is_ok:
 			var atlas_coord := tile_map.get_cell_atlas_coords(hovered_tile)
@@ -100,27 +97,32 @@ func _process(_delta: float):
 		if is_ok:
 			remove_tile_on_coordinate(hovered_tile)
 			place_tile_on_coordinate(hovered_tile, tile_selector.selected_tile, chosen_rot)
-	if Input.is_action_just_pressed('rotate_left'):
+	if event.is_action_pressed('rotate_left'):
 		chosen_rot = Shared.rotate_left(chosen_rot)
 		update_hovered_tile(hovered_tile)
 		rotateSFXAudio.play(0.1)
-	if Input.is_action_just_pressed('rotate_right'):
+	if event.is_action_pressed('rotate_right'):
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
 		rotateSFXAudio.play(0.1)
-	if Input.is_action_just_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
+	if event.is_action_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY:
 		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
-		if Input.is_physical_key_pressed(KEY_1 + i):
+		if event is InputEventKey and event.pressed and event.physical_keycode == KEY_1 + i:
 			tile_selector.on_select_tile(tile_selector.tiles[i])
 			update_hovered_tile(hovered_tile)
 			break
-	if Input.is_action_just_pressed("fast_forward"):
+	if event.is_action_pressed("fast_forward"):
 		on_fast_forward_toggle(true)
 		update_fast_forward_button(true)
-	elif Input.is_action_just_released("fast_forward"):
+	elif event.is_action_released("fast_forward"):
 		on_fast_forward_toggle(false)
 		update_fast_forward_button(false)
+
+func _process(_delta: float):
+	var new_hovered_tile = get_selected_tile()
+	if new_hovered_tile != hovered_tile:
+		update_hovered_tile(new_hovered_tile)
 
 func is_tile_available() -> bool:
 	return available_tiles[tile_selector.selected_tile] != 0
