@@ -116,8 +116,6 @@ texture_region_size = Vector2i(32, 32)
 3:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
-2:6/0 = 0
-3:6/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oi66c"]
 scenes/1/scene = ExtResource("5_s3hej")
