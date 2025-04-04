@@ -2,13 +2,12 @@ extends Node
 
 #region Helper enums and data classes
 
-enum SettingCategory {AUDIO, CONTROLS, GRAPHICS, ACCESSIBILITY}
+enum SettingCategory {AUDIO, CONTROLS, GRAPHICS}
 func category_string(cat: SettingCategory) -> String:
 	match cat:
 		SettingCategory.AUDIO: return "Audio"
 		SettingCategory.CONTROLS: return "Controls"
 		SettingCategory.GRAPHICS: return "Graphics"
-		SettingCategory.ACCESSIBILITY: return "Accessibility"
 		_: return "unknown category"
 
 enum SettingType {INT, ENUM, FLOAT, BOOL, SECTION, INPUT_BINDING}
@@ -25,7 +24,7 @@ class Setting:
 	var requires_restart: bool
 	var setter_callable: Callable
 	var hints: Dictionary # Used for minimum/maximum values, step size, enum names
-	
+
 	func _init(p_label_text: String, p_category: SettingCategory, p_type: SettingType, p_default_value: Variant, p_hints: Dictionary = {}, p_setter_callable: Callable = Callable(), p_requires_restart: bool = false):
 		self.label_text = p_label_text
 		self.category = p_category
@@ -35,7 +34,7 @@ class Setting:
 		self.hints = p_hints
 		self.setter_callable = p_setter_callable
 		self.requires_restart = p_requires_restart
-	
+
 	func set_value(p_value: Variant):
 		if not is_same(p_value, value):
 			value = p_value
@@ -51,7 +50,6 @@ func _ready() -> void:
 	AudioSettings._register_settings()
 	GraphicsSettings._register_settings()
 	ControlSettings._register_settings()
-	AccessibilitySettings._register_settings()
 
 #region Settings interface
 
@@ -143,7 +141,7 @@ func load_config():
 	for setting in settings:
 		if settings[setting].type == SettingType.SECTION:
 			continue
-		
+
 		var value = config.get_value(category_string(settings[setting].category), setting, settings[setting].default_value)
 		if value == null:
 			push_warning("Setting " + setting + " not found in config file, using default value")
