@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4mta14a3lujw"]
+
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_2xfu2"]
+[ext_resource type="Script" uid="uid://bobq4bd6ykbc3" path="res://ui/screens/win-screen/level_win_screen.gd" id="1_u82dg"]
+[ext_resource type="AudioStream" uid="uid://dgntn8rvmts2a" path="res://music/SoundEffects/WinSound2.wav" id="2_2xfu2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rbmgw"]
+font_size = 80
+
+[node name="LevelWinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2xfu2")
+script = ExtResource("1_u82dg")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(731.345, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Level completed!"
+label_settings = SubResource("LabelSettings_rbmgw")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NextButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Next Level"
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Return to title screen"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_2xfu2")
+pitch_scale = 1.2
+autoplay = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

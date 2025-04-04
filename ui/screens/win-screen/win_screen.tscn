@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://g2g8hydsgxid"]
+[gd_scene load_steps=6 format=3 uid="uid://g2g8hydsgxid"]
 
+[ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_keok1"]
 [ext_resource type="Script" uid="uid://dgtme0a6lym5c" path="res://ui/screens/win-screen/win_screen.gd" id="1_lgw0b"]
 [ext_resource type="AudioStream" uid="uid://dgntn8rvmts2a" path="res://music/SoundEffects/WinSound2.wav" id="2_yicpd"]
 
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_keok1")
 script = ExtResource("1_lgw0b")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]

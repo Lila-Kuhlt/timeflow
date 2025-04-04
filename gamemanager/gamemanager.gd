@@ -92,7 +92,7 @@ func _show_level(level_nr: int) -> void:
 	level = level_nr
 	var next_level = load(level_location % str(level)).instantiate()
 	if next_level.has_signal("win"):
-		next_level.win.connect(_next_level)
+		next_level.win.connect(_show_level_win_screen)
 	if next_level.has_signal("loss"):
 		next_level.loss.connect(_show_loss_screen)
 	if next_level.has_signal("reset"):
@@ -117,6 +117,12 @@ func _show_win_screen() -> void:
 	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
 	win_screen.tree_exited.connect(_return_to_title_screen)
 	menu_layer.add_child(win_screen)
+
+func _show_level_win_screen() -> void:
+	InputManager.set_is_in_game(false)
+	get_tree().paused = true
+	var level_win_screen: Control = load("res://ui/screens/win-screen/level_win_screen.tscn").instantiate()
+	menu_layer.add_child(level_win_screen)
 
 func _show_loss_screen() -> void:
 	InputManager.set_is_in_game(false)
