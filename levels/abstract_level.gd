@@ -404,16 +404,7 @@ func flow_tick():
 		loss.emit("no water heads")
 		return
 
-	var any_on_checkpoint: bool = false
-	var all_on_checkpoint: bool = true
-
-	var checkpoints = checkpoint_groups[current_checkpoint_index]
-	for head in water_heads:
-		if head in checkpoints:
-			any_on_checkpoint = true
-		else:
-			all_on_checkpoint = false
-
+	# panic
 	var flow_depth := get_flow_depth()
 	var should_panic := flow_depth < 5 and flow_depth >= 0
 	if should_panic and (not is_in_panic):
@@ -421,14 +412,28 @@ func flow_tick():
 	elif (not should_panic) and is_in_panic:
 		update_panic(false)
 
-	if all_on_checkpoint:
+	var checkpoints = checkpoint_groups[current_checkpoint_index]
+
+	var any_on_checkpoint := false
+	var all_on_checkpoint := true
+	for head in water_heads:
+		if head in checkpoints:
+			any_on_checkpoint = true
+		else:
+			all_on_checkpoint = false
+
+	var all_checkpoints_reached := true
+	for checkpoint in checkpoints:
+		if checkpoint not in water_heads:
+			all_checkpoints_reached = false
+
+	if all_checkpoints_reached and all_on_checkpoint:
 		print("checkpoint ", current_checkpoint_index, " complete")
 		current_checkpoint_index += 1
 		if current_checkpoint_index >= checkpoint_groups.size():
 			win.emit()
-	else:
-		if any_on_checkpoint:
-			loss.emit("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
+	elif any_on_checkpoint:
+		loss.emit("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
 
 func get_flow_depth() -> int:
 	var heads := water_heads
