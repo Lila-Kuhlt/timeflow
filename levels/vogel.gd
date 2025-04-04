@@ -6,6 +6,8 @@ extends Node2D
 @export var scheiss_lower := 1.0
 @export var scheiss_upper := 2.0
 
+var last_pos : Vector2
+
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
 @onready var scheiss_timer : Timer = $ScheissTimer
@@ -20,6 +22,12 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	path_follow.progress += delta * speed
+	animationSprite.scale.y = -1 if path_follow.progress_ratio < 0.5 else 1
+	var rotation_value := (last_pos - path_follow.position).angle()
+
+	animationSprite.rotation = rotation_value
+	last_pos = path_follow.position
+
 
 
 func on_scheiss_timer_timeout() -> void:
