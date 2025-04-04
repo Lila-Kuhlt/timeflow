@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://bep8gwb8egt7f" path="res://textures/tilemaps/enviroment/grass.png" id="2_0pla1"]
 [ext_resource type="Texture2D" uid="uid://dhiawqr58h82o" path="res://textures/tilemaps/enviroment/tree.png" id="3_kd2h0"]
 [ext_resource type="Texture2D" uid="uid://bm02qdjoumys0" path="res://textures/tilemaps/enviroment/bush_small_withflowers.png" id="3_q5int"]
-[ext_resource type="Texture2D" uid="uid://bbjmpjdm40iy7" path="res://textures/tilemaps/enviroment/dry_grass.png" id="4_kd2h0"]
 [ext_resource type="Texture2D" uid="uid://cc1usmcq73lre" path="res://textures/tilemaps/enviroment/flower_orange.png" id="4_qxrm0"]
 [ext_resource type="Texture2D" uid="uid://dpdgiup6yswo0" path="res://textures/tilemaps/enviroment/flower_pink.png" id="5_dbv2v"]
 [ext_resource type="PackedScene" uid="uid://dcp430ao51hn6" path="res://levels/checkpoint.tscn" id="5_s3hej"]
@@ -12,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dh646o1ofuy1t" path="res://textures/tilemaps/enviroment/rocktile.png" id="6_oi66c"]
 [ext_resource type="Texture2D" uid="uid://lwdgh7t2q060" path="res://textures/tilemaps/enviroment/flower_rose.png" id="7_1uwti"]
 [ext_resource type="Texture2D" uid="uid://ewdaeqaw8mpa" path="res://textures/blocker-tile.png" id="8_qxrm0"]
+[ext_resource type="Texture2D" uid="uid://cqs1kk4ynbhyb" path="res://textures/tilemaps/enviroment/dry_grass_atlas.png" id="10_qxrm0"]
 [ext_resource type="Texture2D" uid="uid://dctmnpbu1x8nw" path="res://textures/tilemaps/enviroment/bush_big.png" id="12_f0fjj"]
 [ext_resource type="Texture2D" uid="uid://crb3lfymrypv5" path="res://textures/tilemaps/enviroment/bush_big_withflowers.png" id="13_ncse7"]
 [ext_resource type="Texture2D" uid="uid://dlb8x1gm6lx3k" path="res://textures/tilemaps/enviroment/bush_small.png" id="14_ue10m"]
@@ -80,9 +80,28 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rp4y7"]
 resource_name = "Dry Grass"
-texture = ExtResource("4_kd2h0")
+texture = ExtResource("10_qxrm0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oi66c"]
 scenes/1/scene = ExtResource("5_s3hej")

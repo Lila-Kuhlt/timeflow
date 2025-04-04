@@ -122,7 +122,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		chosen_rot = Shared.rotate_right(chosen_rot)
 		update_hovered_tile(hovered_tile)
 		rotateSFXAudio.play(0.1)
-	if event.is_action_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and not ist_scheisse(hovered_tile):
+	if event.is_action_pressed('remove_tile') and get_tile_water_state(hovered_tile) == State.EMPTY and is_floor_placeable(hovered_tile) and not ist_scheisse(hovered_tile):
 		remove_tile_on_coordinate(hovered_tile)
 	for i in range(len(tile_selector.tiles)):
 		if event is InputEventKey and event.pressed and event.physical_keycode == KEY_1 + i:
