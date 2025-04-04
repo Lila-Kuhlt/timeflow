@@ -305,10 +305,10 @@ func tick_delay(tile: Tile, coords: Vector2i) -> bool:
 		return true
 	return false
 
-func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads: Array[Vector2i]) -> bool:
+func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads: Array[Vector2i], visited: Array[Vector2i] = []) -> bool:
 	for direction in get_directions(head_type, head_rot):
 		var neighbor = move_in_direction(direction, head)
-		if neighbor == Vector2i(0, -1):
+		if neighbor == Vector2i(0, -1) or neighbor in visited:
 			# TODO: real water soure/sink detection
 			continue
 		var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
@@ -318,6 +318,7 @@ func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads:
 			if Shared.reflect(direction) in neighbor_directions:
 				if get_tile_water_state(neighbor) == State.FULL:
 					continue
+				visited.append(neighbor)
 				heads.append(neighbor)
 				continue
 		return true
@@ -366,3 +367,26 @@ func flow_tick():
 			# TODO add reason
 			print("not all checkpoints reached at the same time: ", current_checkpoint_index)
 			loss.emit()
+
+func get_flow_depth() -> int:
+	var heads := water_heads
+	var visited: Array[Vector2i] = []
+	var depth := 0
+	while true:
+		if heads.is_empty():
+			return -1
+		var new_heads: Array[Vector2i] = []
+		var do_break := false
+		for head in heads:
+			if head in checkpoint_groups[current_checkpoint_index]:
+				continue
+			var head_coords := tile_map.get_cell_atlas_coords(head)
+			var head_data: Dictionary = get_enum_from_atlas_coords(head_coords)
+			var head_type: Tile = head_data["tile"]
+			if flow_single_head(head, head_type, head_data["rotation"], new_heads, visited):
+				do_break = true
+				break
+		if do_break: break
+		heads = new_heads
+		depth += 1
+	return depth
