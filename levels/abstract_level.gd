@@ -305,6 +305,24 @@ func tick_delay(tile: Tile, coords: Vector2i) -> bool:
 		return true
 	return false
 
+func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads: Array[Vector2i]) -> bool:
+	for direction in get_directions(head_type, head_rot):
+		var neighbor = move_in_direction(direction, head)
+		if neighbor == Vector2i(0, -1):
+			# TODO: real water soure/sink detection
+			continue
+		var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
+		var neighbor_data = get_enum_from_atlas_coords(neighbor_coords)
+		if neighbor_data is Dictionary:
+			var neighbor_directions = get_directions(neighbor_data["tile"], neighbor_data["rotation"])
+			if Shared.reflect(direction) in neighbor_directions:
+				if get_tile_water_state(neighbor) == State.FULL:
+					continue
+				heads.append(neighbor)
+				continue
+		return true
+	return false
+
 func flow_tick():
 	var old_water_heads = water_heads.duplicate()
 	water_heads.clear()
@@ -315,25 +333,12 @@ func flow_tick():
 		if not tick_delay(head_type, head):
 			water_heads.append(head)
 			continue
-		for direction in get_directions(head_type, head_data["rotation"]):
-			var neighbor = move_in_direction(direction, head)
-			if neighbor == Vector2i(0, -1):
-				# TODO: real water soure/sink detection
-				continue
-			var neighbor_coords := tile_map.get_cell_atlas_coords(neighbor)
-			var neighbor_data = get_enum_from_atlas_coords(neighbor_coords)
-			if neighbor_data is Dictionary:
-				var neighbor_directions = get_directions(neighbor_data["tile"], neighbor_data["rotation"])
-				if Shared.reflect(direction) in neighbor_directions:
-					if get_tile_water_state(neighbor) == State.FULL:
-						continue
-					set_tile_water_state(neighbor, State.FULL)
-					water_heads.append(neighbor)
-					continue
-			# TODO add reason
+		if flow_single_head(head, head_type, head_data["rotation"], water_heads):
 			print("no way to flow")
 			loss.emit()
 			return
+	for head in water_heads:
+		set_tile_water_state(head, State.FULL)
 
 	if water_heads.is_empty():
 		# TODO add reason
