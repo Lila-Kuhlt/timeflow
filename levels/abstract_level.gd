@@ -377,9 +377,9 @@ func update_panic(new_panic: bool):
 	Global.game_manager.main_theme_player.playing = not new_panic
 	Global.game_manager.panic_theme_player.playing = new_panic
 
-func emit_loss():
+func emit_loss(reason: String):
 	update_panic(false)
-	loss.emit()
+	loss.emit(reason)
 
 func flow_tick():
 	if current_checkpoint_index >= len(checkpoint_groups):
@@ -395,13 +395,13 @@ func flow_tick():
 			water_heads.append(head)
 			continue
 		if flow_single_head(head, head_type, head_data["rotation"], water_heads):
-			loss.emit("no way to flow")
+			emit_loss("no way to flow")
 			return
 	for head in water_heads:
 		set_tile_water_state(head, State.FULL)
 
 	if water_heads.is_empty():
-		loss.emit("no water heads")
+		emit_loss("no water heads")
 		return
 
 	# panic
@@ -433,7 +433,7 @@ func flow_tick():
 		if current_checkpoint_index >= checkpoint_groups.size():
 			win.emit()
 	elif any_on_checkpoint:
-		loss.emit("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
+		emit_loss("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
 
 func get_flow_depth() -> int:
 	var heads := water_heads

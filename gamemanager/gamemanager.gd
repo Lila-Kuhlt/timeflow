@@ -145,7 +145,7 @@ func _show_win_screen() -> void:
 	elif value > 5:
 		win_screen.comment.text = "Is this collection of flowers an accident?"
 		return
-	elif value > 30:
+	elif value == 1:
 		win_screen.comment.text = "One to rule them all!"
 
 func _show_level_win_screen() -> void:
