@@ -41,6 +41,7 @@ bus = &"Music"
 
 [node name="AudioPanicThemePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_gpq8w")
+volume_db = -10.0
 bus = &"Music"
 
 [connection signal="continue_btn_pressed" from="MenuLayer/PauseMenu" to="." method="resume"]
