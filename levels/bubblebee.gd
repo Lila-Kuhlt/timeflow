@@ -7,6 +7,7 @@ var outphase := false
 var target_reached := false
 var target_coords: Vector2
 var target_type: Shared.Tile
+@export var disabeele := false
 @onready var level: Level = $".."
 @onready var path: Path2D = $Path2D
 @onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
@@ -17,8 +18,11 @@ var target_type: Shared.Tile
 signal on_blocking_toggle(tile: Shared.Tile, block: bool)
 
 func _ready():
-	update_target(rand_position())
-	aimless_timer.start()
+	if disabeele:
+		queue_free()
+	else:
+		update_target(rand_position())
+		aimless_timer.start()
 
 func on_leave_aimless_mode() -> void:
 	aimless_timer.stop()

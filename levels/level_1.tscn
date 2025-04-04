@@ -20,3 +20,6 @@ tile_map_data = PackedByteArray("AAALAAcACgAAAAAAAAABAAUACgAAAAAAAAANAAMACQAAAAA
 
 [node name="PlaceableTileMap" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAAAAAEAAAAAAAQAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAEAAAABAAMAAAACAAEAAAACAAMAAAACAAEAAAAKAAMAAAABAAEAAAA=")
+
+[node name="Bubblebee" parent="." index="11"]
+disabeele = true

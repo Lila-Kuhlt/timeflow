@@ -76,6 +76,7 @@ tile_set = ExtResource("1_nghai")
 
 [node name="FluidTimer" type="Timer" parent="."]
 wait_time = 1.25
+autostart = true
 
 [node name="AudioRotationSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_y43h3")
