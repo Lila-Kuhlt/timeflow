@@ -1,14 +1,74 @@
-[gd_scene load_steps=5 format=3 uid="uid://cssckb87y5syb"]
+[gd_scene load_steps=13 format=3 uid="uid://cssckb87y5syb"]
 
 [ext_resource type="Script" uid="uid://exeatyfn5nk0" path="res://levels/vogel.gd" id="1_drrly"]
-[ext_resource type="Texture2D" uid="uid://dkgp7tccxyyxc" path="res://icon.svg" id="2_2tg2t"]
 [ext_resource type="AudioStream" uid="uid://bf4xcs44u4vkc" path="res://music/SoundEffects/WaterSplash.wav" id="3_2tg2t"]
+[ext_resource type="Texture2D" uid="uid://bdycb0ufvuyk6" path="res://textures/tilemaps/enviroment/Vogel1.png" id="3_efgev"]
 
 [sub_resource type="Curve2D" id="Curve2D_efgev"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dvyv"]
+atlas = ExtResource("3_efgev")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_heg3k"]
+atlas = ExtResource("3_efgev")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_803tl"]
+atlas = ExtResource("3_efgev")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6abe"]
+atlas = ExtResource("3_efgev")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ns8s"]
+atlas = ExtResource("3_efgev")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qprir"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_1dvyv")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_heg3k")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_803tl")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_n6abe")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_2ns8s")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_n6abe")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_803tl")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_heg3k")
+}],
+"loop": true,
+"name": &"vogelFlieg",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_2tg2t"]
+resource_name = "flatter"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_efgev"]
+_data = {
+&"flatter": SubResource("Animation_2tg2t")
+}
 
 [node name="Vogel" type="Node2D"]
 script = ExtResource("1_drrly")
@@ -19,12 +79,19 @@ scheiss_upper = 10.0
 curve = SubResource("Curve2D_efgev")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotates = false
 
 [node name="VogelNodePosition" type="Node2D" parent="Path2D/PathFollow2D"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D/VogelNodePosition"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_2tg2t")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Path2D/PathFollow2D/VogelNodePosition"]
+sprite_frames = SubResource("SpriteFrames_qprir")
+animation = &"vogelFlieg"
+frame_progress = 0.165717
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D/VogelNodePosition"]
+libraries = {
+&"": SubResource("AnimationLibrary_efgev")
+}
 
 [node name="ScheissTimer" type="Timer" parent="."]
 wait_time = 5.0

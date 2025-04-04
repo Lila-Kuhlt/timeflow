@@ -10,11 +10,13 @@ extends Node2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
 @onready var scheiss_timer : Timer = $ScheissTimer
 @onready var scheisse_audio : AudioStreamPlayer = $ScheisseAudioPlayer
+@onready var animationSprite : AnimatedSprite2D = $Path2D/PathFollow2D/VogelNodePosition/AnimatedSprite2D
 
 func _ready() -> void:
 	path.curve.set_point_position(0, start_pos)
 	path.curve.set_point_position(1, end_pos)
 	path.curve.set_point_position(2, start_pos)
+	animationSprite.play()
 	
 func _physics_process(delta: float) -> void:
 	path_follow.progress += delta * speed
