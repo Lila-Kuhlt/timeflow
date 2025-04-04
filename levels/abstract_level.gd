@@ -20,6 +20,7 @@ var current_checkpoint_index: int = 0 # Index of next checkpoint to reach
 
 var bumblebee_blockers: Array[Tile] = []
 var blocker_source_id: int
+var is_in_panic := false
 var hovered_tile: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
@@ -356,6 +357,17 @@ func flow_tick():
 			any_on_checkpoint = true
 		else:
 			all_on_checkpoint = false
+
+	var flow_depth := get_flow_depth()
+	var should_panic := flow_depth < 5
+	if should_panic and (not is_in_panic):
+		is_in_panic = true
+		Global.game_manager.main_theme_player.playing = false
+		Global.game_manager.panic_theme_player.playing = true
+	elif (not should_panic) and is_in_panic:
+		is_in_panic = false
+		Global.game_manager.main_theme_player.playing = true
+		Global.game_manager.panic_theme_player.playing = false
 
 	if all_on_checkpoint:
 		print("checkpoint ", current_checkpoint_index, " complete")

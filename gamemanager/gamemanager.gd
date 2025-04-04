@@ -18,6 +18,8 @@ class_name GameManager
 
 @onready var pause_menu: Control = %PauseMenu
 @onready var menu_layer: CanvasLayer = %MenuLayer
+@onready var main_theme_player: AudioStreamPlayer = $AudioMainThemePlayer
+@onready var panic_theme_player: AudioStreamPlayer = $AudioPanicThemePlayer
 
 var level = 0
 var completed_levels: Array[bool] = []
