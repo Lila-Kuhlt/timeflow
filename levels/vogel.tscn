@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d00kbwpwkbomu"]
+[gd_scene load_steps=5 format=3 uid="uid://cssckb87y5syb"]
 
 [ext_resource type="Script" uid="uid://exeatyfn5nk0" path="res://levels/vogel.gd" id="1_drrly"]
 [ext_resource type="Texture2D" uid="uid://dkgp7tccxyyxc" path="res://icon.svg" id="2_2tg2t"]
