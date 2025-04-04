@@ -122,7 +122,7 @@ func _show_win_screen() -> void:
 
 	var value = flower_highscores.values().reduce(func(a, b): return a + b, 0)
 	win_screen.count.text = str(value)
-	
+
 	#update comments
 	if value > 50:
 		win_screen.comment.text = "Where did you get all the flowers? o.O"
@@ -157,10 +157,11 @@ func _show_level_win_screen() -> void:
 	menu_layer.add_child(level_win_screen)
 	level_win_screen.count.text = str(Global.game_manager.flower_highscores[Global.game_manager.level])
 
-func _show_loss_screen() -> void:
+func _show_loss_screen(reason: String) -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	var loss_screen: Control = load("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
+	print("loss reason: ", reason)
 	menu_layer.add_child(loss_screen)
 
 func _show_credits() -> void:

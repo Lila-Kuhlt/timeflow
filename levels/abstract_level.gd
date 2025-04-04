@@ -50,7 +50,7 @@ var delay_map: Dictionary[Vector2i, int] = {}
 var is_place_tile_pressed := false
 var is_remove_tile_pressed := false
 
-signal loss()
+signal loss(reason: String)
 signal win()
 
 func _ready() -> void:
@@ -395,16 +395,13 @@ func flow_tick():
 			water_heads.append(head)
 			continue
 		if flow_single_head(head, head_type, head_data["rotation"], water_heads):
-			print("no way to flow")
-			emit_loss()
+			loss.emit("no way to flow")
 			return
 	for head in water_heads:
 		set_tile_water_state(head, State.FULL)
 
 	if water_heads.is_empty():
-		# TODO add reason
-		print("no water heads")
-		emit_loss()
+		loss.emit("no water heads")
 		return
 
 	var any_on_checkpoint: bool = false
@@ -431,9 +428,7 @@ func flow_tick():
 			win.emit()
 	else:
 		if any_on_checkpoint:
-			# TODO add reason
-			print("not all checkpoints reached at the same time: ", current_checkpoint_index)
-			emit_loss()
+			loss.emit("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
 
 func get_flow_depth() -> int:
 	var heads := water_heads
