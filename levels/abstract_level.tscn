@@ -106,7 +106,7 @@ zoom = Vector2(2, 2)
 
 [node name="AudioPlacementSound" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_qu85l")
-volume_db = -5.0
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="Bubblebee" parent="." instance=ExtResource("6_5vxm8")]

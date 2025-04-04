@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://d00kbwpwkbomu"]
+[gd_scene load_steps=5 format=3 uid="uid://d00kbwpwkbomu"]
 
 [ext_resource type="Script" uid="uid://exeatyfn5nk0" path="res://levels/vogel.gd" id="1_drrly"]
 [ext_resource type="Texture2D" uid="uid://dkgp7tccxyyxc" path="res://icon.svg" id="2_2tg2t"]
+[ext_resource type="AudioStream" uid="uid://bf4xcs44u4vkc" path="res://music/SoundEffects/WaterSplash.wav" id="3_2tg2t"]
 
 [sub_resource type="Curve2D" id="Curve2D_efgev"]
 _data = {
@@ -25,5 +26,10 @@ texture = ExtResource("2_2tg2t")
 
 [node name="ScheissTimer" type="Timer" parent="."]
 autostart = true
+
+[node name="ScheisseAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2tg2t")
+volume_db = -25.0
+bus = &"SFX"
 
 [connection signal="timeout" from="ScheissTimer" to="." method="on_scheiss_timer_timeout"]

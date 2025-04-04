@@ -9,6 +9,7 @@ extends Node2D
 @onready var path : Path2D = $Path2D
 @onready var path_follow : PathFollow2D = $Path2D/PathFollow2D
 @onready var scheiss_timer : Timer = $ScheissTimer
+@onready var scheisse_audio : AudioStreamPlayer = $ScheisseAudioPlayer
 
 func _ready() -> void:
 	path.curve.set_point_position(0, start_pos)
@@ -20,7 +21,7 @@ func _physics_process(delta: float) -> void:
 
 
 func on_scheiss_timer_timeout() -> void:
-	print("UWU")
 	var parent : Level = get_parent()
 	parent.drauf_scheissen(path_follow.global_position)
+	scheisse_audio.play(0.13)
 	scheiss_timer.wait_time = randf_range(scheiss_lower, scheiss_upper)
