@@ -47,9 +47,10 @@ func _ready() -> void:
 	tile_selector.fast_forward_button.connect("toggled", on_fast_forward_toggle)
 
 	for i in range(ghost_map.tile_set.get_source_count()):
-		var source := ghost_map.tile_set.get_source(ghost_map.tile_set.get_source_id(i))
+		var id := ghost_map.tile_set.get_source_id(i)
+		var source := ghost_map.tile_set.get_source(id)
 		if source.resource_name == 'Blocker':
-			blocker_source_id = i
+			blocker_source_id = id
 
 	water_heads.append(Vector2i(0, 0))
 	set_tile_water_state(Vector2i(0, 0), State.FULL)
