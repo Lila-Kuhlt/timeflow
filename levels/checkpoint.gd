@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var flag : Sprite2D = $Flag 
+
 func _ready() -> void:
 	var level: Level = self.get_node("../..")
 	var coords: Vector2i = level.checkpoint_map.local_to_map(position)
@@ -20,3 +22,8 @@ func _ready() -> void:
 	for i in range(level.checkpoint_groups.size()):
 		if coords in level.checkpoint_groups[i]:
 			self.get_node("Flag").modulate = colors[i]
+						
+	Global.game_manager.current_level_node.connect('reached', func(coord): flag_animation(coord, coords))
+	
+func flag_animation(coord, coords):
+	if coord == coords: $AnimationPlayer.play("reached")

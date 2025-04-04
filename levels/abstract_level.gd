@@ -54,6 +54,7 @@ var is_remove_tile_pressed := false
 
 signal loss(reason: String)
 signal win()
+signal reached(coord)
 
 func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
@@ -432,6 +433,9 @@ func flow_tick():
 
 	if all_checkpoints_reached and all_on_checkpoint:
 		print("checkpoint ", current_checkpoint_index, " complete")
+		#checkpoint_groups[current_checkpoint_index].flag.transform.y
+		for checkpoint in checkpoint_groups[current_checkpoint_index]:
+			reached.emit(checkpoint)
 		current_checkpoint_index += 1
 		if current_checkpoint_index >= checkpoint_groups.size():
 			win.emit()

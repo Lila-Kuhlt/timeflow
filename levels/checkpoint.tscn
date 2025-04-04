@@ -1,8 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcp430ao51hn6"]
+[gd_scene load_steps=9 format=3 uid="uid://dcp430ao51hn6"]
 
 [ext_resource type="Script" uid="uid://b7owndihruw6u" path="res://levels/checkpoint.gd" id="1_o8aye"]
 [ext_resource type="Texture2D" uid="uid://byxiw5e401pyp" path="res://textures/tilemaps/enviroment/watermill.png" id="1_yt13s"]
 [ext_resource type="Texture2D" uid="uid://bq8j2bn420jno" path="res://textures/tilemaps/enviroment/checkpoint_flag.png" id="2_o8aye"]
+
+[sub_resource type="Animation" id="Animation_5v0h6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-27, -25)]
+}
+
+[sub_resource type="Animation" id="Animation_o8aye"]
+resource_name = "reached"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-27, 3), Vector2(-27, -25)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2gv07"]
+_data = {
+&"RESET": SubResource("Animation_5v0h6"),
+&"reached": SubResource("Animation_o8aye")
+}
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_5v0h6"]
 diffuse_texture = ExtResource("1_yt13s")
@@ -12,6 +48,12 @@ diffuse_texture = ExtResource("2_o8aye")
 
 [node name="Checkpoint" type="Node2D"]
 script = ExtResource("1_o8aye")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Flag")
+libraries = {
+&"": SubResource("AnimationLibrary_2gv07")
+}
 
 [node name="Mill" type="Sprite2D" parent="."]
 texture = SubResource("CanvasTexture_5v0h6")
