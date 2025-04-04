@@ -373,6 +373,9 @@ func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads:
 	return false
 
 func flow_tick():
+	if current_checkpoint_index >= len(checkpoint_groups):
+		return
+
 	var old_water_heads = water_heads.duplicate()
 	water_heads.clear()
 	for head in old_water_heads:
