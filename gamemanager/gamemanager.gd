@@ -150,7 +150,7 @@ func _show_win_screen() -> void:
 
 func _show_level_win_screen() -> void:
 	InputManager.set_is_in_game(false)
-	get_tree().paused = true
+	# get_tree().paused = true
 	var level_win_screen: Control = load("res://ui/screens/win-screen/level_win_screen.tscn").instantiate()
 	if level not in flower_highscores or current_level_node.flower_count > flower_highscores[level]:
 		flower_highscores[level] = current_level_node.flower_count
