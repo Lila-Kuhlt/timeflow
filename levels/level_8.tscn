@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=4 uid="uid://mri0wq0oykk0"]
+[gd_scene load_steps=3 format=4 uid="uid://drty6fhhg0usq"]
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_2b88s"]
-[ext_resource type="PackedScene" uid="uid://cssckb87y5syb" path="res://levels/vogel.tscn" id="2_4mk42"]
+[ext_resource type="PackedScene" path="res://levels/vogel.tscn" id="2_4mk42"]
 
 [node name="Level8" instance=ExtResource("1_2b88s")]
 checkpoint_groups = Array[Array]([[Vector2i(8, 9)], [Vector2i(17, 3)]])
