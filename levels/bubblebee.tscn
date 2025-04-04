@@ -34,7 +34,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g61yg"]
 size = Vector2(15, 10)
 
-[node name="Bubblebee" type="Node2D"]
+[node name="Bubblebee" type="CanvasLayer"]
 script = ExtResource("1_0uemu")
 
 [node name="Path2D" type="Path2D" parent="."]
