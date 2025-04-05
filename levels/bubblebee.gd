@@ -12,6 +12,7 @@ var target_type: Shared.Tile
 @onready var path: Path2D = $Path2D
 @onready var path_follow: PathFollow2D = $Path2D/PathFollow2D
 @onready var bee_node: Node2D = $BeeNode
+@onready var sprite: AnimatedSprite2D = $BeeNode/AnimatedSprite2D
 @onready var aimless_timer: Timer = $AimlessTimer
 @onready var occupy_timer: Timer = $OccupyTimer
 @onready var bubbleBeeSound : AudioStreamPlayer = $AudioBubbleBee
@@ -60,7 +61,10 @@ func update_target(newpos: Vector2):
 func _process(delta):
 	if is_aimless or not target_reached:
 		path_follow.progress += delta * speed
+		var old_pos := bee_node.global_position
 		bee_node.global_position = path_follow.position
+		var v := bee_node.global_position - old_pos
+		sprite.flip_h = v.x < 0.0
 		if path_follow.progress_ratio >= 1.0:
 			if is_aimless:
 				update_target(rand_position())

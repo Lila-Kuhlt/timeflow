@@ -48,7 +48,6 @@ loop = false
 scale = Vector2(2, 2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BeeNode"]
-scale = Vector2(1.03448, 0.966667)
 sprite_frames = SubResource("SpriteFrames_sd5b6")
 animation = &"fly"
 autoplay = "fly"
