@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqfaf3dbgttg2"]
+[gd_scene load_steps=7 format=3 uid="uid://c4mta14a3lujw"]
 
 [ext_resource type="Theme" uid="uid://hheneshfv1b2" path="res://ui/themes/your_theme.tres" id="1_2xfu2"]
 [ext_resource type="Script" uid="uid://bobq4bd6ykbc3" path="res://ui/screens/win-screen/level_win_screen.gd" id="1_u82dg"]
@@ -19,6 +19,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_2xfu2")
 script = ExtResource("1_u82dg")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.588235)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
