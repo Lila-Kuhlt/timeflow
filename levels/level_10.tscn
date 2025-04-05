@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=4 uid="uid://csrot0nggmjd7"]
+[gd_scene load_steps=3 format=4 uid="uid://cv7ebijogrs6y"]
 
 [ext_resource type="PackedScene" uid="uid://cyfvcuxi210mg" path="res://levels/abstract_level.tscn" id="1_tghxx"]
-[ext_resource type="PackedScene" uid="uid://cssckb87y5syb" path="res://levels/vogel.tscn" id="2_s4rsi"]
+[ext_resource type="PackedScene" uid="uid://d00kbwpwkbomu" path="res://levels/vogel.tscn" id="2_s4rsi"]
 
 [node name="Level10" instance=ExtResource("1_tghxx")]
 available_tiles = Dictionary[int, int]({

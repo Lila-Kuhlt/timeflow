@@ -32,7 +32,7 @@ func init_tiles(t: Dictionary[Shared.Tile, int]):
 func update_tile_count(ty: Shared.Tile, count: int):
 	var tile: TileSelectorTile = tiles[type_to_index[ty]]
 	tile.set_tile_count(count)
-	
+
 func update_flower_count(flower_count):
 	flower_count_label.text = str(flower_count)#
 
@@ -44,4 +44,3 @@ func on_select_tile(tile: TileSelectorTile):
 	selected_tile_idx = tile.idx
 	selected_tile = tile.tile_type
 	tile_select_changed.emit(selected_tile_idx)
-	
