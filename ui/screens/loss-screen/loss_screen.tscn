@@ -55,17 +55,32 @@ layout_mode = 2
 custom_minimum_size = Vector2(731.345, 0)
 layout_mode = 2
 size_flags_vertical = 3
-text = "You loss :("
+text = "You loss  ("
 label_settings = SubResource("LabelSettings_rbmgw")
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Label"]
+custom_minimum_size = Vector2(731.345, 0)
 layout_mode = 2
-text = "I       I i
+offset_left = 123.5
+offset_top = -12.5
+offset_right = 854.845
+offset_bottom = 50.5
+size_flags_vertical = 3
+text = ":"
+label_settings = SubResource("LabelSettings_rbmgw")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="AspectRatioContainer" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Control"]
+layout_mode = 2
+text = "I         I i
 I I      I _"
 label_settings = SubResource("LabelSettings_rvyxm")
-horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45.77)
