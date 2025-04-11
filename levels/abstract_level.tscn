@@ -125,5 +125,6 @@ stream = ExtResource("12_07s2t")
 volume_db = -20.0
 bus = &"SFX"
 
+[connection signal="changed" from="PlaceableTileMap" to="." method="_check_panic"]
 [connection signal="timeout" from="FluidTimer" to="." method="flow_tick"]
 [connection signal="on_blocking_toggle" from="Bubblebee" to="." method="on_bumblebee_blocker_toggle"]

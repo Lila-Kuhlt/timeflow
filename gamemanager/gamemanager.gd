@@ -50,6 +50,7 @@ func _start_game() -> void:
 
 func pause():
 	InputManager.set_is_paused(true)
+	update_panic(false)
 	# menu_layer.move_to_front()
 	pause_menu.move_to_front()
 	pause_menu.show()
@@ -57,7 +58,7 @@ func pause():
 
 func resume():
 	InputManager.set_is_paused(false)
-	print("resume")
+	update_panic(current_level_node.panic)
 	pause_menu.hide()
 	pause_menu.reset()
 	get_tree().paused = false
@@ -116,6 +117,7 @@ func _reload_current_level() -> void:
 func _show_win_screen() -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
+	update_panic(false)
 	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
 	win_screen.tree_exited.connect(_return_to_title_screen)
 	menu_layer.add_child(win_screen)
@@ -152,6 +154,7 @@ func _show_level_win_screen() -> void:
 	InputManager.set_is_in_game(false)
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = true
+	update_panic(false)
 	var level_win_screen: Control = load("res://ui/screens/win-screen/level_win_screen.tscn").instantiate()
 	if level not in flower_highscores or current_level_node.flower_count > flower_highscores[level]:
 		flower_highscores[level] = current_level_node.flower_count
@@ -161,6 +164,7 @@ func _show_level_win_screen() -> void:
 func _show_loss_screen(reason: String) -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
+	#update_panic(false)
 	var loss_screen: Control = load("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
 	print("loss reason: ", reason)
 	menu_layer.add_child(loss_screen)
@@ -172,6 +176,7 @@ func _show_credits() -> void:
 
 func _show_title_screen() -> void:
 	InputManager.set_is_in_game(false)
+	update_panic(false)
 	var title_screen: Node = load("res://ui/screens/title-screen/title_screen.tscn").instantiate()
 	title_screen.start_game.connect(_start_game)
 	title_screen.show_credits.connect(_show_credits)
@@ -205,6 +210,7 @@ func _return_to_title_screen() -> void:
 	get_tree().paused = false
 	InputManager.set_is_paused(false)
 	InputManager.set_is_in_game(false)
+	update_panic(false)
 	# Destroy level
 	if current_level_node != null:
 		current_level_node.queue_free()
@@ -218,3 +224,8 @@ func _quit_game() -> void:
 
 func set_world_environment(env: Environment):
 	$WorldEnvironment.environment = env
+
+func update_panic(new_panic: bool):
+	if panic_theme_player.playing != new_panic:
+		main_theme_player.playing = not new_panic
+		panic_theme_player.playing = new_panic

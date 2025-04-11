@@ -27,7 +27,7 @@ var scheiss_array : Array[Dictionary] = []
 
 var bumblebee_blockers: Array[Tile] = []
 var blocker_source_id: int
-var is_in_panic := false
+var panic := false
 var hovered_tile: Vector2i
 var chosen_atlas_coord: Vector2i # specific tile to assign from within that tileset source
 var chosen_rot: Rotation = Rotation.UP
@@ -74,6 +74,8 @@ func _ready() -> void:
 	for i in range(checkpoint_groups.size()):
 		for checkpoint in checkpoint_groups[i]:
 			checkpoint_map.set_cell(checkpoint, 4, Vector2i(0, 0), 1)
+
+	_check_panic()
 
 func on_fast_forward_toggle(enable: bool) -> void:
 	if enable:
@@ -376,15 +378,6 @@ func flow_single_head(head: Vector2, head_type: Tile, head_rot: Rotation, heads:
 		return true
 	return false
 
-func update_panic(new_panic: bool):
-	is_in_panic = new_panic
-	Global.game_manager.main_theme_player.playing = not new_panic
-	Global.game_manager.panic_theme_player.playing = new_panic
-
-func emit_loss(reason: String):
-	update_panic(false)
-	loss.emit(reason)
-
 func flow_tick():
 	if current_checkpoint_index >= len(checkpoint_groups):
 		return
@@ -399,22 +392,14 @@ func flow_tick():
 			water_heads.append(head)
 			continue
 		if flow_single_head(head, head_type, head_data["rotation"], water_heads):
-			emit_loss("no way to flow")
+			loss.emit("no way to flow")
 			return
 	for head in water_heads:
 		set_tile_water_state(head, State.FULL)
 
 	if water_heads.is_empty():
-		emit_loss("no water heads")
+		loss.emit("no water heads")
 		return
-
-	# panic
-	var flow_depth := get_flow_depth()
-	var should_panic := flow_depth < 5 and flow_depth >= 0
-	if should_panic and (not is_in_panic):
-		update_panic(true)
-	elif (not should_panic) and is_in_panic:
-		update_panic(false)
 
 	var checkpoints = checkpoint_groups[current_checkpoint_index]
 
@@ -440,9 +425,13 @@ func flow_tick():
 		if current_checkpoint_index >= checkpoint_groups.size():
 			win.emit()
 	elif any_on_checkpoint:
-		emit_loss("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
+		loss.emit("not all checkpoints reached at the same time: {}".format([current_checkpoint_index]))
+
+	_check_panic()
 
 func get_flow_depth() -> int:
+	if current_checkpoint_index >= checkpoint_groups.size():
+		return -1
 	var heads := water_heads
 	var visited: Array[Vector2i] = []
 	var depth := 0
@@ -470,3 +459,9 @@ func drauf_scheissen(coords : Vector2):
 	var map_coords := scheiss_map.local_to_map(coords)
 	scheiss_array.append({"lifetime" : scheiss_fade_time, "coords" : map_coords})
 	scheiss_map.set_cell(map_coords, 0, Vector2i(0, 0))
+
+## Check if the panic soundtrack should be played.
+func _check_panic() -> void:
+	var flow_depth := get_flow_depth()
+	panic = flow_depth < 5 and flow_depth >= 0
+	Global.game_manager.update_panic(panic)
