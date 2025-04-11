@@ -23,7 +23,7 @@ class_name GameManager
 
 var level = 0
 var completed_levels: Array[bool] = []
-var current_level_node: Node
+var current_level_node: Level
 var flower_highscores: Dictionary[int, int] = {}
 
 func _ready() -> void:
@@ -67,7 +67,7 @@ func resume():
 
 func _show_main_level() -> void:
 	InputManager.set_is_in_game(true)
-	var next_level: Node = main_level.instantiate()
+	var next_level: Level = main_level.instantiate()
 	InputManager.set_is_in_game(true)
 	if next_level.has_signal("win"):
 		next_level.win.connect(_next_level)
