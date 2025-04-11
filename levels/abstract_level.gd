@@ -79,11 +79,11 @@ func _ready() -> void:
 
 func on_fast_forward_toggle(enable: bool) -> void:
 	if enable:
-		fluid_timer.wait_time = 0.3
+		fluid_timer.wait_time /= 4
 		if fluid_timer.time_left > fluid_timer.wait_time:
 			fluid_timer.start()
 	else:
-		fluid_timer.wait_time = 1.25
+		fluid_timer.wait_time *= 4
 
 func update_fast_forward_button(enable: bool) -> void:
 	tile_selector.fast_forward_button.button_pressed = enable
