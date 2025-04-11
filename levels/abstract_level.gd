@@ -137,8 +137,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		on_fast_forward_toggle(false)
 		update_fast_forward_button(false)
 
-func ist_scheisse(hovered_tile : Vector2i) -> bool:
-	return scheiss_map.get_cell_source_id(hovered_tile) >= 0
+func ist_scheisse(coords: Vector2i) -> bool:
+	return scheiss_map.get_cell_source_id(coords) >= 0
 
 func _process(delta: float):
 	var new_hovered_tile = get_selected_tile()
