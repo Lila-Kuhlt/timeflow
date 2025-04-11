@@ -99,6 +99,7 @@ offset_right = 21.0
 offset_bottom = 19.0
 scale = Vector2(2.5, 2.5)
 tooltip_text = "Where are the flowers?"
+mouse_filter = 1
 theme = SubResource("Theme_186ei")
 text = "0"
 label_settings = SubResource("LabelSettings_58mdv")
