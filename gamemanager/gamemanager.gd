@@ -155,10 +155,11 @@ func _show_level_win_screen() -> void:
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = true
 	update_panic(false)
-	var level_win_screen: Control = load("res://ui/screens/win-screen/level_win_screen.tscn").instantiate()
+	var level_win_screen: LevelWinScreen = preload("res://ui/screens/win-screen/level_win_screen.tscn").instantiate()
 	if level not in flower_highscores or current_level_node.flower_count > flower_highscores[level]:
 		flower_highscores[level] = current_level_node.flower_count
 	menu_layer.add_child(level_win_screen)
+	level_win_screen.text_label.text = "Level {0} completed!".format([level])
 	level_win_screen.count.text = str(Global.game_manager.flower_highscores[Global.game_manager.level])
 
 func _show_loss_screen(reason: String) -> void:
