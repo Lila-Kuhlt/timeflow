@@ -3,10 +3,8 @@ extends Control
 @export var credits: String
 
 func _ready() -> void:
-	
-	
-	var credit_button_scene = load("res://ui/screens/credit-screen/credit_element.tscn")
-	
+	var credit_button_scene = preload("res://ui/screens/credit-screen/credit_element.tscn")
+
 	var creds: Array[CreditEntry] = _dicts_to_entry(_read_credits())
 	for c in creds:
 		var b: CreditButton = credit_button_scene.instantiate()
@@ -55,20 +53,20 @@ func _on_detailed_g_credits_pressed() -> void:
 					copyright_text += "© " + copyright_owner + "\n"
 				copyright_text += "License:" + part["license"] + "\n"
 		# Append full license texts
-		var license_texts = Engine.get_license_info()	
+		var license_texts = Engine.get_license_info()
 		copyright_text += "\n\n\n\nFull license texts:"
 		for license in license_texts:
 			copyright_text += "\n\n" + license + ":\n"
 			copyright_text += license_texts[license]
-			
+
 		$VBoxContainer/ScrollContainer/Godot3PCredits.text = copyright_text
-	
+
 	$VBoxContainer/ScrollContainer/Godot3PCredits.visible = \
 		not $VBoxContainer/ScrollContainer/Godot3PCredits.visible
-	
+
 	$VBoxContainer/ScrollContainer/VBoxContainer.visible = \
 		not $VBoxContainer/ScrollContainer/VBoxContainer.visible
-	
+
 	if $VBoxContainer/ScrollContainer/Godot3PCredits.visible:
 		$DetailedGCredits.text = "Return to Credits"
 	else:

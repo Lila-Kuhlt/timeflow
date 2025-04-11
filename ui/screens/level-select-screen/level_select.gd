@@ -12,10 +12,10 @@ signal exit()
 func init_buttons(max_level: int, completed_level_information: Array[bool]) -> void:
 	if max_level > 0:
 		$VBoxContainer/Label.visible = false
-	
+
 	completed_levels = completed_level_information
 	for i in range(max_level):
-		var b: LevelButton = load("res://ui/screens/level-select-screen/level_button.tscn").instantiate()
+		var b: LevelButton = preload("res://ui/screens/level-select-screen/level_button.tscn").instantiate()
 		b.level_nr = i + 1
 		b.select_level.connect(_level_button_pressed)
 		b.disabled = not completed_levels[i]
@@ -26,7 +26,7 @@ func _level_button_pressed(level_nr: int) -> void:
 	print("Start Level ",level_nr)
 	start_level.emit(level_nr)
 	queue_free()
-	
+
 func _return_to_title() -> void:
 	exit.emit()
 	queue_free()

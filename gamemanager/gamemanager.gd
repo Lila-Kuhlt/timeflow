@@ -118,7 +118,7 @@ func _show_win_screen() -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	update_panic(false)
-	var win_screen: Control = load("res://ui/screens/win-screen/win_screen.tscn").instantiate()
+	var win_screen: Control = preload("res://ui/screens/win-screen/win_screen.tscn").instantiate()
 	win_screen.tree_exited.connect(_return_to_title_screen)
 	menu_layer.add_child(win_screen)
 
@@ -166,19 +166,19 @@ func _show_loss_screen(reason: String) -> void:
 	InputManager.set_is_in_game(false)
 	get_tree().paused = true
 	#update_panic(false)
-	var loss_screen: Control = load("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
+	var loss_screen: Control = preload("res://ui/screens/loss-screen/loss_screen.tscn").instantiate()
 	print("loss reason: ", reason)
 	menu_layer.add_child(loss_screen)
 
 func _show_credits() -> void:
-	var credits: Node = load("res://ui/screens/credit-screen/credit_screen.tscn").instantiate()
+	var credits: Node = preload("res://ui/screens/credit-screen/credit_screen.tscn").instantiate()
 	credits.tree_exited.connect(_show_title_screen)
 	menu_layer.add_child(credits)
 
 func _show_title_screen() -> void:
 	InputManager.set_is_in_game(false)
 	update_panic(false)
-	var title_screen: Node = load("res://ui/screens/title-screen/title_screen.tscn").instantiate()
+	var title_screen: Node = preload("res://ui/screens/title-screen/title_screen.tscn").instantiate()
 	title_screen.start_game.connect(_start_game)
 	title_screen.show_credits.connect(_show_credits)
 	title_screen.show_level_select.connect(_show_level_select)
@@ -188,19 +188,19 @@ func _show_title_screen() -> void:
 	menu_layer.add_child(title_screen)
 
 func _show_level_select() -> void:
-	var level_select: Node = load("res://ui/screens/level-select-screen/level_select.tscn").instantiate()
+	var level_select: Node = preload("res://ui/screens/level-select-screen/level_select.tscn").instantiate()
 	level_select.start_level.connect(_show_level)
 	level_select.exit.connect(_show_title_screen)
 	level_select.init_buttons(max_level, completed_levels)
 	menu_layer.add_child(level_select)
 
 func _show_settings_screen() -> void:
-	var settings_screen: Node = load("res://ui/screens/settings-screen/settings_screen.tscn").instantiate()
+	var settings_screen: Node = preload("res://ui/screens/settings-screen/settings_screen.tscn").instantiate()
 	settings_screen.exit.connect(_show_title_screen)
 	menu_layer.add_child(settings_screen)
 
 func _show_controls() -> void:
-	var controls: Node = load("res://ui/screens/control-screen/control_screen.tscn").instantiate()
+	var controls: Node = preload("res://ui/screens/control-screen/control_screen.tscn").instantiate()
 	if not main_level:
 		controls.tree_exited.connect(_next_level)
 	else:
