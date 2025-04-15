@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cyfvcuxi210mg"]
+[gd_scene load_steps=23 format=4 uid="uid://cyfvcuxi210mg"]
 
 [ext_resource type="Script" uid="uid://bdoh5s4sf08d0" path="res://levels/abstract_level.gd" id="1_8tasw"]
 [ext_resource type="TileSet" uid="uid://dj5auvsbjxvwu" path="res://textures/tile_set.tres" id="1_nghai"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bxsvv2pyicwfk" path="res://textures/tilemaps/enviroment/schiss.png" id="3_5wbbs"]
 [ext_resource type="Texture2D" uid="uid://5u86ksoilp5c" path="res://textures/tilemaps/channels/water_atlas.png" id="5_c78cs"]
 [ext_resource type="AudioStream" uid="uid://dgui7vgxlffit" path="res://music/SoundEffects/Rotate1.wav" id="5_gcjs8"]
+[ext_resource type="Shader" uid="uid://3gqsukrt2anl" path="res://shaders/water.gdshader" id="5_y43h3"]
 [ext_resource type="PackedScene" uid="uid://baphhn1yaervo" path="res://levels/bubblebee.tscn" id="6_5vxm8"]
 [ext_resource type="AudioStream" uid="uid://vbrsap5vqadx" path="res://music/SoundEffects/Placement3.wav" id="6_sv1o5"]
 [ext_resource type="AudioStream" uid="uid://nkgroqp7xy0f" path="res://music/SoundEffects/Placement2.wav" id="7_arcml"]
@@ -22,9 +23,27 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_07s2t")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y43h3"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_qu85l"]
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_y43h3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qu85l"]
+shader = ExtResource("5_y43h3")
+shader_parameter/frequency = 0.5
+shader_parameter/amplitude = 0.1
+shader_parameter/spatial_frequency = 2
+shader_parameter/tile_size_px = Vector2i(32, 32)
+shader_parameter/noise_scale = 0.5
+shader_parameter/noise_texture = SubResource("NoiseTexture3D_qu85l")
+shader_parameter/debug = false
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5vxm8"]
 texture = ExtResource("5_c78cs")
 texture_region_size = Vector2i(32, 32)
+use_texture_padding = false
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -84,6 +103,7 @@ modulate = Color(1, 1, 1, 0.564706)
 tile_set = ExtResource("1_nghai")
 
 [node name="WaterTileMap" type="TileMapLayer" parent="."]
+material = SubResource("ShaderMaterial_qu85l")
 tile_set = SubResource("TileSet_aw458")
 
 [node name="CheckpointTileMap" type="TileMapLayer" parent="."]
