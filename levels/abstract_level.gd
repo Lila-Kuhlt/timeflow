@@ -133,10 +133,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			update_hovered_tile(hovered_tile)
 			break
 	if event.is_action_pressed("fast_forward"):
-		on_fast_forward_toggle(true)
 		update_fast_forward_button(true)
 	elif event.is_action_released("fast_forward"):
-		on_fast_forward_toggle(false)
 		update_fast_forward_button(false)
 
 func ist_scheisse(coords: Vector2i) -> bool:
