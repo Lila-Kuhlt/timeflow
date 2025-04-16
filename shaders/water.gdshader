@@ -7,7 +7,7 @@ uniform float amplitude = 0.1;
 /** The spatial frequency of the standing waves, i.e. the number of waves per tile. */
 uniform int spatial_frequency = 1;
 /** The size of a single tile in pixels. */
-uniform ivec2 tile_size_px = ivec2(32, 32);
+uniform ivec2 tile_size_px = ivec2(16, 16);
 /** The scale of the noise. */
 uniform float noise_scale = 0.5;
 /** The noise texture. The z coordinate is used as time. */

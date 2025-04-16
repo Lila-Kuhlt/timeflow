@@ -60,6 +60,9 @@ func _ready() -> void:
 	tile_selector.init_tiles(available_tiles)
 	tile_selector.fast_forward_button.connect("toggled", on_fast_forward_toggle)
 
+	# set water shader tile size
+	water_map.material.set_shader_parameter("tile_size_px", water_map.tile_set.tile_size)
+
 	for i in range(ghost_map.tile_set.get_source_count()):
 		var id := ghost_map.tile_set.get_source_id(i)
 		var source := ghost_map.tile_set.get_source(id)
