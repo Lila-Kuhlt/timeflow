@@ -18,14 +18,18 @@ uniform bool debug = false;
 const float two_pi = 2.0 * PI;
 
 void fragment() {
+	// convert tile set coordinates to tile coordinates
 	vec2 tile_size = TEXTURE_PIXEL_SIZE * vec2(tile_size_px);
 	vec2 uv = mod(UV, tile_size) / tile_size;
+
+	// standing wave
 	float wave = sin(float(spatial_frequency) * two_pi * uv.x)
 		* sin(float(spatial_frequency) * two_pi * uv.y)
 		* cos(TIME * two_pi * frequency) * amplitude + 1.0;
 	float noise = (texture(noise_texture, vec3(uv, TIME)).r * 2.0 - 1.0) * noise_scale;
 	wave += noise;
 	if (debug) {
+		// make background gray for better visualization
 		COLOR = vec4(0.5, 0.5, 0.5, 1.0);
 	}
 	COLOR *= vec4(wave, wave, wave, 1.0);
